@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ENERGON</title>
+  <meta name="description" content="Energon Protocol Abstract" />
+  <style>
+    :root {
+      --bg: #05060b;
+      --fg: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.68);
+      --card: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.14);
+      --accent: rgba(80,180,255,0.35);
+    }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 30% 10%, #1b2a5a 0%, var(--bg) 55%, #000 100%);
+      color: var(--fg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      letter-spacing: 0.2px;
+    }
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 56px 18px 72px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px;
+      box-shadow: 0 18px 48px rgba(0,0,0,0.35);
+    }
+    .top {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .sigil {
+      width: 132px;
+      height: 132px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.18);
+      object-fit: cover;
+    }
+    h1 {
+      margin: 6px 0 0;
+      font-size: 44px;
+      letter-spacing: 3px;
+      font-weight: 800;
+    }
+    h2 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 650;
+      color: var(--muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    p {
+      margin: 14px 0;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.86);
+      font-size: 15.5px;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+      justify-content: center;
+    }
+    a.btn {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.08);
+      color: var(--fg);
+      text-decoration: none;
+      font-weight: 650;
+      font-size: 13.5px;
+      transition: transform 0.08s ease, border-color 0.12s ease;
+    }
+    a.btn:hover { transform: translateY(-1px); border-color: var(--accent); }
+    .foot {
+      margin-top: 18px;
+      text-align: center;
+      color: rgba(255,255,255,0.55);
+      font-size: 12px;
+    }
+    code {
+      color: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 2px 6px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <!-- Replace this with your SIGIL image if different -->
+        <img class="sigil"
+             src="https://red-secret-dragonfly-529.mypinata.cloud/ipfs/bafybeiccfdp4aez6gqva5yx5cmixc7dugqxl6eee5nhb54sdhpnidpmt7u"
+             alt="Energon Sigil" />
+        <div>
+          <h1>ENERGON</h1>
+          <h2>Protocol Abstract</h2>
+        </div>
+      </div>
+
+      <p>
+        Energon is a live protocol operating on Flare mainnet that advances through a deterministic,
+        height-based progression system known as <em>Energon Height</em>.
+      </p>
+      <p>
+        Protocol progression is governed by an on-chain controller that enforces strict timing,
+        sequencing, and execution constraints. Energon Height advances only when predefined conditions
+        are met, ensuring fairness, predictability, and resistance to manipulation.
+      </p>
+      <p>
+        The protocol does not rely on centralized schedulers, off-chain cron jobs, or privileged operators.
+        All state transitions are verifiable through on-chain reads and are subject to guardrails that prevent
+        duplicate execution, race conditions, and amplification through multiple wallets or interfaces.
+      </p>
+      <p>
+        Participation eligibility is enforced programmatically. Only wallets holding exactly one Energon Cube
+        may interact with protocol mechanics. Wallets holding zero or more than one cube are excluded without exception.
+      </p>
+      <p>
+        Energon utilizes a native ERC-20 utility token, <strong>EON</strong>, for protocol-level mechanics and ecosystem alignment.
+        EON does not convey ownership, equity, or claims on external assets.
+      </p>
+
+      <div class="links">
+        <!-- Replace these with your real links -->
+        <a class="btn" href="https://energon-dapp.vercel.app" target="_blank" rel="noreferrer">Mint Site</a>
+       <a class="btn"
+   href="https://red-secret-dragonfly-529.mypinata.cloud/ipfs/bafkreiaayuqpb2nhpa4hsnhsvnp3nsapkk7xhxzsty6wzl75xyu4nfkihe"
+   target="_blank"
+   rel="noreferrer">
+  Whitepaper PDF
+</a>
+        <a class="btn" href="https://flare-explorer.flare.network/address/0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79" target="_blank" rel="noreferrer">EON Contract</a>
+      </div>
+
+      <div class="foot">
+        Minimal surface. Observable state. <code>ENERGON</code>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
