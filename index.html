@@ -91,11 +91,36 @@
       transition: transform 0.08s ease, border-color 0.12s ease;
     }
     a.btn:hover { transform: translateY(-1px); border-color: var(--accent); }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: rgba(255,255,255,0.14);
+      margin: 28px 0;
+    }
+
+    .section-title {
+      margin: 0 0 6px;
+      font-size: 14px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.70);
+      font-weight: 750;
+      text-align: center;
+    }
+
     .foot {
       margin-top: 18px;
       text-align: center;
       color: rgba(255,255,255,0.55);
       font-size: 12px;
+    }
+    .caption {
+      margin-top: 10px;
+      text-align: center;
+      color: rgba(255,255,255,0.60);
+      font-size: 13px;
+      letter-spacing: 0.6px;
     }
     code {
       color: rgba(255,255,255,0.85);
@@ -111,10 +136,9 @@
   <div class="wrap">
     <div class="card">
       <div class="top">
-        <!-- Replace this with your SIGIL image if different -->
         <img class="sigil"
-             src="https://red-secret-dragonfly-529.mypinata.cloud/ipfs/bafybeiccfdp4aez6gqva5yx5cmixc7dugqxl6eee5nhb54sdhpnidpmt7u"
-             alt="Energon Sigil" />
+          src="https://red-secret-dragonfly-529.mypinata.cloud/ipfs/bafybeiccfdp4aez6gqva5yx5cmixc7dugqxl6eee5nhb54sdhpnidpmt7u"
+          alt="Energon Sigil" />
         <div>
           <h1>ENERGON</h1>
           <h2>Protocol Abstract</h2>
@@ -145,16 +169,47 @@
       </p>
 
       <div class="links">
-        <!-- Replace these with your real links -->
         <a class="btn" href="https://energon-dapp.vercel.app" target="_blank" rel="noreferrer">Mint Site</a>
-       <a class="btn"
-   href="https://red-secret-dragonfly-529.mypinata.cloud/ipfs/bafkreiaayuqpb2nhpa4hsnhsvnp3nsapkk7xhxzsty6wzl75xyu4nfkihe"
-   target="_blank"
-   rel="noreferrer">
-  Whitepaper PDF
-</a>
-        <a class="btn" href="https://flare-explorer.flare.network/address/0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79" target="_blank" rel="noreferrer">EON Contract</a>
+
+        <a class="btn"
+          href="https://red-secret-dragonfly-529.mypinata.cloud/ipfs/bafkreiaayuqpb2nhpa4hsnhsvnp3nsapkk7xhxzsty6wzl75xyu4nfkihe"
+          target="_blank"
+          rel="noreferrer">Whitepaper PDF</a>
+
+        <a class="btn"
+          href="https://flare-explorer.flare.network/address/0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79"
+          target="_blank"
+          rel="noreferrer">EON Contract</a>
       </div>
+
+      <div class="caption">“The Grid hums quietly.”</div>
+
+      <!-- WHY 1 CUBE (INLINE) -->
+      <hr />
+
+      <div class="section-title">Why One Cube?</div>
+
+      <p>
+        Energon enforces a strict <strong>one wallet, one cube</strong> rule. This is not a limitation —
+        it is the protocol’s fairness guarantee.
+      </p>
+      <p>
+        Without this constraint, a single actor could split capital across many wallets (or many interfaces)
+        to amplify influence. Energon’s eligibility gate, combined with contract guardrails, reduces that surface.
+      </p>
+      <p>
+        The one-cube boundary also keeps progression predictable. Energon Height advances under strict timing
+        and execution constraints; limiting eligibility helps prevent concentrated acceleration and preserves
+        deterministic evolution.
+      </p>
+      <p>
+        “Exactly one cube” is simple to verify on-chain. That makes the rule auditable, resistant to manual
+        exceptions, and free of centralized discretion.
+      </p>
+      <p style="opacity:0.78; font-size:14px; margin-top:16px;">
+        TL;DR: <strong>1 Cube = 1 eligible identity.</strong> The Grid stays fair, manipulation is slowed,
+        and progression remains observable.
+      </p>
 
       <div class="foot">
         Minimal surface. Observable state. <code>ENERGON</code>
