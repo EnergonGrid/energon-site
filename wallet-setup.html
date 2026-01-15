@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>ENERGON — Wallet Setup</title>
+<meta name="description" content="How to connect MetaMask, Bifrost, or Ledger (hardware) to Flare and set up EON + Energon Cube." />
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<style>
+:root {
+  --bg: #05060b;
+  --fg: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.68);
+  --card: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.14);
+  --accent: rgba(80,180,255,0.35);
+}
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at 30% 10%, #1b2a5a 0%, var(--bg) 55%, #000 100%);
+  color: var(--fg);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  letter-spacing: 0.2px;
+}
+
+.wrap {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 48px 18px 72px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 18px 48px rgba(0,0,0,0.35);
+}
+
+h1 {
+  margin: 0;
+  font-size: 36px;
+  letter-spacing: 2px;
+}
+
+h2 {
+  margin: 6px 0 18px;
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin-top: 32px;
+  font-size: 18px;
+  letter-spacing: 0.6px;
+}
+
+p {
+  line-height: 1.6;
+  font-size: 15px;
+  color: rgba(255,255,255,0.86);
+}
+
+a {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.btn {
+  display: inline-block;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.08);
+  font-size: 13px;
+  font-weight: 650;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.btn:hover {
+  border-color: var(--accent);
+}
+
+.kv {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 8px 12px;
+  margin: 18px 0;
+}
+
+code {
+  color: rgba(255,255,255,0.88);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 3px 6px;
+  border-radius: 8px;
+}
+
+.steps {
+  margin: 14px 0;
+  padding-left: 18px;
+}
+
+.steps li {
+  margin-bottom: 14px;
+}
+
+.note {
+  margin: 12px 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.18);
+  border-radius: 12px;
+  color: rgba(255,255,255,0.78);
+  font-size: 13.5px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  margin: 36px 0;
+}
+
+.footer {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+<div class="card">
+
+<a class="btn" href="index.html">← Back</a>
+<a class="btn" target="_blank" rel="noreferrer" href="https://flare-explorer.flare.network/address/0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79">EON Explorer</a>
+<a class="btn" target="_blank" rel="noreferrer" href="https://flare-explorer.flare.network/token/0x30e1076bDf2B123B54486C2721125388af2d2061">CUBE Explorer</a>
+
+<h1>WALLET SETUP</h1>
+<h2>Flare Network · MetaMask · Bifrost · Ledger (Hardware)</h2>
+
+<p>
+This page walks you through connecting a wallet to <strong>Flare Mainnet</strong>,
+adding the <strong>EON token</strong>, and verifying your <strong>Energon Cube (NFT)</strong> after purchase.
+Choose one of three setups below.
+</p>
+
+<h3>Network Details (Copy / Paste)</h3>
+<div class="kv">
+  <div>Network</div><div>Flare Mainnet</div>
+  <div>Chain ID</div><div><code>14</code></div>
+  <div>RPC URL</div><div><code>https://flare-api.flare.network/ext/C/rpc</code></div>
+  <div>Explorer</div><div><code>https://flare-explorer.flare.network</code></div>
+  <div>EON Token</div><div><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code></div>
+  <div>Energon Cube</div><div><code>0x30e1076bDf2B123B54486C2721125388af2d2061</code></div>
+</div>
+
+<div class="note">
+<strong>Eligibility note:</strong> Energon participation is enforced programmatically.
+Only wallets holding <strong>exactly one Energon Cube</strong> are eligible. Wallets holding 0 or more than 1 cube are excluded.
+</div>
+
+<hr>
+
+<h3>Option A — MetaMask</h3>
+<ol class="steps">
+  <li><strong>Install MetaMask</strong> (browser extension or mobile) and create/import your wallet.</li>
+
+  <li>
+    <strong>Add Flare Network</strong> manually in MetaMask:
+    <div class="kv">
+      <div>Network Name</div><div>Flare Mainnet</div>
+      <div>New RPC URL</div><div><code>https://flare-api.flare.network/ext/C/rpc</code></div>
+      <div>Chain ID</div><div><code>14</code></div>
+      <div>Currency Symbol</div><div><code>FLR</code></div>
+      <div>Block Explorer</div><div><code>https://flare-explorer.flare.network</code></div>
+    </div>
+  </li>
+
+  <li><strong>Switch</strong> MetaMask to <strong>Flare Mainnet</strong>.</li>
+
+  <li>
+    <strong>Add EON token</strong> so it shows in your wallet:
+    <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code>
+  </li>
+
+  <li>
+    <strong>After purchasing an Energon Cube</strong>:
+    MetaMask may not display NFTs automatically. Verify ownership on explorer:
+    <br>
+    <a class="btn" target="_blank" rel="noreferrer"
+       href="https://flare-explorer.flare.network/token/0x30e1076bDf2B123B54486C2721125388af2d2061">
+      View CUBE on Explorer
+    </a>
+  </li>
+
+  <li><strong>Connect</strong> to Energon dApps and approve the wallet connection prompt.</li>
+</ol>
+
+<hr>
+
+<h3>Option B — Bifrost Wallet</h3>
+<ol class="steps">
+  <li><strong>Install Bifrost Wallet</strong> on mobile and create/import your wallet.</li>
+  <li><strong>Select Flare network</strong> inside Bifrost (not Songbird or other networks).</li>
+  <li>
+    <strong>Add EON token</strong>:
+    Find “Manage tokens” / “Add token” and paste:
+    <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code>
+  </li>
+  <li>
+    <strong>After purchasing an Energon Cube</strong>:
+    Look under NFTs/Collectibles. If it doesn’t appear immediately, confirm via explorer:
+    <br>
+    <a class="btn" target="_blank" rel="noreferrer"
+       href="https://flare-explorer.flare.network/token/0x30e1076bDf2B123B54486C2721125388af2d2061">
+      Verify CUBE on Explorer
+    </a>
+  </li>
+  <li>
+    <strong>Connect using WalletConnect</strong>:
+    On an Energon site, click Connect → WalletConnect → scan the QR code with Bifrost.
+  </li>
+</ol>
+
+<hr>
+
+<h3>Option C — Ledger / Hardware Wallet (Recommended for Security)</h3>
+<p>
+A hardware wallet protects your private keys offline. The most common setup on EVM chains like Flare is:
+<strong>Ledger + MetaMask</strong>. You manage accounts in Ledger, and MetaMask acts as the interface.
+</p>
+
+<ol class="steps">
+  <li><strong>Set up Ledger</strong> using Ledger Live, create your device PIN, and store your recovery phrase safely (offline).</li>
+
+  <li>
+    <strong>Install the Ethereum app</strong> on your Ledger using Ledger Live.
+    <div class="note">
+      Flare is EVM-compatible, so Ledger uses the <strong>Ethereum app</strong> for signing.
+    </div>
+  </li>
+
+  <li>
+    <strong>Connect Ledger to MetaMask</strong>:
+    In MetaMask → Accounts → “Add account” → <strong>Hardware wallet</strong> → choose Ledger → connect and select an address.
+  </li>
+
+  <li>
+    <strong>Add Flare Network</strong> in MetaMask (same fields as Option A) and switch to Flare Mainnet.
+  </li>
+
+  <li>
+    <strong>Add EON token</strong> in MetaMask (same token address):
+    <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code>
+  </li>
+
+  <li>
+    <strong>Purchase / hold your Energon Cube on the Ledger account</strong> you connected.
+    Verify ownership on explorer if the NFT does not show in-wallet:
+    <br>
+    <a class="btn" target="_blank" rel="noreferrer"
+       href="https://flare-explorer.flare.network/token/0x30e1076bDf2B123B54486C2721125388af2d2061">
+      Verify CUBE on Explorer
+    </a>
+  </li>
+
+  <li>
+    <strong>When signing a transaction</strong>, always verify the address + details on the Ledger screen before approving.
+  </li>
+</ol>
+
+<div class="note">
+<strong>Hardware wallet safety:</strong> Never type your Ledger recovery phrase into any website or app.
+Energon will never ask for it. Only enter it on your Ledger device during recovery.
+</div>
+
+<hr>
+
+<h3>Troubleshooting</h3>
+<ul class="steps">
+  <li><strong>Balances look empty:</strong> switch wallet network to <strong>Flare Mainnet</strong>.</li>
+  <li><strong>EON not showing:</strong> re-add the token using the EON contract address.</li>
+  <li><strong>NFT not visible:</strong> check the explorer inventory/holder view to confirm ownership.</li>
+  <li><strong>Ledger won’t connect:</strong> unlock device, open Ethereum app, enable “Blind signing” if prompted by Ledger/MetaMask.</li>
+</ul>
+
+<div class="footer">
+  Minimal surface. Observable state. <code>ENERGON</code>
+</div>
+
+</div>
+</div>
+</body>
+</html>
