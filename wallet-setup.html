@@ -103,6 +103,7 @@ code {
   border: 1px solid rgba(255,255,255,0.12);
   padding: 3px 6px;
   border-radius: 8px;
+  word-break: break-all;
 }
 
 .steps {
@@ -207,6 +208,12 @@ Select the wallet you use below. Each option explains how to connect to
 <strong>Energon Cube</strong> using the wallet’s <strong>dApp Browser</strong>.
 </p>
 
+<div class="note">
+<strong>Funding:</strong> You’ll need a small amount of <strong>FLR</strong> to pay network fees (and mint cost if minting).
+You can purchase <strong>FLR</strong> on most major crypto exchanges, then <strong>withdraw/send FLR</strong> to your wallet’s
+<strong>Flare Mainnet</strong> address.
+</div>
+
 <div class="wallet-chooser">
   <a href="#metamask" class="wallet-card">
     <div class="wallet-icon">🦊</div>
@@ -255,10 +262,20 @@ Only wallets holding <strong>exactly one Energon Cube</strong> are eligible.
   <li>Install MetaMask and create or import your wallet.</li>
   <li>Add the Flare Mainnet network using the network details above.</li>
   <li>Switch MetaMask to <strong>Flare Mainnet</strong>.</li>
+
   <li>
-    Add the <strong>EON token</strong> to MetaMask using the EON contract address:
-    <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code>
+    <strong>Fund your wallet with FLR</strong> (for gas + mint):
+    Tap <strong>Receive</strong> in MetaMask to copy your address, then send/withdraw <strong>FLR (Flare Mainnet)</strong> to that address.
   </li>
+
+  <li>
+    <strong>Add EON in MetaMask (mobile):</strong>
+    Go to <strong>Tokens</strong> → tap <strong>+</strong> (Import tokens) → select <strong>Custom token</strong> →
+    paste the EON contract address:
+    <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
+    EON should auto-populate → tap <strong>Import</strong>. (EON will now appear in your wallet.)
+  </li>
+
   <li>
     <strong>Tap and copy</strong> the Energon dApp address:
     <br><code>https://energon-dapp.vercel.app</code>
@@ -292,11 +309,22 @@ If the mint site opens in Safari/Chrome instead of MetaMask, copy the URL and op
 <h3 id="bifrost">Option B — Bifrost Wallet</h3>
 <ol class="steps">
   <li>Install Bifrost Wallet and create or import your wallet.</li>
-  <li>Ensure the active network is set to <strong>Flare</strong>.</li>
+  <li>Ensure the active network is set to <strong>Flare Mainnet</strong> (or <strong>Flare</strong>).</li>
+
   <li>
-    Add the <strong>EON token</strong> manually using the EON contract address:
-    <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code>
+    <strong>Fund your wallet with FLR</strong> (for gas + mint):
+    Tap <strong>Receive</strong> to copy your Flare address, then send/withdraw <strong>FLR (Flare Mainnet)</strong> to that address.
   </li>
+
+  <li>
+    <strong>Add EON in Bifrost (manual import):</strong><br>
+    Tap the <strong>blue up arrow</strong> → tap <strong>Receive</strong> → search <strong>Energon</strong> →
+    tap <strong>Custom token</strong> → make sure <strong>Flare Mainnet</strong> is selected (Flare at the top) →
+    paste the EON contract address:
+    <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
+    You should see <strong>EON</strong> populate → confirm/add. (EON will now show in your token list.)
+  </li>
+
   <li>
     <strong>Tap and copy</strong> the Energon dApp address:
     <br><code>https://energon-dapp.vercel.app</code>
@@ -308,7 +336,7 @@ If the mint site opens in Safari/Chrome instead of MetaMask, copy the URL and op
     Approve the wallet connection inside Bifrost
     (this may appear as an in-app approval or WalletConnect confirmation).
   </li>
-  <li>Confirm the network is <strong>Flare</strong>.</li>
+  <li>Confirm the network is <strong>Flare Mainnet</strong>.</li>
   <li>Follow the on-screen steps to mint or purchase <strong>one Energon Cube</strong>.</li>
   <li>Approve the transaction in Bifrost.</li>
   <li>
@@ -333,8 +361,22 @@ Use Ledger together with MetaMask for Flare compatibility.
   <li>Initialize Ledger and store your recovery phrase securely offline.</li>
   <li>Install the <strong>Ethereum app</strong> on Ledger.</li>
   <li>Connect Ledger to MetaMask as a hardware wallet.</li>
-  <li>Add Flare Network and EON token in MetaMask.</li>
-  <li>Open the Mint Site and always verify transaction details on the Ledger device screen before approving.</li>
+  <li>Add Flare Network in MetaMask (using the network details above).</li>
+
+  <li>
+    <strong>Fund with FLR:</strong> Send/withdraw <strong>FLR (Flare Mainnet)</strong> to your Ledger address (view/copy it in MetaMask → <strong>Receive</strong>).
+  </li>
+
+  <li>
+    <strong>Add EON in MetaMask:</strong> Go to <strong>Tokens</strong> → <strong>+</strong> (Import) → <strong>Custom token</strong> →
+    paste:
+    <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
+    then <strong>Import</strong>.
+  </li>
+
+  <li>
+    Open the Mint Site in MetaMask (dApp Browser) and always verify transaction details on the Ledger device screen before approving.
+  </li>
 </ol>
 
 <div class="note">
