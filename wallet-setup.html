@@ -15,379 +15,417 @@
 
 <style>
 :root {
-  --bg: #05060b;
-  --fg: rgba(255,255,255,0.92);
-  --muted: rgba(255,255,255,0.68);
-  --card: rgba(255,255,255,0.06);
-  --border: rgba(255,255,255,0.14);
+  --bg:#05060b;
+  --fg:rgba(255,255,255,0.92);
+  --muted:rgba(255,255,255,0.68);
+
+  --sheetA: rgba(12,14,22,0.72);
+  --sheetB: rgba(12,14,22,0.62);
+  --stroke: rgba(255,255,255,0.08);
+  --stroke2: rgba(255,255,255,0.06);
   --accent: rgba(80,180,255,0.35);
   --badge: rgba(120,220,255,0.25);
+  --glow: rgba(80,180,255,0.18);
+  --radius: 18px;
 }
 
 html { scroll-behavior: smooth; }
 html, body { height: 100%; }
 
-body {
-  margin: 0;
-  background: radial-gradient(circle at 30% 10%, #1b2a5a 0%, var(--bg) 55%, #000 100%);
-  color: var(--fg);
+body{
+  margin:0;
+  color:var(--fg);
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-  letter-spacing: 0.2px;
+  letter-spacing:0.2px;
+
+  background:
+    radial-gradient(circle at 30% 10%, rgba(27,42,90,0.95) 0%, rgba(5,6,11,1) 55%, #000 100%);
+  background-attachment: fixed;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-.wrap {
+.wrap{
   max-width: 920px;
   margin: 0 auto;
   padding: 48px 18px 72px;
 }
 
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 28px;
+/* Single continuous sheet (no split bands) */
+.sheet{
+  background: linear-gradient(180deg, var(--sheetA) 0%, var(--sheetB) 100%);
+  border:1px solid var(--stroke);
+  border-radius: var(--radius);
   box-shadow: 0 18px 48px rgba(0,0,0,0.35);
+  overflow:hidden;
+  backdrop-filter: blur(10px);
+  transform: translateZ(0);
 }
 
-h1 {
+.inner{
+  padding: 28px;
+  position: relative;
+}
+.inner:before{
+  content:"";
+  position:absolute;
+  inset:-140px -140px auto auto;
+  width:280px;
+  height:280px;
+  background: radial-gradient(circle, var(--glow) 0%, rgba(0,0,0,0) 65%);
+  filter: blur(8px);
+  pointer-events:none;
+}
+
+a{ color: var(--fg); text-decoration:none; }
+
+.btn{
+  display:inline-block;
+  padding:9px 14px;
+  border-radius:999px;
+  border:1px solid var(--stroke2);
+  background:rgba(255,255,255,0.07);
+  font-size:13px;
+  font-weight:650;
+  margin-right:8px;
+  margin-bottom:8px;
+  transition: transform .08s ease, border-color .12s ease, background .12s ease;
+}
+.btn:hover{
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  background: rgba(255,255,255,0.09);
+}
+
+h1{
   margin: 0;
-  font-size: 36px;
-  letter-spacing: 2px;
+  font-size:36px;
+  letter-spacing:2px;
+  position:relative;
+  z-index:1;
+}
+h2{
+  margin:6px 0 18px;
+  font-size:14px;
+  color:var(--muted);
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  position:relative;
+  z-index:1;
+}
+h3{
+  margin-top: 30px; /* slightly tighter for continuous feel */
+  font-size:18px;
+  letter-spacing:0.6px;
+  position:relative;
+  z-index:1;
+}
+p{
+  line-height:1.6;
+  font-size:15px;
+  color:rgba(255,255,255,0.86);
+  position:relative;
+  z-index:1;
 }
 
-h2 {
-  margin: 6px 0 18px;
-  font-size: 14px;
-  color: var(--muted);
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-}
-
-h3 {
-  margin-top: 36px;
-  font-size: 18px;
-  letter-spacing: 0.6px;
-}
-
-p {
-  line-height: 1.6;
-  font-size: 15px;
-  color: rgba(255,255,255,0.86);
-}
-
-a { color: var(--fg); text-decoration: none; }
-
-.btn {
-  display: inline-block;
-  padding: 9px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.08);
-  font-size: 13px;
-  font-weight: 650;
-  margin-right: 8px;
-  margin-bottom: 8px;
-}
-
-.btn:hover { border-color: var(--accent); }
-
-.kv {
-  display: grid;
+.kv{
+  display:grid;
   grid-template-columns: 170px 1fr;
-  gap: 8px 12px;
-  margin: 18px 0;
+  gap:8px 12px;
+  margin:18px 0;
+  position:relative;
+  z-index:1;
 }
 
-code {
+code{
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  padding: 3px 6px;
-  border-radius: 8px;
+  border:1px solid rgba(255,255,255,0.12);
+  padding:3px 6px;
+  border-radius:8px;
   word-break: break-all;
 }
 
-.steps {
+.steps{
   margin: 14px 0;
   padding-left: 18px;
+  position:relative;
+  z-index:1;
 }
+.steps li{ margin-bottom: 14px; }
 
-.steps li { margin-bottom: 14px; }
-
-.note {
-  margin: 14px 0;
-  padding: 12px 14px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(0,0,0,0.18);
-  border-radius: 12px;
-  font-size: 13.5px;
+.note{
+  margin:14px 0;
+  padding:12px 14px;
+  border:1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.14);
+  border-radius:12px;
+  font-size:13.5px;
   color: rgba(255,255,255,0.8);
+  position:relative;
+  z-index:1;
 }
 
-/* === Wallet Chooser === */
-.wallet-chooser {
-  display: grid;
+/* Wallet chooser — keep, but soften borders */
+.wallet-chooser{
+  display:grid;
   grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
-  gap: 14px;
-  margin: 22px 0 32px;
+  gap:14px;
+  margin: 22px 0 28px;
+  position:relative;
+  z-index:1;
 }
-
-.wallet-card {
-  position: relative;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(0,0,0,0.18);
-  border-radius: 14px;
-  padding: 18px 14px;
-  text-align: center;
-  transition: transform 0.12s ease, border-color 0.12s ease;
+.wallet-card{
+  position:relative;
+  border:1px solid var(--stroke2);
+  background: rgba(0,0,0,0.14);
+  border-radius:14px;
+  padding:18px 14px;
+  text-align:center;
+  transition: transform .12s ease, border-color .12s ease, background .12s ease;
 }
-
-.wallet-card:hover {
+.wallet-card:hover{
   transform: translateY(-2px);
   border-color: var(--accent);
+  background: rgba(0,0,0,0.18);
 }
-
-.wallet-icon {
-  font-size: 34px;
-  margin-bottom: 10px;
-}
-
-.wallet-title {
-  font-weight: 700;
-  letter-spacing: 0.6px;
-}
-
-.wallet-sub {
-  font-size: 13px;
-  color: var(--muted);
-}
-
-/* Recommended badge */
-.badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 4px 8px;
-  font-size: 11px;
-  font-weight: 700;
-  border-radius: 999px;
+.wallet-icon{ font-size:34px; margin-bottom:10px; }
+.wallet-title{ font-weight:700; letter-spacing:.6px; }
+.wallet-sub{ font-size:13px; color: var(--muted); }
+.badge{
+  position:absolute;
+  top:10px;
+  right:10px;
+  padding:4px 8px;
+  font-size:11px;
+  font-weight:700;
+  border-radius:999px;
   background: var(--badge);
-  border: 1px solid var(--accent);
-  letter-spacing: 0.6px;
+  border:1px solid var(--accent);
+  letter-spacing:.6px;
 }
 
-hr {
-  border: none;
-  border-top: 1px solid rgba(255,255,255,0.12);
-  margin: 40px 0;
+/* Replace harsh <hr> with gentle spacing + fade */
+.sep{
+  height: 18px;
+  margin: 26px 0 18px;
+  border: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.10), rgba(255,255,255,0));
+  border-radius: 999px;
+  opacity: 0.55;
 }
 
-.footer {
-  margin-top: 32px;
-  text-align: center;
-  font-size: 12px;
+.footer{
+  margin-top:32px;
+  text-align:center;
+  font-size:12px;
   color: rgba(255,255,255,0.55);
+  position:relative;
+  z-index:1;
 }
 </style>
 </head>
 
 <body>
 <div class="wrap">
-<div class="card">
+  <div class="sheet">
+    <div class="inner">
 
-<a class="btn" href="index.html">← Back</a>
-<a class="btn" target="_blank" rel="noreferrer" href="https://energon-dapp.vercel.app">Mint Site</a>
-<a class="btn" target="_blank" rel="noreferrer" href="https://flare-explorer.flare.network/address/0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79">EON Explorer</a>
-<a class="btn" target="_blank" rel="noreferrer" href="https://flare-explorer.flare.network/token/0x30e1076bDf2B123B54486C2721125388af2d2061">CUBE Explorer</a>
+      <a class="btn" href="index.html">← Back</a>
+      <a class="btn" target="_blank" rel="noreferrer" href="https://energon-dapp.vercel.app">Mint Site</a>
+      <a class="btn" target="_blank" rel="noreferrer" href="https://flare-explorer.flare.network/address/0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79">EON Explorer</a>
+      <a class="btn" target="_blank" rel="noreferrer" href="https://flare-explorer.flare.network/token/0x30e1076bDf2B123B54486C2721125388af2d2061">CUBE Explorer</a>
 
-<h1>WALLET SETUP</h1>
-<h2>Flare Network · Choose Your Wallet</h2>
+      <h1>WALLET SETUP</h1>
+      <h2>Flare Network · Choose Your Wallet</h2>
 
-<p>
-Select the wallet you use below. Each option explains how to connect to
-<strong>Flare Mainnet</strong>, add <strong>EON</strong>, and mint/purchase your
-<strong>Energon Cube</strong> using the wallet’s <strong>dApp Browser</strong>.
-</p>
+      <p>
+        Select the wallet you use below. Each option explains how to connect to
+        <strong>Flare Mainnet</strong>, add <strong>EON</strong>, and mint/purchase your
+        <strong>Energon Cube</strong> using the wallet’s <strong>dApp Browser</strong>.
+      </p>
 
-<div class="note">
-<strong>Funding:</strong> You’ll need a small amount of <strong>FLR</strong> to pay network fees (and mint cost if minting).
-You can purchase <strong>FLR</strong> on most major crypto exchanges, then <strong>withdraw/send FLR</strong> to your wallet’s
-<strong>Flare Mainnet</strong> address.
-</div>
+      <div class="note">
+        <strong>Funding:</strong> You’ll need a small amount of <strong>FLR</strong> to pay network fees (and mint cost if minting).
+        You can purchase <strong>FLR</strong> on most major crypto exchanges, then <strong>withdraw/send FLR</strong> to your wallet’s
+        <strong>Flare Mainnet</strong> address.
+      </div>
 
-<div class="wallet-chooser">
-  <a href="#metamask" class="wallet-card">
-    <div class="wallet-icon">🦊</div>
-    <div class="wallet-title">MetaMask</div>
-    <div class="wallet-sub">Browser & Mobile</div>
-  </a>
+      <div class="wallet-chooser">
+        <a href="#metamask" class="wallet-card">
+          <div class="wallet-icon">🦊</div>
+          <div class="wallet-title">MetaMask</div>
+          <div class="wallet-sub">Browser & Mobile</div>
+        </a>
 
-  <a href="#bifrost" class="wallet-card">
-    <div class="wallet-icon">❄️</div>
-    <div class="wallet-title">Bifrost</div>
-    <div class="wallet-sub">Flare Native</div>
-  </a>
+        <a href="#bifrost" class="wallet-card">
+          <div class="wallet-icon">❄️</div>
+          <div class="wallet-title">Bifrost</div>
+          <div class="wallet-sub">Flare Native</div>
+        </a>
 
-  <a href="#ledger" class="wallet-card">
-    <div class="badge">RECOMMENDED</div>
-    <div class="wallet-icon">🔐</div>
-    <div class="wallet-title">Ledger</div>
-    <div class="wallet-sub">Hardware Wallet</div>
-  </a>
-</div>
+        <a href="#ledger" class="wallet-card">
+          <div class="badge">RECOMMENDED</div>
+          <div class="wallet-icon">🔐</div>
+          <div class="wallet-title">Ledger</div>
+          <div class="wallet-sub">Hardware Wallet</div>
+        </a>
+      </div>
 
-<h3>Network Details (Copy / Paste)</h3>
-<div class="kv">
-  <div>Network</div><div>Flare Mainnet</div>
-  <div>Chain ID</div><div><code>14</code></div>
-  <div>RPC URL</div><div><code>https://flare-api.flare.network/ext/C/rpc</code></div>
-  <div>Explorer</div><div><code>https://flare-explorer.flare.network</code></div>
-  <div>Mint URL</div><div><code>https://energon-dapp.vercel.app</code></div>
-  <div>EON Token</div><div><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code></div>
-  <div>Energon Cube</div><div><code>0x30e1076bDf2B123B54486C2721125388af2d2061</code></div>
-</div>
+      <h3>Network Details (Copy / Paste)</h3>
+      <div class="kv">
+        <div>Network</div><div>Flare Mainnet</div>
+        <div>Chain ID</div><div><code>14</code></div>
+        <div>RPC URL</div><div><code>https://flare-api.flare.network/ext/C/rpc</code></div>
+        <div>Explorer</div><div><code>https://flare-explorer.flare.network</code></div>
+        <div>Mint URL</div><div><code>https://energon-dapp.vercel.app</code></div>
+        <div>EON Token</div><div><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code></div>
+        <div>Energon Cube</div><div><code>0x30e1076bDf2B123B54486C2721125388af2d2061</code></div>
+      </div>
 
-<div class="note">
-<strong>Security:</strong> Always verify the URL in your wallet dApp Browser is exactly
-<code>energon-dapp.vercel.app</code>. Never enter a seed phrase on any website.
-</div>
+      <div class="note">
+        <strong>Security:</strong> Always verify the URL in your wallet dApp Browser is exactly
+        <code>energon-dapp.vercel.app</code>. Never enter a seed phrase on any website.
+      </div>
 
-<div class="note">
-Only wallets holding <strong>exactly one Energon Cube</strong> are eligible.
-</div>
+      <div class="note">
+        Only wallets holding <strong>exactly one Energon Cube</strong> are eligible.
+      </div>
 
-<hr>
+      <div class="sep" aria-hidden="true"></div>
 
-<h3 id="metamask">Option A — MetaMask</h3>
-<ol class="steps">
-  <li>Install MetaMask and create or import your wallet.</li>
-  <li>Add the Flare Mainnet network using the network details above.</li>
-  <li>Switch MetaMask to <strong>Flare Mainnet</strong>.</li>
+      <h3 id="metamask">Option A — MetaMask</h3>
+      <ol class="steps">
+        <li>Install MetaMask and create or import your wallet.</li>
+        <li>Add the Flare Mainnet network using the network details above.</li>
+        <li>Switch MetaMask to <strong>Flare Mainnet</strong>.</li>
 
-  <li>
-    <strong>Fund your wallet with FLR</strong> (for gas + mint):
-    Tap <strong>Receive</strong> in MetaMask to copy your address, then send/withdraw <strong>FLR (Flare Mainnet)</strong> to that address.
-  </li>
+        <li>
+          <strong>Fund your wallet with FLR</strong> (for gas + mint):
+          Tap <strong>Receive</strong> in MetaMask to copy your address, then send/withdraw <strong>FLR (Flare Mainnet)</strong> to that address.
+        </li>
 
-  <li>
-    <strong>Add EON in MetaMask (mobile):</strong>
-    Go to <strong>Tokens</strong> → tap <strong>+</strong> (Import tokens) → select <strong>Custom token</strong> →
-    paste the EON contract address:
-    <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
-    EON should auto-populate → tap <strong>Import</strong>. (EON will now appear in your wallet.)
-  </li>
+        <li>
+          <strong>Add EON in MetaMask (mobile):</strong>
+          Go to <strong>Tokens</strong> → tap <strong>+</strong> (Import tokens) → select <strong>Custom token</strong> →
+          paste the EON contract address:
+          <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
+          EON should auto-populate → tap <strong>Import</strong>. (EON will now appear in your wallet.)
+        </li>
 
-  <li>
-    <strong>Tap and copy</strong> the Energon dApp address:
-    <br><code>https://energon-dapp.vercel.app</code>
-  </li>
-  <li>Open the <strong>dApp Browser</strong> inside the MetaMask app.</li>
-  <li>Paste the Energon dApp address into the address bar of the dApp Browser and load the page.</li>
-  <li>Tap <strong>Connect Wallet</strong> on the Energon dApp.</li>
-  <li>Approve the wallet connection request in MetaMask.</li>
-  <li>
-    Confirm the network is <strong>Flare Mainnet</strong>
-    (MetaMask will prompt you to switch if required).
-  </li>
-  <li>Follow the on-screen steps to mint or purchase <strong>one Energon Cube</strong>.</li>
-  <li>Review the transaction details carefully and approve the transaction in MetaMask.</li>
-  <li>
-    After confirmation, if the Energon Cube does not appear immediately, verify ownership on the Flare Explorer:
-    <br>
-    <a class="btn" target="_blank" rel="noreferrer"
-      href="https://flare-explorer.flare.network/token/0x30e1076bDf2B123B54486C2721125388af2d2061">
-      Verify CUBE on Explorer
-    </a>
-  </li>
-</ol>
+        <li>
+          <strong>Tap and copy</strong> the Energon dApp address:
+          <br><code>https://energon-dapp.vercel.app</code>
+        </li>
+        <li>Open the <strong>dApp Browser</strong> inside the MetaMask app.</li>
+        <li>Paste the Energon dApp address into the address bar of the dApp Browser and load the page.</li>
+        <li>Tap <strong>Connect Wallet</strong> on the Energon dApp.</li>
+        <li>Approve the wallet connection request in MetaMask.</li>
+        <li>
+          Confirm the network is <strong>Flare Mainnet</strong>
+          (MetaMask will prompt you to switch if required).
+        </li>
+        <li>Follow the on-screen steps to mint or purchase <strong>one Energon Cube</strong>.</li>
+        <li>Review the transaction details carefully and approve the transaction in MetaMask.</li>
+        <li>
+          After confirmation, if the Energon Cube does not appear immediately, verify ownership on the Flare Explorer:
+          <br>
+          <a class="btn" target="_blank" rel="noreferrer"
+            href="https://flare-explorer.flare.network/token/0x30e1076bDf2B123B54486C2721125388af2d2061">
+            Verify CUBE on Explorer
+          </a>
+        </li>
+      </ol>
 
-<div class="note">
-If the mint site opens in Safari/Chrome instead of MetaMask, copy the URL and open it inside the MetaMask dApp Browser.
-</div>
+      <div class="note">
+        If the mint site opens in Safari/Chrome instead of MetaMask, copy the URL and open it inside the MetaMask dApp Browser.
+      </div>
 
-<hr>
+      <div class="sep" aria-hidden="true"></div>
 
-<h3 id="bifrost">Option B — Bifrost Wallet</h3>
-<ol class="steps">
-  <li>Install Bifrost Wallet and create or import your wallet.</li>
-  <li>Ensure the active network is set to <strong>Flare Mainnet</strong> (or <strong>Flare</strong>).</li>
+      <h3 id="bifrost">Option B — Bifrost Wallet</h3>
+      <ol class="steps">
+        <li>Install Bifrost Wallet and create or import your wallet.</li>
+        <li>Ensure the active network is set to <strong>Flare Mainnet</strong> (or <strong>Flare</strong>).</li>
 
-  <li>
-    <strong>Fund your wallet with FLR</strong> (for gas + mint):
-    Tap <strong>Receive</strong> to copy your Flare address, then send/withdraw <strong>FLR (Flare Mainnet)</strong> to that address.
-  </li>
+        <li>
+          <strong>Fund your wallet with FLR</strong> (for gas + mint):
+          Tap <strong>Receive</strong> to copy your Flare address, then send/withdraw <strong>FLR (Flare Mainnet)</strong> to that address.
+        </li>
 
-  <li>
-    <strong>Add EON in Bifrost (manual import):</strong><br>
-    Tap the <strong>blue up arrow</strong> → tap <strong>Receive</strong> → search <strong>Energon</strong> →
-    tap <strong>Custom token</strong> → make sure <strong>Flare Mainnet</strong> is selected (Flare at the top) →
-    paste the EON contract address:
-    <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
-    You should see <strong>EON</strong> populate → confirm/add. (EON will now show in your token list.)
-  </li>
+        <li>
+          <strong>Add EON in Bifrost (manual import):</strong><br>
+          Tap the <strong>blue up arrow</strong> → tap <strong>Receive</strong> → search <strong>Energon</strong> →
+          tap <strong>Custom token</strong> → make sure <strong>Flare Mainnet</strong> is selected (Flare at the top) →
+          paste the EON contract address:
+          <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
+          You should see <strong>EON</strong> populate → confirm/add. (EON will now show in your token list.)
+        </li>
 
-  <li>
-    <strong>Tap and copy</strong> the Energon dApp address:
-    <br><code>https://energon-dapp.vercel.app</code>
-  </li>
-  <li>Open the <strong>dApp Browser</strong> inside the Bifrost app.</li>
-  <li>Paste the Energon dApp address into the address bar of the dApp Browser and load the page.</li>
-  <li>Tap <strong>Connect Wallet</strong> on the Energon dApp.</li>
-  <li>
-    Approve the wallet connection inside Bifrost
-    (this may appear as an in-app approval or WalletConnect confirmation).
-  </li>
-  <li>Confirm the network is <strong>Flare Mainnet</strong>.</li>
-  <li>Follow the on-screen steps to mint or purchase <strong>one Energon Cube</strong>.</li>
-  <li>Approve the transaction in Bifrost.</li>
-  <li>
-    If the Energon Cube does not appear immediately, verify ownership on the Flare Explorer:
-    <br>
-    <a class="btn" target="_blank" rel="noreferrer"
-      href="https://flare-explorer.flare.network/token/0x30e1076bDf2B123B54486C2721125388af2d2061">
-      Verify CUBE on Explorer
-    </a>
-  </li>
-</ol>
+        <li>
+          <strong>Tap and copy</strong> the Energon dApp address:
+          <br><code>https://energon-dapp.vercel.app</code>
+        </li>
+        <li>Open the <strong>dApp Browser</strong> inside the Bifrost app.</li>
+        <li>Paste the Energon dApp address into the address bar of the dApp Browser and load the page.</li>
+        <li>Tap <strong>Connect Wallet</strong> on the Energon dApp.</li>
+        <li>
+          Approve the wallet connection inside Bifrost
+          (this may appear as an in-app approval or WalletConnect confirmation).
+        </li>
+        <li>Confirm the network is <strong>Flare Mainnet</strong>.</li>
+        <li>Follow the on-screen steps to mint or purchase <strong>one Energon Cube</strong>.</li>
+        <li>Approve the transaction in Bifrost.</li>
+        <li>
+          If the Energon Cube does not appear immediately, verify ownership on the Flare Explorer:
+          <br>
+          <a class="btn" target="_blank" rel="noreferrer"
+            href="https://flare-explorer.flare.network/token/0x30e1076bDf2B123B54486C2721125388af2d2061">
+            Verify CUBE on Explorer
+          </a>
+        </li>
+      </ol>
 
-<hr>
+      <div class="sep" aria-hidden="true"></div>
 
-<h3 id="ledger">Option C — Ledger (Hardware Wallet)</h3>
-<p>
-Ledger provides maximum security by keeping private keys offline.
-Use Ledger together with MetaMask for Flare compatibility.
-</p>
+      <h3 id="ledger">Option C — Ledger (Hardware Wallet)</h3>
+      <p>
+        Ledger provides maximum security by keeping private keys offline.
+        Use Ledger together with MetaMask for Flare compatibility.
+      </p>
 
-<ol class="steps">
-  <li>Initialize Ledger and store your recovery phrase securely offline.</li>
-  <li>Install the <strong>Ethereum app</strong> on Ledger.</li>
-  <li>Connect Ledger to MetaMask as a hardware wallet.</li>
-  <li>Add Flare Network in MetaMask (using the network details above).</li>
+      <ol class="steps">
+        <li>Initialize Ledger and store your recovery phrase securely offline.</li>
+        <li>Install the <strong>Ethereum app</strong> on Ledger.</li>
+        <li>Connect Ledger to MetaMask as a hardware wallet.</li>
+        <li>Add Flare Network in MetaMask (using the network details above).</li>
 
-  <li>
-    <strong>Fund with FLR:</strong> Send/withdraw <strong>FLR (Flare Mainnet)</strong> to your Ledger address (view/copy it in MetaMask → <strong>Receive</strong>).
-  </li>
+        <li>
+          <strong>Fund with FLR:</strong> Send/withdraw <strong>FLR (Flare Mainnet)</strong> to your Ledger address (view/copy it in MetaMask → <strong>Receive</strong>).
+        </li>
 
-  <li>
-    <strong>Add EON in MetaMask:</strong> Go to <strong>Tokens</strong> → <strong>+</strong> (Import) → <strong>Custom token</strong> →
-    paste:
-    <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
-    then <strong>Import</strong>.
-  </li>
+        <li>
+          <strong>Add EON in MetaMask:</strong> Go to <strong>Tokens</strong> → <strong>+</strong> (Import) → <strong>Custom token</strong> →
+          paste:
+          <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
+          then <strong>Import</strong>.
+        </li>
 
-  <li>
-    Open the Mint Site in MetaMask (dApp Browser) and always verify transaction details on the Ledger device screen before approving.
-  </li>
-</ol>
+        <li>
+          Open the Mint Site in MetaMask (dApp Browser) and always verify transaction details on the Ledger device screen before approving.
+        </li>
+      </ol>
 
-<div class="note">
-Never share your Ledger recovery phrase. Energon will never request it.
-</div>
+      <div class="note">
+        Never share your Ledger recovery phrase. Energon will never request it.
+      </div>
 
-<div class="footer">
-  Minimal surface. Observable state. <code>ENERGON</code>
-</div>
+      <div class="footer">
+        Minimal surface. Observable state. <code>ENERGON</code>
+      </div>
 
-</div>
+    </div>
+  </div>
 </div>
 </body>
 </html>

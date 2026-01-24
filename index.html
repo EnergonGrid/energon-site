@@ -16,214 +16,238 @@
 
 <style>
 :root {
---bg: #05060b;
---fg: rgba(255,255,255,0.92);
---muted: rgba(255,255,255,0.68);
---card: rgba(255,255,255,0.06);
---border: rgba(255,255,255,0.14);
---accent: rgba(80,180,255,0.35);
+  --bg: #05060b;
+  --fg: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.68);
+
+  /* Continuous reading surface */
+  --sheetA: rgba(12,14,22,0.72);
+  --sheetB: rgba(12,14,22,0.62);
+  --stroke: rgba(255,255,255,0.08);
+  --stroke2: rgba(255,255,255,0.06);
+  --accent: rgba(80,180,255,0.35);
+  --glow: rgba(80,180,255,0.18);
+  --radius: 18px;
 }
 
 html, body { height: 100%; }
+html { scroll-behavior: smooth; }
 
 body {
-margin: 0;
-background: radial-gradient(circle at 30% 10%, #1b2a5a 0%, var(--bg) 55%, #000 100%);
-color: var(--fg);
-font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-letter-spacing: 0.2px;
+  margin: 0;
+  color: var(--fg);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  letter-spacing: 0.2px;
+
+  /* One stable background to avoid visible seams while scrolling */
+  background:
+    radial-gradient(circle at 30% 10%, rgba(27,42,90,0.95) 0%, rgba(5,6,11,1) 55%, #000 100%);
+  background-attachment: fixed;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .wrap {
-max-width: 880px;
-margin: 0 auto;
-padding: 56px 18px 72px;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 56px 18px 72px;
 }
 
-.card {
-background: var(--card);
-border: 1px solid var(--border);
-border-radius: 16px;
-padding: 26px;
-box-shadow: 0 18px 48px rgba(0,0,0,0.35);
+.sheet {
+  background: linear-gradient(180deg, var(--sheetA) 0%, var(--sheetB) 100%);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 48px rgba(0,0,0,0.35);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+
+  /* iOS banding helpers */
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.sheetInner {
+  padding: 26px;
+  position: relative;
+}
+
+.sheetInner:before{
+  content:"";
+  position:absolute;
+  inset:-140px -140px auto auto;
+  width:280px;
+  height:280px;
+  background: radial-gradient(circle, var(--glow) 0%, rgba(0,0,0,0) 65%);
+  filter: blur(8px);
+  pointer-events:none;
 }
 
 .top {
-display: flex;
-gap: 18px;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-text-align: center;
-margin-bottom: 14px;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
 }
 
 .sigil {
-width: 132px;
-height: 132px;
-border-radius: 24px;
-border: 1px solid rgba(255,255,255,0.18);
-background: rgba(0,0,0,0.18);
-object-fit: cover;
+  width: 132px;
+  height: 132px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(0,0,0,0.18);
+  object-fit: cover;
 }
 
 h1 {
-margin: 6px 0 0;
-font-size: 44px;
-letter-spacing: 3px;
-font-weight: 800;
+  margin: 6px 0 0;
+  font-size: 44px;
+  letter-spacing: 3px;
+  font-weight: 800;
 }
 
 h2 {
-margin: 0;
-font-size: 16px;
-font-weight: 650;
-color: var(--muted);
-letter-spacing: 1.5px;
-text-transform: uppercase;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 650;
+  color: var(--muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 p {
-margin: 14px 0;
-line-height: 1.6;
-color: rgba(255,255,255,0.86);
-font-size: 15.5px;
+  margin: 14px 0;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.86);
+  font-size: 15.5px;
+  position: relative;
+  z-index: 1;
 }
 
 .links {
-display: flex;
-flex-wrap: wrap;
-gap: 10px;
-margin-top: 22px;
-justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 a.btn {
-display: inline-block;
-padding: 10px 14px;
-border-radius: 999px;
-border: 1px solid rgba(255,255,255,0.16);
-background: rgba(255,255,255,0.08);
-color: var(--fg);
-text-decoration: none;
-font-weight: 650;
-font-size: 13.5px;
-transition: transform 0.08s ease, border-color 0.12s ease;
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--stroke2);
+  background: rgba(255,255,255,0.07);
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 650;
+  font-size: 13.5px;
+  transition: transform 0.08s ease, border-color 0.12s ease, background 0.12s ease;
 }
 
 a.btn:hover {
-transform: translateY(-1px);
-border-color: var(--accent);
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  background: rgba(255,255,255,0.09);
 }
 
 .caption {
-margin-top: 14px;
-text-align: center;
-color: rgba(255,255,255,0.60);
-font-size: 13px;
-letter-spacing: 0.6px;
+  margin-top: 14px;
+  text-align: center;
+  color: rgba(255,255,255,0.60);
+  font-size: 13px;
+  letter-spacing: 0.6px;
+  position: relative;
+  z-index: 1;
 }
 
 .foot {
-margin-top: 22px;
-text-align: center;
-color: rgba(255,255,255,0.55);
-font-size: 12px;
+  margin-top: 22px;
+  text-align: center;
+  color: rgba(255,255,255,0.55);
+  font-size: 12px;
+  position: relative;
+  z-index: 1;
 }
 
 code {
-color: rgba(255,255,255,0.85);
-background: rgba(255,255,255,0.06);
-border: 1px solid rgba(255,255,255,0.10);
-padding: 2px 6px;
-border-radius: 8px;
+  color: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  padding: 2px 6px;
+  border-radius: 8px;
 }
 </style>
 </head>
 
 <body>
 <div class="wrap">
-<div class="card">
+  <div class="sheet">
+    <div class="sheetInner">
 
-<div class="top">
-<img
-class="sigil"
-src="https://red-secret-dragonfly-529.mypinata.cloud/ipfs/bafybeiccfdp4aez6gqva5yx5cmixc7dugqxl6eee5nhb54sdhpnidpmt7u"
-alt="Energon Sigil"
-/>
-<div>
-<h1>ENERGON</h1>
-<h2>Protocol Abstract</h2>
-</div>
-</div>
+      <div class="top">
+        <img
+          class="sigil"
+          src="https://red-secret-dragonfly-529.mypinata.cloud/ipfs/bafybeiccfdp4aez6gqva5yx5cmixc7dugqxl6eee5nhb54sdhpnidpmt7u"
+          alt="Energon Sigil"
+        />
+        <div>
+          <h1>ENERGON</h1>
+          <h2>Protocol Abstract</h2>
+        </div>
+      </div>
 
-<p>
-Energon is a live protocol operating on Flare mainnet that advances through a deterministic,
-height-based progression system known as <em>Energon Height</em>.
-</p>
+      <p>
+        Energon is a live protocol operating on Flare mainnet that advances through a deterministic,
+        height-based progression system known as <em>Energon Height</em>.
+      </p>
 
-<p>
-Protocol progression is governed by an on-chain controller that enforces strict timing,
-sequencing, and execution constraints. Energon Height advances only when predefined conditions
-are met, preserving fairness, predictability, and resistance to manipulation.
-</p>
+      <p>
+        Protocol progression is governed by an on-chain controller that enforces strict timing,
+        sequencing, and execution constraints. Energon Height advances only when predefined conditions
+        are met, preserving fairness, predictability, and resistance to manipulation.
+      </p>
 
-<p>
-The protocol does not rely on centralized schedulers, off-chain cron jobs, or privileged operators.
-All state transitions are verifiable through on-chain reads and are protected by guardrails that
-prevent duplicate execution, race conditions, and amplification across wallets or interfaces.
-</p>
+      <p>
+        The protocol does not rely on centralized schedulers, off-chain cron jobs, or privileged operators.
+        All state transitions are verifiable through on-chain reads and are protected by guardrails that
+        prevent duplicate execution, race conditions, and amplification across wallets or interfaces.
+      </p>
 
-<p>
-Participation eligibility is enforced programmatically. Only wallets holding exactly one Energon Cube
-may interact with protocol mechanics. Wallets holding zero or more than one cube are excluded
-without exception.
-</p>
+      <p>
+        Participation eligibility is enforced programmatically. Only wallets holding exactly one Energon Cube
+        may interact with protocol mechanics. Wallets holding zero or more than one cube are excluded
+        without exception.
+      </p>
 
-<p>
-Energon utilizes a native ERC-20 utility token, <strong>EON</strong>, for protocol-level mechanics
-and ecosystem alignment. EON does not convey ownership, equity, or claims on external assets.
-</p>
+      <p>
+        Energon utilizes a native ERC-20 utility token, <strong>EON</strong>, for protocol-level mechanics
+        and ecosystem alignment. EON does not convey ownership, equity, or claims on external assets.
+      </p>
 
-<div class="links">
-<a class="btn" href="https://energon-dapp.vercel.app" target="_blank" rel="noreferrer">
-Mint Site
-</a>
+      <div class="links">
+        <a class="btn" href="https://energon-dapp.vercel.app" target="_blank" rel="noreferrer">Mint Site</a>
+        <a class="btn" href="wallet-setup.html">Wallet Setup</a>
+        <a class="btn" href="docs/energon-whitepaper.pdf" target="_blank" rel="noreferrer">Whitepaper PDF</a>
+        <a class="btn" href="docs/energon-emp.pdf" target="_blank" rel="noreferrer">EMP v1.0 PDF</a>
+        <a class="btn" href="why-1-cube.html">Why 1 Cube?</a>
+      </div>
 
-<a class="btn" href="wallet-setup.html">
-Wallet Setup
-</a>
+      <div class="caption">“The Grid hums quietly.”</div>
 
-<a
-class="btn"
-href="docs/energon-whitepaper.pdf"
-target="_blank"
-rel="noreferrer"
->
-Whitepaper PDF
-</a>
+      <div class="foot">
+        Minimal surface. Observable state. <code>ENERGON</code>
+      </div>
 
-<a
-class="btn"
-href="docs/energon-emp.pdf"
-target="_blank"
-rel="noreferrer"
->
-EMP v1.0 PDF
-</a>
-
-<a class="btn" href="why-1-cube.html">
-Why 1 Cube?
-</a>
-</div>
-
-<div class="caption">“The Grid hums quietly.”</div>
-
-<div class="foot">
-Minimal surface. Observable state. <code>ENERGON</code>
-</div>
-
-</div>
+    </div>
+  </div>
 </div>
 </body>
 </html>
