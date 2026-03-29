@@ -237,7 +237,7 @@ code {
         <a class="btn" href="wallet-setup.html">Wallet Setup</a>
         <a class="btn" href="docs/energon-whitepaper.pdf" target="_blank" rel="noreferrer">Whitepaper PDF</a>
         <a class="btn" href="docs/energon-emp.pdf" target="_blank" rel="noreferrer">EMP v1.0 PDF</a>
-       <a class="btn" href="guardian.html">Guardian</a>
+        <a class="btn" href="guardian.html">Guardian</a>
       </div>
 
       <div class="caption">“The Grid hums quietly.”</div>

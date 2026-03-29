@@ -115,7 +115,7 @@ h2{
   z-index:1;
 }
 h3{
-  margin-top: 30px; /* slightly tighter for continuous feel */
+  margin-top: 30px;
   font-size:18px;
   letter-spacing:0.6px;
   position:relative;
@@ -144,6 +144,34 @@ code{
   padding:3px 6px;
   border-radius:8px;
   word-break: break-all;
+  color:#ffffff;
+}
+
+/* === SPECIAL CODE COLORS === */
+.code-green{
+  background: rgba(0,255,140,0.10);
+  border:1px solid rgba(0,255,140,0.35);
+  color:#ffffff;
+}
+
+.code-yellow{
+  background: rgba(255,200,0,0.12);
+  border:1px solid rgba(255,200,0,0.45);
+  color:#ffffff;
+}
+
+.note-danger{
+  background: rgba(255,60,60,0.08);
+  border:1px solid rgba(255,60,60,0.45);
+  color:#ffffff;
+  animation: dangerPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes dangerPulse {
+  0%   { box-shadow: 0 0 0 1px rgba(255,80,80,0.25), 0 0 12px rgba(255,60,60,0.15); }
+  50%  { box-shadow: 0 0 0 1px rgba(255,80,80,0.45), 0 0 22px rgba(255,60,60,0.35); }
+  100% { box-shadow: 0 0 0 1px rgba(255,80,80,0.25), 0 0 12px rgba(255,60,60,0.15); }
+}
 }
 
 .steps{
@@ -166,7 +194,7 @@ code{
   z-index:1;
 }
 
-/* Wallet chooser — keep, but soften borders */
+/* Wallet chooser */
 .wallet-chooser{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
@@ -205,7 +233,6 @@ code{
   letter-spacing:.6px;
 }
 
-/* Replace harsh <hr> with gentle spacing + fade */
 .sep{
   height: 18px;
   margin: 26px 0 18px;
@@ -278,14 +305,14 @@ code{
         <div>Chain ID</div><div><code>14</code></div>
         <div>RPC URL</div><div><code>https://flare-api.flare.network/ext/C/rpc</code></div>
         <div>Explorer</div><div><code>https://flare-explorer.flare.network</code></div>
-        <div>Mint URL</div><div><code>https://energon-dapp.vercel.app</code></div>
-        <div>EON Token</div><div><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code></div>
+        <div>Mint URL</div><div><code class="code-green">https://energon-dapp.vercel.app</code></div>
+        <div>EON Token</div><div><code class="code-yellow">0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code></div>
         <div>Energon Cube</div><div><code>0x30e1076bDf2B123B54486C2721125388af2d2061</code></div>
       </div>
 
-      <div class="note">
+      <div class="note note-danger">
         <strong>Security:</strong> Always verify the URL in your wallet dApp Browser is exactly
-        <code>energon-dapp.vercel.app</code>. Never enter a seed phrase on any website.
+        <code class="code-green">energon-dapp.vercel.app</code>. Never enter a seed phrase on any website.
       </div>
 
       <div class="note">
@@ -309,13 +336,13 @@ code{
           <strong>Add EON in MetaMask (mobile):</strong>
           Go to <strong>Tokens</strong> → tap <strong>+</strong> (Import tokens) → select <strong>Custom token</strong> →
           paste the EON contract address:
-          <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
+          <br><code class="code-yellow">0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
           EON should auto-populate → tap <strong>Import</strong>. (EON will now appear in your wallet.)
         </li>
 
         <li>
           <strong>Tap and copy</strong> the Energon dApp address:
-          <br><code>https://energon-dapp.vercel.app</code>
+          <br><code class="code-green">https://energon-dapp.vercel.app</code>
         </li>
         <li>Open the <strong>dApp Browser</strong> inside the MetaMask app.</li>
         <li>Paste the Energon dApp address into the address bar of the dApp Browser and load the page.</li>
@@ -358,13 +385,13 @@ code{
           Tap the <strong>blue up arrow</strong> → tap <strong>Receive</strong> → search <strong>Energon</strong> →
           tap <strong>Custom token</strong> → make sure <strong>Flare Mainnet</strong> is selected (Flare at the top) →
           paste the EON contract address:
-          <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
+          <br><code class="code-yellow">0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
           You should see <strong>EON</strong> populate → confirm/add. (EON will now show in your token list.)
         </li>
 
         <li>
           <strong>Tap and copy</strong> the Energon dApp address:
-          <br><code>https://energon-dapp.vercel.app</code>
+          <br><code class="code-green">https://energon-dapp.vercel.app</code>
         </li>
         <li>Open the <strong>dApp Browser</strong> inside the Bifrost app.</li>
         <li>Paste the Energon dApp address into the address bar of the dApp Browser and load the page.</li>
@@ -407,7 +434,7 @@ code{
         <li>
           <strong>Add EON in MetaMask:</strong> Go to <strong>Tokens</strong> → <strong>+</strong> (Import) → <strong>Custom token</strong> →
           paste:
-          <br><code>0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
+          <br><code class="code-yellow">0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
           then <strong>Import</strong>.
         </li>
 
