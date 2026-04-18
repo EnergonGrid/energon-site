@@ -254,39 +254,6 @@
       color:rgba(214,226,255,0.82);
     }
 
-    .startStrip{
-      margin:18px auto 16px;
-      max-width:820px;
-      min-height:54px;
-      border-radius:14px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:12px 18px;
-      background:linear-gradient(180deg, rgba(8,18,42,0.82), rgba(6,12,28,0.94));
-      border:1px solid rgba(110,180,255,0.18);
-      color:rgba(214,229,255,0.88);
-      font-size:14px;
-      box-shadow:
-        0 16px 30px rgba(0,0,0,0.26),
-        inset 0 0 0 1px rgba(255,255,255,0.015);
-      text-align:center;
-    }
-
-    .startDot{
-      width:22px;
-      height:22px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      font-size:11px;
-      color:#7fcfff;
-      border:1px solid rgba(76,160,255,0.38);
-      box-shadow:0 0 12px rgba(60,130,255,0.12);
-      flex-shrink:0;
-    }
-
     .grid3{
       display:grid;
       grid-template-columns:repeat(3, minmax(0, 1fr));
@@ -301,7 +268,6 @@
 
     .ctaCard,
     .tile,
-    .stepTile,
     .miniTile{
       position:relative;
       background:linear-gradient(180deg, var(--panelA), var(--panelB));
@@ -364,34 +330,6 @@
       line-height:1.72;
       color:rgba(214,226,255,0.84);
       white-space:normal;
-    }
-
-    .stepNum{
-      width:28px;
-      height:28px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(180deg, rgba(36,74,142,0.74), rgba(16,36,88,0.92));
-      border:1px solid rgba(110,185,255,0.30);
-      color:#eef6ff;
-      font-size:12px;
-      font-weight:700;
-      margin-bottom:10px;
-      box-shadow:0 0 14px rgba(80,160,255,0.10);
-    }
-
-    .stepTitle{
-      font-size:18px;
-      font-weight:700;
-      color:#f2f7ff;
-      margin-bottom:8px;
-    }
-
-    .stepCopy{
-      font-size:14px;
-      line-height:1.55;
-      color:var(--textMuted);
     }
 
     .newHere{
@@ -477,6 +415,43 @@
       font-size:14px;
       line-height:1.55;
       color:var(--textMuted);
+    }
+
+    .startStrip{
+      margin:16px auto 16px;
+      max-width:820px;
+      min-height:54px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 18px;
+      background:linear-gradient(180deg, rgba(8,18,42,0.82), rgba(6,12,28,0.94));
+      border:1px solid rgba(110,180,255,0.18);
+      color:rgba(214,229,255,0.88);
+      font-size:14px;
+      box-shadow:
+        0 16px 30px rgba(0,0,0,0.26),
+        inset 0 0 0 1px rgba(255,255,255,0.015);
+      text-align:center;
+      transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+    .startDot{
+      width:22px;
+      height:22px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      font-size:11px;
+      color:#7fcfff;
+      border:1px solid rgba(76,160,255,0.38);
+      box-shadow:0 0 12px rgba(60,130,255,0.12);
+      flex-shrink:0;
     }
 
     .bottomStrip{
@@ -598,8 +573,8 @@
 
     .ctaCard:hover,
     .tile:hover,
-    .stepTile:hover,
     .miniTile:hover,
+    .startStrip:hover,
     .bottomStrip:hover{
       animation:goldPulse 1.6s ease-in-out infinite;
       transform:translateY(-1px) scale(1.01);
@@ -707,73 +682,14 @@
           </div>
         </div>
 
-        <div class="startStrip">
-          <span class="startDot">◉</span>
-          <span><strong>Start here.</strong> Set up a wallet, get exactly one cube, then observe the system.</span>
-        </div>
-
-        <div class="grid2">
-          <a class="ctaCard" href="https://energon-dapp.vercel.app" target="_blank" rel="noreferrer">
-            <div class="ctaTitle">Acquire an Energon Cube</div>
-            <div class="ctaCopy">Key to your protocol identity</div>
-          </a>
-
-          <a class="ctaCard" href="wallet-setup.html">
-            <div class="ctaTitle">Wallet Setup</div>
-            <div class="ctaCopy">Start here if you are new to Energon</div>
-          </a>
-
-          <a class="ctaCard" href="docs/energon-whitepaper.pdf" target="_blank" rel="noreferrer">
-            <div class="ctaTitle">Read How It Works</div>
-            <div class="ctaCopy">Protocol white paper and full framework</div>
-          </a>
-
-          <a class="ctaCard" href="docs/energon-emp.pdf" target="_blank" rel="noreferrer">
-            <div class="ctaTitle">EMP</div>
-            <div class="ctaCopy">Advanced reference for the Energon Management Protocol framework</div>
-          </a>
-        </div>
-
-        <div class="spacer"></div>
-
-        <div class="tile">
-          <div class="tileLabel">3-Step Onboarding</div>
-
-          <div class="grid3">
-            <div class="stepTile">
-              <div class="stepNum">1</div>
-              <div class="stepTitle">Set Up Wallet</div>
-              <div class="stepCopy">
-                Create or prepare the wallet you will use to interact with the system.
-              </div>
-            </div>
-
-            <div class="stepTile">
-              <div class="stepNum">2</div>
-              <div class="stepTitle">Acquire One Cube</div>
-              <div class="stepCopy">
-                Acquire exactly one Energon Cube. The rule is strict and on-chain.
-              </div>
-            </div>
-
-            <div class="stepTile">
-              <div class="stepNum">3</div>
-              <div class="stepTitle">Observe the System</div>
-              <div class="stepCopy">
-                Return after setup and view the protocol from a clear state.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="spacer"></div>
-
         <div class="tile newHere">
           <div class="tileLabel">New Here?</div>
           <div class="tileTitle">A clear place to begin.</div>
           <div class="tileBody">
-            You do not need to know everything first. Start with Wallet Setup if you are new to Energon.
-            Then get exactly one cube. After that, come back and understand how the system behaves.
+            Understanding comes through observation.
+Begin with Wallet Setup, then hold exactly one cube.
+Return after and let the system reveal itself.
+Everything that happens is defined by rule.
           </div>
         </div>
 
@@ -913,6 +829,72 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="tile">
+  <div class="tileLabel">Path to Guardian</div>
+
+  <div class="grid3">
+
+    <div class="tile">
+      <div class="stepNum">1</div>
+      <div class="stepTitle">Prepare the Wallet</div>
+      <div class="stepCopy">
+        Set up a wallet capable of interacting with the protocol.
+        This becomes your point of observation.
+      </div>
+    </div>
+
+    <div class="tile">
+      <div class="stepNum">2</div>
+      <div class="stepTitle">Hold Exactly One Cube</div>
+      <div class="stepCopy">
+        Acquire one Energon Cube. Not zero. Not two.
+        The condition is exact and enforced on-chain.
+      </div>
+    </div>
+
+    <div class="tile">
+      <div class="stepNum">3</div>
+      <div class="stepTitle">Observe the System</div>
+      <div class="stepCopy">
+        Return and observe from a coherent state.
+        The system reveals itself through condition, not instruction.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+        <div class="startStrip">
+          <span class="startDot">◉</span>
+          <span><strong>Start here.</strong> After reading, choose where you want to begin.</span>
+        </div>
+
+        <div class="grid2">
+          <a class="ctaCard" href="https://energon-dapp.vercel.app" target="_blank" rel="noreferrer">
+            <div class="ctaTitle">Acquire an Energon Cube</div>
+            <div class="ctaCopy">Key to your protocol identity</div>
+          </a>
+
+          <a class="ctaCard" href="wallet-setup.html">
+            <div class="ctaTitle">Wallet Setup</div>
+            <div class="ctaCopy">Start here if you are new to Energon</div>
+          </a>
+
+          <a class="ctaCard" href="docs/energon-whitepaper.pdf" target="_blank" rel="noreferrer">
+            <div class="ctaTitle">Read How It Works</div>
+            <div class="ctaCopy">Protocol white paper and full framework</div>
+          </a>
+
+          <a class="ctaCard" href="docs/energon-emp.pdf" target="_blank" rel="noreferrer">
+            <div class="ctaTitle">EMP</div>
+            <div class="ctaCopy">Advanced reference for the Energon Management Protocol framework</div>
+          </a>
         </div>
 
         <div class="spacer"></div>
