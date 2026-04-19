@@ -29,22 +29,33 @@
   <style>
     :root{
       --bg:#000000;
-      --panelA:rgba(22,56,118,0.22);
-      --panelB:rgba(8,18,42,0.54);
-      --stroke:rgba(122,185,255,0.22);
+
+      --panelA:rgba(18,40,92,0.24);
+      --panelB:rgba(6,14,36,0.68);
+      --stroke:rgba(110,175,255,0.22);
+      --strokeStrong:rgba(136,198,255,0.34);
+
       --text:#f2f7ff;
-      --textMuted:rgba(214,226,255,0.72);
+      --textMuted:rgba(214,226,255,0.74);
 
-      --green:rgba(42,176,86,0.18);
-      --greenStroke:rgba(74,214,120,0.36);
-      --greenText:#d8ffea;
+      --blue:#57b8ff;
+      --blue2:#8ed8ff;
+      --green:#86f0a8;
+      --gold:#ffd969;
+      --violet:#c77dff;
+      --cyan:#76f1ff;
 
-      --red:rgba(220,54,76,0.18);
-      --redStroke:rgba(255,90,110,0.34);
-      --redText:#ffd8dd;
+      --blueGlow:rgba(87,184,255,0.22);
+      --greenGlow:rgba(134,240,168,0.22);
+      --goldGlow:rgba(255,217,105,0.22);
+      --violetGlow:rgba(199,125,255,0.22);
+      --cyanGlow:rgba(118,241,255,0.22);
+
+      --goldBorder:rgba(255,215,120,0.72);
+      --goldText:#ffe9b0;
 
       --shadow:
-        0 16px 34px rgba(0,0,0,0.28),
+        0 16px 34px rgba(0,0,0,0.30),
         inset 0 0 0 1px rgba(255,255,255,0.02),
         0 0 18px rgba(60,135,255,0.07);
     }
@@ -58,8 +69,8 @@
       min-height:100vh;
       overflow-x:hidden;
       color:var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      background:#000000;
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:#000;
       position:relative;
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
@@ -95,10 +106,7 @@
         radial-gradient(circle at 22% 72%, rgba(255,255,255,0.55) 0 1px, transparent 2px);
     }
 
-    .bgGlowA,
-    .bgGlowB,
-    .circuitLeft,
-    .circuitRight{
+    .bgGlowA,.bgGlowB,.circuitLeft,.circuitRight{
       position:fixed;
       pointer-events:none;
       z-index:0;
@@ -153,13 +161,13 @@
       z-index:1;
       max-width:980px;
       margin:0 auto;
-      padding:34px 18px 60px;
+      padding:18px 18px 60px;
     }
 
     .shell{
       position:relative;
       border-radius:22px;
-      background:linear-gradient(180deg, rgba(8,14,30,0.22), rgba(5,10,24,0.28));
+      background:linear-gradient(180deg, rgba(8,14,30,0.24), rgba(5,10,24,0.30));
       border:1px solid rgba(122,185,255,0.10);
       box-shadow:
         0 18px 40px rgba(0,0,0,0.24),
@@ -170,7 +178,88 @@
     }
 
     .inner{
-      padding:26px 22px 24px;
+      padding:18px 22px 24px;
+    }
+
+    /* TOP NAV — resized to match image 2 */
+    .topNavWrap{
+      display:flex;
+      justify-content:center;
+      margin:0 0 26px;
+    }
+
+    .topNav{
+      width:100%;
+      max-width:900px;
+      display:grid;
+      grid-template-columns:repeat(5, minmax(0, 1fr));
+      background:linear-gradient(180deg, rgba(8,18,42,0.84), rgba(6,12,28,0.96));
+      border:1px solid rgba(110,180,255,0.18);
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:
+        0 16px 30px rgba(0,0,0,0.26),
+        inset 0 0 0 1px rgba(255,255,255,0.015);
+    }
+
+    .topNavLink{
+      min-height:84px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 12px;
+      text-decoration:none;
+      color:rgba(234,241,255,0.92);
+      font-size:13px;
+      font-weight:700;
+      text-align:center;
+      border-right:1px solid rgba(110,180,255,0.14);
+      transition:
+        color 0.18s ease,
+        text-shadow 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+    }
+
+    .topNavLink:last-child{
+      border-right:none;
+    }
+
+    .topNavIcon{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      flex-shrink:0;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.02);
+      box-shadow:0 0 20px rgba(60,130,255,0.06);
+    }
+
+    .topNavIcon svg{
+      width:22px;
+      height:22px;
+      stroke:currentColor;
+      fill:none;
+      stroke-width:1.8;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    .nav-wallet{ color:var(--blue2); box-shadow:0 0 18px var(--blueGlow); }
+    .nav-cube{ color:var(--blue); box-shadow:0 0 18px var(--blueGlow); }
+    .nav-paper{ color:var(--gold); box-shadow:0 0 18px var(--goldGlow); }
+    .nav-emp{ color:var(--violet); box-shadow:0 0 18px var(--violetGlow); }
+    .nav-guardian{ color:var(--cyan); box-shadow:0 0 18px var(--cyanGlow); }
+
+    .topNavText{
+      line-height:1.15;
+      white-space:normal;
     }
 
     .headerBlock{
@@ -268,7 +357,8 @@
 
     .ctaCard,
     .tile,
-    .miniTile{
+    .miniTile,
+    .pathTile{
       position:relative;
       background:linear-gradient(180deg, var(--panelA), var(--panelB));
       border:1px solid var(--stroke);
@@ -287,8 +377,40 @@
 
     .ctaCard{
       display:block;
-      min-height:104px;
+      min-height:132px;
       text-decoration:none;
+    }
+
+    .ctaInner{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      min-height:96px;
+    }
+
+    .ctaIcon{
+      width:62px;
+      height:62px;
+      border-radius:20px;
+      display:grid;
+      place-items:center;
+      flex-shrink:0;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.02);
+    }
+
+    .ctaIcon svg{
+      width:30px;
+      height:30px;
+      stroke:currentColor;
+      fill:none;
+      stroke-width:1.8;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    .ctaText{
+      min-width:0;
     }
 
     .ctaTitle{
@@ -301,7 +423,68 @@
     .ctaCopy{
       font-size:14px;
       line-height:1.55;
-      color:var(--textMuted);
+      color:rgba(226,235,255,0.78);
+    }
+
+    /* bottom CTA colors like image 2 */
+    .ctaCube{
+      border-color:rgba(87,184,255,0.48);
+      background:
+        radial-gradient(circle at 18% 30%, rgba(87,184,255,0.12), transparent 40%),
+        linear-gradient(180deg, rgba(16,48,108,0.40), rgba(6,16,42,0.82));
+      box-shadow:
+        0 18px 34px rgba(0,0,0,0.30),
+        inset 0 0 0 1px rgba(130,200,255,0.05),
+        0 0 28px rgba(87,184,255,0.10);
+    }
+    .ctaCube .ctaIcon{
+      color:var(--blue);
+      box-shadow:0 0 24px var(--blueGlow);
+    }
+
+    .ctaWallet{
+      border-color:rgba(134,240,168,0.48);
+      background:
+        radial-gradient(circle at 18% 30%, rgba(134,240,168,0.12), transparent 40%),
+        linear-gradient(180deg, rgba(18,58,44,0.42), rgba(8,24,16,0.84));
+      box-shadow:
+        0 18px 34px rgba(0,0,0,0.30),
+        inset 0 0 0 1px rgba(170,255,200,0.04),
+        0 0 28px rgba(134,240,168,0.10);
+    }
+    .ctaWallet .ctaIcon{
+      color:var(--green);
+      box-shadow:0 0 24px var(--greenGlow);
+    }
+
+    .ctaPaper{
+      border-color:rgba(255,217,105,0.48);
+      background:
+        radial-gradient(circle at 18% 30%, rgba(255,217,105,0.12), transparent 40%),
+        linear-gradient(180deg, rgba(62,48,16,0.42), rgba(28,22,8,0.84));
+      box-shadow:
+        0 18px 34px rgba(0,0,0,0.30),
+        inset 0 0 0 1px rgba(255,236,170,0.04),
+        0 0 28px rgba(255,217,105,0.10);
+    }
+    .ctaPaper .ctaIcon{
+      color:var(--gold);
+      box-shadow:0 0 24px var(--goldGlow);
+    }
+
+    .ctaEmp{
+      border-color:rgba(199,125,255,0.48);
+      background:
+        radial-gradient(circle at 18% 30%, rgba(199,125,255,0.12), transparent 40%),
+        linear-gradient(180deg, rgba(46,18,66,0.42), rgba(20,8,30,0.84));
+      box-shadow:
+        0 18px 34px rgba(0,0,0,0.30),
+        inset 0 0 0 1px rgba(236,190,255,0.04),
+        0 0 28px rgba(199,125,255,0.10);
+    }
+    .ctaEmp .ctaIcon{
+      color:var(--violet);
+      box-shadow:0 0 24px var(--violetGlow);
     }
 
     .spacer{
@@ -382,16 +565,16 @@
     }
 
     .badge.open{
-      color:var(--greenText);
-      background:var(--green);
-      border:1px solid var(--greenStroke);
+      color:#d8ffea;
+      background:rgba(42,176,86,0.18);
+      border:1px solid rgba(74,214,120,0.36);
       box-shadow:0 0 14px rgba(70,214,120,0.12);
     }
 
     .badge.closed{
-      color:var(--redText);
-      background:var(--red);
-      border:1px solid var(--redStroke);
+      color:#ffd8dd;
+      background:rgba(220,54,76,0.18);
+      border:1px solid rgba(255,90,110,0.34);
       box-shadow:0 0 14px rgba(255,70,98,0.10);
     }
 
@@ -417,7 +600,7 @@
       color:var(--textMuted);
     }
 
-    .startStrip{
+    .pathStrip{
       margin:16px auto 16px;
       max-width:820px;
       min-height:54px;
@@ -435,13 +618,9 @@
         0 16px 30px rgba(0,0,0,0.26),
         inset 0 0 0 1px rgba(255,255,255,0.015);
       text-align:center;
-      transition:
-        transform 0.18s ease,
-        border-color 0.18s ease,
-        box-shadow 0.18s ease;
     }
 
-    .startDot{
+    .pathDot{
       width:22px;
       height:22px;
       border-radius:50%;
@@ -452,6 +631,34 @@
       border:1px solid rgba(76,160,255,0.38);
       box-shadow:0 0 12px rgba(60,130,255,0.12);
       flex-shrink:0;
+    }
+
+    .stepNum{
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(180deg, rgba(36,74,142,0.74), rgba(16,36,88,0.92));
+      border:1px solid rgba(110,185,255,0.30);
+      color:#eef6ff;
+      font-size:12px;
+      font-weight:700;
+      margin-bottom:10px;
+      box-shadow:0 0 14px rgba(80,160,255,0.10);
+    }
+
+    .stepTitle{
+      font-size:18px;
+      font-weight:700;
+      color:#f2f7ff;
+      margin-bottom:8px;
+    }
+
+    .stepCopy{
+      font-size:14px;
+      line-height:1.55;
+      color:var(--textMuted);
     }
 
     .bottomStrip{
@@ -473,10 +680,6 @@
         inset 0 0 0 1px rgba(255,255,255,0.015);
       text-align:center;
       flex-wrap:wrap;
-      transition:
-        transform 0.18s ease,
-        border-color 0.18s ease,
-        box-shadow 0.18s ease;
     }
 
     .bottomIcon{
@@ -537,7 +740,7 @@
           0 0 18px rgba(60,135,255,0.07);
       }
       50%{
-        border-color:rgba(255,215,120,0.70);
+        border-color:var(--goldBorder);
         box-shadow:
           0 18px 38px rgba(0,0,0,0.30),
           inset 0 0 0 1px rgba(255,245,210,0.06),
@@ -560,7 +763,7 @@
         text-shadow:none;
       }
       50%{
-        color:#ffe9b0;
+        color:var(--goldText);
         text-shadow:
           0 0 8px rgba(255,220,130,0.35),
           0 0 18px rgba(255,195,90,0.22);
@@ -571,83 +774,21 @@
       }
     }
 
+    .topNavLink:hover,
     .ctaCard:hover,
-    .tile:hover,
-    .miniTile:hover,
-    .startStrip:hover,
-    .bottomStrip:hover{
+    .footerLinks a:hover{
       animation:goldPulse 1.6s ease-in-out infinite;
       transform:translateY(-1px) scale(1.01);
     }
 
+    .topNavLink:hover .topNavText,
+    .topNavLink:hover .topNavIcon,
+    .ctaCard:hover .ctaTitle,
+    .ctaCard:hover .ctaIcon,
     .footerLinks a:hover{
       animation:goldTextPulse 1.4s ease-in-out infinite;
     }
 
-    @media (max-width: 900px){
-      .grid3{grid-template-columns:1fr}
-      .grid2{grid-template-columns:1fr}
-    }
-
-    @media (max-width: 760px){
-      .bgGlowA,
-      .bgGlowB,
-      .circuitLeft,
-      .circuitRight{
-        display:none;
-      }
-
-      .wrap{
-        padding:20px 14px 34px;
-      }
-
-      .inner{
-        padding:18px 14px 18px;
-      }
-
-      .sigilWrap{
-        width:118px;
-        height:118px;
-        margin-bottom:14px;
-      }
-
-      .sigil{
-        width:118px;
-        height:118px;
-        border-radius:24px;
-      }
-
-      h1{
-        font-size:34px;
-        letter-spacing:0.08em;
-      }
-
-      .heroTitle{
-        font-size:20px;
-      }
-
-      .heroCopy,
-      .tileBody{
-        font-size:14px;
-        line-height:1.6;
-      }
-
-      .tileTitle{
-        font-size:20px;
-      }
-
-      .startStrip,
-      .bottomStrip{
-        border-radius:16px;
-        padding:12px 14px;
-        font-size:13px;
-        line-height:1.5;
-      }
-
-      .miniGrid{
-        grid-template-columns:1fr;
-      }
-    }
   </style>
 </head>
 <body>
@@ -659,6 +800,66 @@
   <div class="wrap">
     <div class="shell">
       <div class="inner">
+
+        <div class="topNavWrap">
+          <div class="topNav">
+            <a class="topNavLink" href="wallet-setup.html">
+              <span class="topNavIcon nav-wallet">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a2 2 0 0 1 2 2v1.5"></path>
+                  <path d="M3 8v8.5A2.5 2.5 0 0 0 5.5 19H19a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H5.5A2.5 2.5 0 0 1 3 6.5"></path>
+                  <circle cx="17" cy="14" r="1"></circle>
+                </svg>
+              </span>
+              <span class="topNavText">Wallet Setup</span>
+            </a>
+
+            <a class="topNavLink" href="https://energon-dapp.vercel.app" target="_blank" rel="noreferrer">
+              <span class="topNavIcon nav-cube">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3l7 4v10l-7 4-7-4V7l7-4z"></path>
+                  <path d="M5 7l7 4 7-4"></path>
+                  <path d="M12 11v10"></path>
+                </svg>
+              </span>
+              <span class="topNavText">Acquire an Energon Cube</span>
+            </a>
+
+            <a class="topNavLink" href="docs/energon-whitepaper.pdf" target="_blank" rel="noreferrer">
+              <span class="topNavIcon nav-paper">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8 3h6l5 5v13H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                  <path d="M14 3v5h5"></path>
+                  <path d="M10 13h6"></path>
+                  <path d="M10 17h6"></path>
+                </svg>
+              </span>
+              <span class="topNavText">Whitepaper</span>
+            </a>
+
+            <a class="topNavLink" href="docs/energon-emp.pdf" target="_blank" rel="noreferrer">
+              <span class="topNavIcon nav-emp">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2l7 4v8l-7 8-7-8V6l7-4z"></path>
+                  <path d="M9 9h6"></path>
+                  <path d="M9 12h6"></path>
+                  <path d="M9 15h4"></path>
+                </svg>
+              </span>
+              <span class="topNavText">EMP</span>
+            </a>
+
+            <a class="topNavLink" href="guardian.html">
+              <span class="topNavIcon nav-guardian">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="8" r="3.5"></circle>
+                  <path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path>
+                </svg>
+              </span>
+              <span class="topNavText">Guardian</span>
+            </a>
+          </div>
+        </div>
 
         <div class="headerBlock">
           <div class="sigilWrap">
@@ -687,9 +888,9 @@
           <div class="tileTitle">A clear place to begin.</div>
           <div class="tileBody">
             Understanding comes through observation.
-Begin with Wallet Setup, then hold exactly one cube.
-Return after and let the system reveal itself.
-Everything that happens is defined by rule.
+            Begin with Wallet Setup, then hold exactly one cube.
+            Return after and let the system reveal itself.
+            Everything that happens is defined by rule.
           </div>
         </div>
 
@@ -834,66 +1035,108 @@ Everything that happens is defined by rule.
         <div class="spacer"></div>
 
         <div class="tile">
-  <div class="tileLabel">Path to Guardian</div>
+          <div class="tileLabel">Path to Guardian</div>
 
-  <div class="grid3">
+          <div class="grid3">
+            <div class="pathTile">
+              <div class="stepNum">1</div>
+              <div class="stepTitle">Prepare the Wallet</div>
+              <div class="stepCopy">
+                Set up a wallet capable of interacting with the protocol.
+                This becomes your point of observation.
+              </div>
+            </div>
 
-    <div class="tile">
-      <div class="stepNum">1</div>
-      <div class="stepTitle">Prepare the Wallet</div>
-      <div class="stepCopy">
-        Set up a wallet capable of interacting with the protocol.
-        This becomes your point of observation.
-      </div>
-    </div>
+            <div class="pathTile">
+              <div class="stepNum">2</div>
+              <div class="stepTitle">Hold Exactly One Cube</div>
+              <div class="stepCopy">
+                Acquire one Energon Cube. Not zero. Not two.
+                The condition is exact and enforced on-chain.
+              </div>
+            </div>
 
-    <div class="tile">
-      <div class="stepNum">2</div>
-      <div class="stepTitle">Hold Exactly One Cube</div>
-      <div class="stepCopy">
-        Acquire one Energon Cube. Not zero. Not two.
-        The condition is exact and enforced on-chain.
-      </div>
-    </div>
+            <div class="pathTile">
+              <div class="stepNum">3</div>
+              <div class="stepTitle">Observe the System</div>
+              <div class="stepCopy">
+                Return and observe from a coherent state.
+                The system reveals itself through condition, not instruction.
+              </div>
+            </div>
+          </div>
+        </div>
 
-    <div class="tile">
-      <div class="stepNum">3</div>
-      <div class="stepTitle">Observe the System</div>
-      <div class="stepCopy">
-        Return and observe from a coherent state.
-        The system reveals itself through condition, not instruction.
-      </div>
-    </div>
+        <div class="spacer"></div>
 
-  </div>
-</div>
-
-<div class="spacer"></div>
-
-        <div class="startStrip">
-          <span class="startDot">◉</span>
+        <div class="pathStrip">
+          <span class="pathDot">◉</span>
           <span><strong>Start here.</strong> After reading, choose where you want to begin.</span>
         </div>
 
         <div class="grid2">
-          <a class="ctaCard" href="https://energon-dapp.vercel.app" target="_blank" rel="noreferrer">
-            <div class="ctaTitle">Acquire an Energon Cube</div>
-            <div class="ctaCopy">Key to your protocol identity</div>
+          <a class="ctaCard ctaCube" href="https://energon-dapp.vercel.app" target="_blank" rel="noreferrer">
+            <div class="ctaInner">
+              <div class="ctaIcon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3l7 4v10l-7 4-7-4V7l7-4z"></path>
+                  <path d="M5 7l7 4 7-4"></path>
+                  <path d="M12 11v10"></path>
+                </svg>
+              </div>
+              <div class="ctaText">
+                <div class="ctaTitle">Acquire an Energon Cube</div>
+                <div class="ctaCopy">Key to your protocol identity</div>
+              </div>
+            </div>
           </a>
 
-          <a class="ctaCard" href="wallet-setup.html">
-            <div class="ctaTitle">Wallet Setup</div>
-            <div class="ctaCopy">Start here if you are new to Energon</div>
+          <a class="ctaCard ctaWallet" href="wallet-setup.html">
+            <div class="ctaInner">
+              <div class="ctaIcon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a2 2 0 0 1 2 2v1.5"></path>
+                  <path d="M3 8v8.5A2.5 2.5 0 0 0 5.5 19H19a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H5.5A2.5 2.5 0 0 1 3 6.5"></path>
+                  <circle cx="17" cy="14" r="1"></circle>
+                </svg>
+              </div>
+              <div class="ctaText">
+                <div class="ctaTitle">Wallet Setup</div>
+                <div class="ctaCopy">Start here if you are new to Energon</div>
+              </div>
+            </div>
           </a>
 
-          <a class="ctaCard" href="docs/energon-whitepaper.pdf" target="_blank" rel="noreferrer">
-            <div class="ctaTitle">Read How It Works</div>
-            <div class="ctaCopy">Protocol white paper and full framework</div>
+          <a class="ctaCard ctaPaper" href="docs/energon-whitepaper.pdf" target="_blank" rel="noreferrer">
+            <div class="ctaInner">
+              <div class="ctaIcon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 5.5C7.2 4.5 8.7 4 10.5 4c2 0 3.8.7 5.5 2v14c-1.5-1-3.3-1.5-5.5-1.5-1.8 0-3.3.4-4.5 1.2z"></path>
+                  <path d="M18 5.5C16.8 4.5 15.3 4 13.5 4c-2 0-3.8.7-5.5 2v14c1.5-1 3.3-1.5 5.5-1.5 1.8 0 3.3.4 4.5 1.2z"></path>
+                </svg>
+              </div>
+              <div class="ctaText">
+                <div class="ctaTitle">Read How It Works</div>
+                <div class="ctaCopy">Protocol white paper and full framework</div>
+              </div>
+            </div>
           </a>
 
-          <a class="ctaCard" href="docs/energon-emp.pdf" target="_blank" rel="noreferrer">
-            <div class="ctaTitle">EMP</div>
-            <div class="ctaCopy">Advanced reference for the Energon Management Protocol framework</div>
+          <a class="ctaCard ctaEmp" href="docs/energon-emp.pdf" target="_blank" rel="noreferrer">
+            <div class="ctaInner">
+              <div class="ctaIcon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2l7 4v8l-7 8-7-8V6l7-4z"></path>
+                  <path d="M9 9h6"></path>
+                  <path d="M9 12h6"></path>
+                  <path d="M9 15h4"></path>
+                </svg>
+              </div>
+              <div class="ctaText">
+                <div class="ctaTitle">EMP</div>
+                <div class="ctaCopy">Advanced reference for the Energon Management Protocol framework</div>
+              </div>
+            </div>
           </a>
         </div>
 
@@ -907,7 +1150,7 @@ Everything that happens is defined by rule.
         <div class="footerLinks">
           <a href="wallet-setup.html">Wallet Setup</a>
           <span>·</span>
-          <a href="https://energon-dapp.vercel.app" target="_blank" rel="noreferrer">Mint</a>
+          <a href="https://energon-dapp.vercel.app" target="_blank" rel="noreferrer">Acquire an Energon Cube</a>
           <span>·</span>
           <a href="docs/energon-whitepaper.pdf" target="_blank" rel="noreferrer">Whitepaper</a>
           <span>·</span>
