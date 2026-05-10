@@ -1077,6 +1077,67 @@
         transform:translateY(0) scale(1);
       }
     }
+
+#qoriOrb{
+  position:fixed;
+  top:34px;
+  left:24px;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  border:1px solid rgba(47,212,255,0.35);
+  background:rgba(47,212,255,0.08);
+  box-shadow:0 0 8px rgba(47,212,255,0.28);
+  opacity:0.28;
+  z-index:9999;
+  cursor:pointer;
+  transition:all 0.35s ease;
+}
+
+#qoriOrb:hover,
+#qoriOrb:active{
+  width:16px;
+  height:16px;
+  opacity:1;
+  background:#2fd4ff;
+  box-shadow:0 0 12px rgba(47,212,255,0.95),0 0 28px rgba(47,212,255,0.45);
+}
+
+#qoriFrameOverlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(0,6,14,0.78);
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
+  z-index:10000;
+}
+
+#qoriFrame{
+  display:block;
+  width:460px;
+  max-width:94vw;
+  height:680px;
+  max-height:92vh;
+  border:0;
+  border-radius:26px;
+  background:transparent;
+}
+
+#qoriFrameClose{
+  position:fixed;
+  top:24px;
+  right:28px;
+  z-index:10001;
+  background:transparent;
+  border:none;
+  color:#fff;
+  font-size:34px;
+  cursor:pointer;
+}
   </style>
 </head>
 <body>
@@ -1545,5 +1606,38 @@
       </div>
     </div>
   </div>
+<button
+  id="qoriOrb"
+  type="button"
+  aria-label="Open Q.O.R.I"
+  title="Open Q.O.R.I"
+></button>
+
+<div id="qoriFrameOverlay">
+  <button id="qoriFrameClose" type="button">×</button>
+  <iframe
+    id="qoriFrame"
+    src=""
+    title="Q.O.R.I"
+    loading="lazy"
+  ></iframe>
+</div>
+
+<script>
+  const qoriOrb = document.getElementById("qoriOrb");
+  const qoriOverlay = document.getElementById("qoriFrameOverlay");
+  const qoriClose = document.getElementById("qoriFrameClose");
+  const qoriFrame = document.getElementById("qoriFrame");
+
+  qoriOrb.addEventListener("click", () => {
+    qoriFrame.src = "https://energon-dapp.vercel.app/qori?open=1";
+    qoriOverlay.style.display = "flex";
+  });
+
+  qoriClose.addEventListener("click", () => {
+    qoriOverlay.style.display = "none";
+    qoriFrame.src = "";
+  });
+</script>
 </body>
 </html>
