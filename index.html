@@ -974,10 +974,8 @@
       }
 
       .mobileMenuTrigger{
-        display:flex;
-        justify-content:flex-end;
-        margin:0 0 14px;
-      }
+  display:none;
+}
 
       .headerBlock{
         margin-bottom:14px;
@@ -1080,18 +1078,74 @@
 
 #qoriOrb{
   position:fixed;
-  top:34px;
-  left:24px;
-  width:12px;
-  height:12px;
+  top:18px;
+  right:18px;
+  width:18px;
+  height:18px;
   border-radius:50%;
-  border:1px solid rgba(47,212,255,0.35);
-  background:rgba(47,212,255,0.08);
-  box-shadow:0 0 8px rgba(47,212,255,0.28);
-  opacity:0.28;
+  border:1px solid rgba(47,212,255,0.45);
+  background:#2fd4ff;
+  box-shadow:
+    0 0 12px rgba(47,212,255,0.95),
+    0 0 30px rgba(47,212,255,0.55),
+    0 0 58px rgba(47,212,255,0.22);
+  opacity:0.9;
   z-index:9999;
   cursor:pointer;
-  transition:all 0.35s ease;
+  animation:qoriOrbPulse 3.6s ease-in-out infinite;
+}
+
+#qoriOrb::before{
+  content:"";
+  position:absolute;
+  inset:-8px;
+  border-radius:50%;
+  border:1px solid rgba(47,212,255,0.18);
+  animation:qoriOrbRing 4.8s ease-in-out infinite;
+}
+
+#qoriOrb:hover,
+#qoriOrb:active{
+  opacity:1;
+  transform:scale(1.16);
+  box-shadow:
+    0 0 14px rgba(47,212,255,1),
+    0 0 36px rgba(47,212,255,0.68),
+    0 0 72px rgba(47,212,255,0.32);
+}
+
+@keyframes qoriOrbPulse{
+  0%{
+    transform:scale(1);
+    opacity:0.72;
+  }
+
+  50%{
+    transform:scale(1.18);
+    opacity:1;
+  }
+
+  100%{
+    transform:scale(1);
+    opacity:0.72;
+  }
+}
+
+@keyframes qoriOrbRing{
+  0%{
+    transform:scale(0.9);
+    opacity:0.18;
+  }
+
+  50%{
+    transform:scale(1.22);
+    opacity:0.42;
+  }
+
+  100%{
+    transform:scale(0.9);
+    opacity:0.18;
+  }
 }
 
 #qoriOrb:hover,
@@ -1210,16 +1264,6 @@
               <span class="topNavText">Guardian</span>
             </a>
           </div>
-        </div>
-
-        <div class="mobileMenuTrigger">
-          <label class="mobileTriggerCube" for="mobile-menu-toggle" aria-label="Open menu">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 3l7 4v10l-7 4-7-4V7l7-4z"></path>
-              <path d="M5 7l7 4 7-4"></path>
-              <path d="M12 11v10"></path>
-            </svg>
-          </label>
         </div>
 
         <label class="mobileBackdrop" for="mobile-menu-toggle" aria-hidden="true"></label>
