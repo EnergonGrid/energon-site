@@ -1674,9 +1674,23 @@
   const qoriFrame = document.getElementById("qoriFrame");
 
   qoriOrb.addEventListener("click", () => {
-    qoriFrame.src = "https://energon-dapp.vercel.app/qori?open=1";
+
+  const isMobileWallet =
+    /Bifrost|MetaMaskMobile|Trust|CoinbaseWallet|Rainbow|TokenPocket/i.test(
+      navigator.userAgent
+    );
+
+  if (isMobileWallet) {
+    window.location.href =
+      "https://energon-dapp.vercel.app/qori?open=1";
+  } else {
+    qoriFrame.src =
+      "https://energon-dapp.vercel.app/qori?open=1&mode=landing";
+
     qoriOverlay.style.display = "flex";
-  });
+  }
+
+});
 
   qoriClose.addEventListener("click", () => {
     qoriOverlay.style.display = "none";
