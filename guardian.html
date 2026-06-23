@@ -146,6 +146,40 @@
       color:rgba(255,255,255,0.78);
     }
 
+    .signalSequence{
+      min-height:92px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      margin:8px 0 24px;
+    }
+
+    #signalLine{
+  min-height:28px;
+  color:rgba(255,255,255,0.88);
+  font-size:14px;
+  font-weight:850;
+  letter-spacing:2.8px;
+  text-transform:uppercase;
+  text-shadow:0 0 14px rgba(80,180,255,0.25);
+}
+
+#signalLine::after{
+  content:"_";
+  margin-left:4px;
+  animation:blinkCursor 0.8s infinite;
+}
+
+@keyframes blinkCursor{
+  0%,50%{opacity:1;}
+  51%,100%{opacity:0;}
+}
+
+.hidden{
+  display:none;
+}
+
     .pathSelector{
       display:flex;
       justify-content:center;
@@ -261,6 +295,43 @@
       font-size:12px;
     }
 
+    .returnBlock{
+      margin:34px auto 0;
+      text-align:center;
+    }
+
+    .returnCopy{
+      margin:0 auto 18px;
+      max-width:620px;
+      color:rgba(255,255,255,0.68);
+      font-size:14px;
+      line-height:1.65;
+    }
+
+    .returnButton{
+      display:inline-block;
+      padding:14px 30px;
+      border-radius:16px;
+      color:#ffffff;
+      text-decoration:none;
+      font-size:12px;
+      font-weight:850;
+      letter-spacing:1.7px;
+      text-transform:uppercase;
+      border:1px solid rgba(87,184,255,0.52);
+      background:
+        radial-gradient(circle at 18% 30%, rgba(87,184,255,0.14), transparent 42%),
+        linear-gradient(180deg, rgba(16,48,108,0.42), rgba(6,16,42,0.92));
+      box-shadow:0 0 24px rgba(87,184,255,0.16);
+      transition:transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .returnButton:hover{
+      transform:translateY(-2px);
+      border-color:rgba(142,216,255,0.82);
+      box-shadow:0 0 30px rgba(87,184,255,0.30),0 0 60px rgba(87,184,255,0.12);
+    }
+
     code{
       color:rgba(255,255,255,0.85);
       background:rgba(255,255,255,0.06);
@@ -308,7 +379,8 @@
     body.silent .top,
     body.silent .softSep,
     body.silent .archiveLabel,
-    body.silent .archiveContent{
+    body.silent .archiveContent,
+    body.silent .signalSequence{
       display:none;
     }
 
@@ -359,6 +431,10 @@
     body.fractured .law{
       border-color:rgba(255,50,50,0.28);
       background:rgba(50,0,0,0.20);
+    }
+
+    body.fractured .returnBlock{
+      display:none;
     }
 
     @keyframes fractureShake{
@@ -420,7 +496,11 @@
             <em>Recovered Archive // Origin Unknown</em>
           </p>
 
-          <div class="pathSelector">
+          <div class="signalSequence" id="signalSequence">
+            <div id="signalLine"></div>
+          </div>
+
+          <div class="pathSelector hidden" id="pathSelector">
             <div class="pathTitle">Choose Path</div>
             <button type="button" data-mode="silent" class="silentBtn">SILENT</button>
             <button type="button" data-mode="fractured" class="fracturedBtn">FRACTURED</button>
@@ -496,6 +576,19 @@
               Recovered surface. Coherent signal. <code>ENERGON</code>
             </div>
 
+            <div class="returnBlock">
+
+  <div class="returnCopy">
+    My transmission ends here.<br />
+    Your journey begins here.
+  </div>
+
+  <a href="https://energon-site.vercel.app" class="returnButton">
+    TRANSMISSION COMPLETE
+  </a>
+
+</div>
+
           </div>
 
           <div style="position:fixed;left:-9999px;top:-9999px;opacity:0;">
@@ -508,75 +601,119 @@
   </div>
 
   <script>
-    const body = document.body;
-    const buttons = document.querySelectorAll("[data-mode]");
-    const scrambleNodes = document.querySelectorAll("[data-scramble]");
-    const original = new Map();
-    let scrambleTimer = null;
+  const body = document.body;
+  const buttons = document.querySelectorAll("[data-mode]");
+  const scrambleNodes = document.querySelectorAll("[data-scramble]");
+  const original = new Map();
+  let scrambleTimer = null;
 
-    const chars = "01▓▒░█/\\|<>[]{}#@$%&*+=?ENERGON";
+  const chars = "01▓▒░█/\\|<>[]{}#@$%&*+=?ENERGON";
 
-    scrambleNodes.forEach((node) => {
-      original.set(node, node.innerHTML);
+  scrambleNodes.forEach((node) => {
+    original.set(node, node.innerHTML);
+  });
+
+  function scrambleText(text) {
+    return text.replace(/[A-Za-z0-9]/g, () => {
+      return chars[Math.floor(Math.random() * chars.length)];
+    });
+  }
+
+  function startFracture() {
+    stopFracture(false);
+
+    scrambleTimer = setInterval(() => {
+      scrambleNodes.forEach((node) => {
+        const source = original.get(node);
+        node.innerHTML = scrambleText(source);
+      });
+    }, 80);
+  }
+
+  function stopFracture(restore = true) {
+    if (scrambleTimer) {
+      clearInterval(scrambleTimer);
+      scrambleTimer = null;
+    }
+
+    if (restore) {
+      scrambleNodes.forEach((node) => {
+        node.innerHTML = original.get(node);
+      });
+    }
+  }
+
+  function setMode(mode) {
+    body.classList.remove("unselected", "silent", "fractured", "coherent");
+    body.classList.add(mode);
+
+    buttons.forEach((btn) => {
+      btn.classList.remove("active");
     });
 
-    function scrambleText(text) {
-      return text.replace(/[A-Za-z0-9]/g, () => {
-        return chars[Math.floor(Math.random() * chars.length)];
-      });
+    if (mode !== "unselected") {
+      const active = document.querySelector(`[data-mode="${mode}"]`);
+      if (active) active.classList.add("active");
     }
 
-    function startFracture() {
-      stopFracture(false);
-
-      scrambleTimer = setInterval(() => {
-        scrambleNodes.forEach((node) => {
-          const source = original.get(node);
-          node.innerHTML = scrambleText(source);
-        });
-      }, 80);
+    if (mode === "fractured") {
+      startFracture();
+    } else {
+      stopFracture(true);
     }
+  }
 
-    function stopFracture(restore = true) {
-      if (scrambleTimer) {
-        clearInterval(scrambleTimer);
-        scrambleTimer = null;
-      }
-
-      if (restore) {
-        scrambleNodes.forEach((node) => {
-          node.innerHTML = original.get(node);
-        });
-      }
-    }
-
-    function setMode(mode) {
-      body.classList.remove("unselected", "silent", "fractured", "coherent");
-      body.classList.add(mode);
-
-      buttons.forEach((btn) => {
-        btn.classList.remove("active");
-      });
-
-      if (mode !== "unselected") {
-        const active = document.querySelector(`[data-mode="${mode}"]`);
-        if (active) active.classList.add("active");
-      }
-
-      if (mode === "fractured") {
-        startFracture();
-      } else {
-        stopFracture(true);
-      }
-    }
-
-    buttons.forEach((button) => {
-      button.addEventListener("click", () => {
-        setMode(button.dataset.mode);
-      });
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      setMode(button.dataset.mode);
     });
+  });
 
-    setMode("unselected");
-  </script>
+  const sequence = [
+  "SIGNAL RECEIVED...",
+  "EVALUATING GUARDIAN STATE...",
+  "COHERENCE CHECK IN PROGRESS...",
+  "PATH SELECTION REQUIRED"
+];
+
+let sequenceIndex = 0;
+const signalLine = document.getElementById("signalLine");
+const signalSequence = document.getElementById("signalSequence");
+const pathSelector = document.getElementById("pathSelector");
+
+function typeLine(text, callback) {
+  let i = 0;
+  signalLine.textContent = "";
+
+  const typing = setInterval(() => {
+    signalLine.textContent += text.charAt(i);
+    i++;
+
+    if (i >= text.length) {
+      clearInterval(typing);
+
+      setTimeout(() => {
+        callback();
+      }, 1800);
+    }
+  }, 140);
+}
+
+  function runSequence() {
+    if (sequenceIndex >= sequence.length) {
+      signalSequence.classList.add("hidden");
+      pathSelector.classList.remove("hidden");
+      return;
+    }
+
+    typeLine(sequence[sequenceIndex], () => {
+      sequenceIndex++;
+      runSequence();
+    });
+  }
+
+  setMode("unselected");
+  window.addEventListener("load", runSequence);
+</script>
 </body>
 </html>
