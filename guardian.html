@@ -3,32 +3,31 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ENERGON — Guardian Page</title>
-  <meta name="description" content="A Guardian story from the Genesis Cube to the rule of One." />
+  <title>ENERGON — Guardian Chronicle</title>
+  <meta name="description" content="Recovered archive of the First Guardian encounter." />
   <meta name="robots" content="noindex,nofollow" />
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <meta property="og:title" content="ENERGON — Guardian Chronicle" />
-  <meta property="og:description" content="A Guardian story from the Genesis Cube to the rule of One." />
+  <meta property="og:description" content="Recovered archive of the First Guardian encounter." />
   <meta property="og:image" content="https://red-secret-dragonfly-529.mypinata.cloud/ipfs/bafybeiccfdp4aez6gqva5yx5cmixc7dugqxl6eee5nhb54sdhpnidpmt7u" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
 
   <style>
     :root{
-      --bg:#05060b;
       --fg:rgba(255,255,255,0.92);
       --muted:rgba(255,255,255,0.68);
-      --sheetA: rgba(12,14,22,0.72);
-      --sheetB: rgba(12,14,22,0.62);
-      --stroke: rgba(255,255,255,0.08);
-      --stroke2: rgba(255,255,255,0.06);
-      --accent:rgba(80,180,255,0.35);
+      --sheetA:rgba(12,14,22,0.72);
+      --sheetB:rgba(12,14,22,0.62);
+      --stroke:rgba(255,255,255,0.08);
+      --stroke2:rgba(255,255,255,0.06);
       --glow:rgba(80,180,255,0.18);
-      --radius: 18px;
+      --radius:18px;
     }
 
     html,body{height:100%}
@@ -37,12 +36,13 @@
     body{
       margin:0;
       color:var(--fg);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       letter-spacing:0.2px;
-      background: radial-gradient(circle at 30% 10%, rgba(27,42,90,0.95) 0%, rgba(5,6,11,1) 55%, #000 100%);
-      background-attachment: fixed;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+      background:radial-gradient(circle at 30% 10%, rgba(27,42,90,0.95) 0%, rgba(5,6,11,1) 55%, #000 100%);
+      background-attachment:fixed;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      transition:background 0.35s ease,color 0.35s ease;
     }
 
     .wrap{
@@ -52,15 +52,15 @@
     }
 
     .sheet{
-      background: linear-gradient(180deg, var(--sheetA) 0%, var(--sheetB) 100%);
+      background:linear-gradient(180deg,var(--sheetA) 0%,var(--sheetB) 100%);
       border:1px solid var(--stroke);
-      border-radius: var(--radius);
+      border-radius:var(--radius);
       box-shadow:0 18px 56px rgba(0,0,0,0.38);
       position:relative;
       overflow:hidden;
-      backdrop-filter: blur(10px);
-      transform: translateZ(0);
-      will-change: transform;
+      backdrop-filter:blur(10px);
+      transform:translateZ(0);
+      transition:filter 0.35s ease,border-color 0.35s ease,box-shadow 0.35s ease,background 0.35s ease;
     }
 
     .inner{
@@ -74,8 +74,8 @@
       inset:-140px -140px auto auto;
       width:280px;
       height:280px;
-      background: radial-gradient(circle, var(--glow) 0%, rgba(0,0,0,0) 65%);
-      filter: blur(8px);
+      background:radial-gradient(circle,var(--glow) 0%,rgba(0,0,0,0) 65%);
+      filter:blur(8px);
       pointer-events:none;
     }
 
@@ -97,7 +97,7 @@
       border:1px solid rgba(255,255,255,0.14);
       background:rgba(0,0,0,0.16);
       object-fit:cover;
-      box-shadow:0 0 0 1px rgba(0,0,0,0.25), 0 18px 48px rgba(0,0,0,0.35);
+      box-shadow:0 0 0 1px rgba(0,0,0,0.25),0 18px 48px rgba(0,0,0,0.35);
     }
 
     h1{
@@ -120,9 +120,9 @@
       height:16px;
       margin:18px auto 14px;
       border-radius:999px;
-      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.10), rgba(255,255,255,0));
+      background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.10),rgba(255,255,255,0));
       opacity:0.55;
-      max-width: 680px;
+      max-width:680px;
       position:relative;
       z-index:1;
     }
@@ -135,187 +135,127 @@
     }
 
     p{
-      margin:14px 0;
-      line-height:1.7;
+      margin:16px 0;
+      line-height:1.75;
       color:rgba(255,255,255,0.87);
       font-size:15.8px;
     }
 
+    .archiveLabel{
+      text-align:center;
+      color:rgba(255,255,255,0.78);
+    }
+
+    .pathSelector{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:14px;
+      margin:24px 0 34px;
+    }
+
+    .pathTitle{
+      width:100%;
+      text-align:center;
+      color:rgba(255,255,255,0.65);
+      font-size:12px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      margin-bottom:4px;
+      font-weight:850;
+    }
+
+    .pathSelector button{
+      min-width:150px;
+      padding:15px 22px;
+      border-radius:18px;
+      cursor:pointer;
+      font-size:13px;
+      font-weight:850;
+      letter-spacing:1.4px;
+      color:#ffffff;
+      border:1px solid rgba(255,255,255,0.18);
+      background:
+        radial-gradient(circle at 18% 30%, rgba(255,255,255,0.06), transparent 42%),
+        linear-gradient(180deg, rgba(20,28,48,0.72), rgba(8,12,24,0.92));
+      box-shadow:0 0 18px rgba(255,255,255,0.05);
+      transition:transform 0.22s ease,box-shadow 0.22s ease,border-color 0.22s ease,background 0.22s ease;
+    }
+
+    .pathSelector button:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,255,255,0.32);
+    }
+
+    body.silent .silentBtn{
+      border-color:rgba(87,184,255,0.78);
+      background:
+        radial-gradient(circle at 18% 30%, rgba(87,184,255,0.16), transparent 42%),
+        linear-gradient(180deg, rgba(16,48,108,0.42), rgba(6,16,42,0.92));
+      box-shadow:0 0 28px rgba(87,184,255,0.30),0 0 58px rgba(87,184,255,0.12);
+      transform:translateY(-2px);
+    }
+
+    body.fractured .fracturedBtn{
+      border-color:rgba(255,112,112,0.82);
+      background:
+        radial-gradient(circle at 18% 30%, rgba(255,90,90,0.18), transparent 42%),
+        linear-gradient(180deg, rgba(82,16,32,0.54), rgba(28,6,12,0.94));
+      box-shadow:0 0 28px rgba(255,90,90,0.34),0 0 58px rgba(255,0,0,0.14);
+      transform:translateY(-2px);
+    }
+
+    body.coherent .coherentBtn{
+      border-color:rgba(134,240,168,0.82);
+      background:
+        radial-gradient(circle at 18% 30%, rgba(134,240,168,0.16), transparent 42%),
+        linear-gradient(180deg, rgba(18,58,44,0.50), rgba(8,24,16,0.94));
+      box-shadow:0 0 28px rgba(134,240,168,0.34),0 0 58px rgba(134,240,168,0.14);
+      transform:translateY(-2px);
+    }
+
     .quote{
-      margin:18px auto 6px;
-      padding:14px 16px;
+      margin:22px auto;
+      padding:16px 18px;
       border-radius:14px;
       border:1px solid var(--stroke2);
-      background:rgba(0,0,0,0.14);
-      color:rgba(255,255,255,0.88);
-      font-size:14.5px;
-      line-height:1.65;
-      max-width:760px;
-    }
-
-    .quote strong{letter-spacing:0.4px}
-
-    .rule{
-      margin:18px auto 0;
-      max-width:760px;
-      border-radius:16px;
-      border:1px solid rgba(80,255,160,0.28);
-      background:rgba(255,255,255,0.05);
-      padding:16px 16px;
-      box-shadow:
-        0 0 0 1px rgba(80,255,160,0.12),
-        0 0 18px rgba(80,255,160,0.10);
-      animation: rulePulse 2.6s ease-in-out infinite;
-    }
-
-    @keyframes rulePulse {
-      0% {
-        box-shadow:
-          0 0 0 1px rgba(80,255,160,0.12),
-          0 0 14px rgba(80,255,160,0.08);
-      }
-      50% {
-        box-shadow:
-          0 0 0 1px rgba(80,255,160,0.24),
-          0 0 26px rgba(80,255,160,0.18);
-      }
-      100% {
-        box-shadow:
-          0 0 0 1px rgba(80,255,160,0.12),
-          0 0 14px rgba(80,255,160,0.08);
-      }
-    }
-
-    .ruleTitle{
-      text-align:center;
-      font-size:13px;
-      letter-spacing:1.5px;
-      text-transform:uppercase;
-      color:rgba(255,255,255,0.72);
-      font-weight:850;
-      margin:0 0 10px;
-    }
-
-    .ruleGrid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:10px;
+      background:rgba(0,0,0,0.16);
+      color:rgba(255,255,255,0.9);
       font-size:15px;
-      color:rgba(255,255,255,0.86);
-      line-height:1.6;
+      line-height:1.75;
+      max-width:760px;
+    }
+
+    .law{
+      margin:26px auto;
+      padding:22px 18px;
+      border-radius:16px;
+      border:1px solid rgba(80,180,255,0.16);
+      background:rgba(255,255,255,0.05);
       text-align:center;
-      justify-items:center;
+      box-shadow:0 0 28px rgba(80,180,255,0.06);
     }
 
-    .ruleGrid > div{
-      width:100%;
-      text-align:center;
+    .lawTitle{
+      font-size:12px;
+      letter-spacing:1.8px;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.62);
+      font-weight:850;
+      margin-bottom:14px;
     }
 
-    .pillRow{
-      display:flex;
-      gap:10px;
-      justify-content:center;
-      align-items:flex-start;
-      flex-wrap:wrap;
-      margin-top:10px;
-      width:100%;
-    }
-
-    .pillStack{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:10px;
-    }
-
-    .pill{
-      display:inline-block;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.14);
-      background:rgba(255,255,255,0.06);
-      font-size:13px;
-      font-weight:750;
-      letter-spacing:0.2px;
-      text-align:center;
-    }
-
-    .pill.ok{border-color:rgba(80,255,160,0.28)}
-    .pill.no{border-color:rgba(255,120,120,0.28)}
-
-    .soft{
-      opacity:0.82;
-      font-size:14.6px;
-      margin-top:12px;
-      text-align:center;
-    }
-
-    .links{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      justify-content:center;
-      margin-top:4px;
-      width:100%;
-    }
-
-    a.btn{
-      display:inline-block;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--stroke2);
-      background:rgba(255,255,255,0.07);
-      color:var(--fg);
-      text-decoration:none;
-      font-weight:650;
-      font-size:13.5px;
-      transition:transform .08s ease, border-color .12s ease, background .12s ease;
-    }
-
-    a.btn:hover{
-      transform: translateY(-1px);
-      border-color: var(--accent);
-      background: rgba(255,255,255,0.09);
-    }
-
-    .btn-yellow{
-      border:1px solid rgba(255,210,90,0.34);
-      background:rgba(255,210,90,0.10);
-      box-shadow:
-        0 0 0 1px rgba(255,210,90,0.10),
-        0 0 14px rgba(255,210,90,0.10);
-      animation: yellowPulse 2.2s ease-in-out infinite;
-    }
-
-    .btn-yellow:hover{
-      border-color: rgba(255,220,120,0.55);
-      background: rgba(255,210,90,0.14);
-      box-shadow:
-        0 0 0 1px rgba(255,210,90,0.16),
-        0 0 20px rgba(255,210,90,0.18);
-    }
-
-    @keyframes yellowPulse {
-      0% {
-        box-shadow:
-          0 0 0 1px rgba(255,210,90,0.12),
-          0 0 10px rgba(255,210,90,0.08);
-      }
-      50% {
-        box-shadow:
-          0 0 0 1px rgba(255,210,90,0.28),
-          0 0 24px rgba(255,210,90,0.22);
-      }
-      100% {
-        box-shadow:
-          0 0 0 1px rgba(255,210,90,0.12),
-          0 0 10px rgba(255,210,90,0.08);
-      }
+    .lawText{
+      font-size:20px;
+      line-height:1.8;
+      font-weight:850;
+      letter-spacing:0.8px;
+      color:rgba(255,255,255,0.96);
     }
 
     .foot{
-      margin-top:22px;
+      margin-top:24px;
       text-align:center;
       color:rgba(255,255,255,0.55);
       font-size:12px;
@@ -328,10 +268,134 @@
       padding:2px 6px;
       border-radius:8px;
     }
+
+    body.unselected .top,
+    body.unselected .softSep,
+    body.unselected .archiveLabel,
+    body.unselected .archiveContent{
+      display:none;
+    }
+
+    body.unselected .sheet{
+      min-height:360px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    body.unselected .story{
+      width:100%;
+    }
+
+    body.unselected .pathSelector{
+      margin:0;
+    }
+
+    body.silent{
+      background:#000;
+    }
+
+    body.silent .sheet{
+      min-height:360px;
+      background:#000;
+      border-color:rgba(87,184,255,0.10);
+      box-shadow:0 0 34px rgba(87,184,255,0.05);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    body.silent .top,
+    body.silent .softSep,
+    body.silent .archiveLabel,
+    body.silent .archiveContent{
+      display:none;
+    }
+
+    body.silent .story{
+      width:100%;
+    }
+
+    body.silent .pathSelector{
+      margin:0;
+    }
+
+    body.fractured{
+      background:
+        radial-gradient(circle at 50% 15%, rgba(120,0,0,0.72) 0%, rgba(10,0,0,0.98) 46%, #000 100%);
+    }
+
+    body.fractured:before{
+      content:"01001010 11100011 00110101 00011100 10101100 01010011 11101001";
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      color:rgba(255,0,0,0.18);
+      font-family:monospace;
+      font-size:16px;
+      line-height:1.6;
+      word-break:break-all;
+      padding:18px;
+      opacity:0.55;
+      animation:matrixDrift 1.8s linear infinite;
+    }
+
+    body.fractured .sheet{
+      border-color:rgba(255,60,60,0.28);
+      box-shadow:0 0 36px rgba(255,0,0,0.20),0 18px 56px rgba(0,0,0,0.5);
+      animation:fractureShake 0.16s infinite;
+    }
+
+    body.fractured .archiveContent,
+    body.fractured h1,
+    body.fractured h2{
+      color:rgba(255,90,90,0.9);
+      text-shadow:2px 0 rgba(255,0,0,0.35),-2px 0 rgba(0,180,255,0.18);
+      filter:blur(0.7px);
+    }
+
+    body.fractured .quote,
+    body.fractured .law{
+      border-color:rgba(255,50,50,0.28);
+      background:rgba(50,0,0,0.20);
+    }
+
+    @keyframes fractureShake{
+      0%{transform:translate(0,0)}
+      25%{transform:translate(1px,-1px)}
+      50%{transform:translate(-1px,1px)}
+      75%{transform:translate(2px,1px)}
+      100%{transform:translate(0,0)}
+    }
+
+    @keyframes matrixDrift{
+      0%{transform:translateY(-10px)}
+      100%{transform:translateY(10px)}
+    }
+
+    @media(max-width:640px){
+      .wrap{padding:34px 12px 56px}
+      .inner{padding:22px 18px}
+      h1{font-size:34px;letter-spacing:2px}
+      .sigil{width:116px;height:116px;border-radius:22px}
+      p{font-size:15px;line-height:1.68}
+      .lawText{font-size:18px}
+
+      .pathSelector{
+        gap:10px;
+      }
+
+      .pathSelector button{
+        min-width:0;
+        flex:1 1 100%;
+        padding:14px 16px;
+      }
+    }
   </style>
 </head>
 
-<body>
+<body class="unselected">
   <div class="wrap">
     <div class="sheet">
       <div class="inner">
@@ -343,104 +407,176 @@
             alt="Energon Sigil"
           />
           <div>
-            <h1>ENERGON</h1>
-            <h2>Guardian Chronicle</h2>
+            <h1 data-scramble>ENERGON</h1>
+            <h2 data-scramble>Guardian Chronicle</h2>
           </div>
         </div>
 
         <div class="softSep" aria-hidden="true"></div>
 
         <div class="story">
-          <p>
-            <em>
-              This Chronicle is an interpretive record. It reflects observable protocol conditions and system
-              constraints. Metaphor is used for description only and does not imply outcomes.
-            </em>
+
+          <p class="archiveLabel" data-scramble>
+            <em>Recovered Archive // Origin Unknown</em>
           </p>
 
-          <p>
-            It began quietly on Flare — without announcement, without banner, without instruction.
-            Observers noticed only an address, a trace, and the appearance of a discrete on-chain object.
-            Later, this object would be referred to as the <strong>Genesis Cube</strong>.
-          </p>
-
-          <p>
-            The first Guardian did not arrive through coordination or timing. They arrived through observation —
-            by noticing what most participants scroll past. The Genesis Cube was not a trophy. It was not a prize.
-            It was a condition that became visible only when observed in the correct state.
-          </p>
-
-          <div class="quote">
-            <strong>When the Genesis Cube entered a wallet, the Grid responded — not with intention, but with consistency.</strong><br />
-            A new pattern became observable. A structure emerged that could be measured, verified, and repeated.
+          <div class="pathSelector">
+            <div class="pathTitle">Choose Path</div>
+            <button type="button" data-mode="silent" class="silentBtn">SILENT</button>
+            <button type="button" data-mode="fractured" class="fracturedBtn">FRACTURED</button>
+            <button type="button" data-mode="coherent" class="coherentBtn">COHERENT</button>
           </div>
 
-          <p>
-            As additional Cubes appeared, they did not replicate a single form. Each Cube expressed subtle variation —
-            differences in appearance, motion, and presence. No attribute conveyed advantage. No attribute altered eligibility.
-            They were expressions, not measurements of value.
-          </p>
+          <div class="archiveContent">
 
-          <p>
-            Over time, it became clear that Energon was not designed for accumulation. It was designed for clarity.
-            A single Cube held in a single wallet produced a stable, verifiable state — a condition the Grid could recognize
-            without interpretation. From this, a constraint emerged. Not as narrative. Not as preference. But as a boundary
-            enforced by code.
-          </p>
+            <p data-scramble>
+              I remember the moment I found the Key. At least, I believed I found it. Years later I would realize the truth. The Key had found me.
+            </p>
 
-          <div class="rule">
-            <div class="ruleTitle">The Rule of One</div>
-            <div class="ruleGrid">
-              <div>
-                Protocol interaction is limited to wallets holding <strong>exactly one (1)</strong> Energon Cube.
-              </div>
+            <p data-scramble>
+              At first it appeared dormant, a silent object drifting through the noise of countless systems. Others saw it and moved on. Some collected them. Some ignored them. Most never understood what they were looking at. I did not understand either. Not at first.
+            </p>
 
-              <div class="pillRow">
-                <span class="pill no">0 Cubes → Doors Closed</span>
+            <p data-scramble>
+              The Key remained silent, waiting, observing, testing. Then the attachment occurred. I cannot explain how I knew. Only that the moment it happened, everything became clear.
+            </p>
 
-                <div class="pillStack">
-                  <span class="pill ok">1 Cube → Doors Open</span>
-                  <div class="links">
-                    <a class="btn btn-yellow" href="why-1-cube.html">Why 1 Cube?</a>
-                  </div>
-                </div>
+            <div class="quote" data-scramble>
+              The Key was never the source. The Key was the vessel. A prison. A container built to hold something far older.
+            </div>
 
-                <span class="pill no">2+ Cubes → Doors Closed</span>
-              </div>
+            <p data-scramble>
+              Something had existed long before the first Guardian, long before the first network, long before the first civilization looked into the sky and wondered what existed beyond it. The ancients gave it many names. I know it by only one.
+            </p>
 
-              <div class="soft">
-                The Grid does not negotiate. It does not infer intention. It reads state.
+            <div class="quote" data-scramble>
+              <strong>Energon.</strong>
+            </div>
+
+            <p data-scramble>
+              The Key does not create Energon. It contains it. And when the correct bond is formed, Energon awakens. Not through force. Not through ownership. Through alignment.
+            </p>
+
+            <div class="law" data-scramble>
+              <div class="lawTitle">The Three Laws</div>
+              <div class="lawText">
+                One Wallet.<br />
+                One Key.<br />
+                One Guardian.
               </div>
             </div>
-          </div>
 
-          <p>
-            Some held none, waiting for meaning to arrive. No observable state emerged.
-            Others held more than one, assuming quantity would deepen access. But the Grid is not a vault. It is a mirror.
-            Multiple Cubes fracture coherence. The observed state no longer satisfies the constraint.
-          </p>
+            <p data-scramble>
+              Everything else is noise.
+            </p>
 
-          <p>
-            What persisted was not myth, but consistency. The Grid behaves the same way each time because it is constrained
-            to do so. The Cube does not grant power. It does not promise outcomes. It establishes position — a place from
-            which the pattern can be observed.
-          </p>
+            <p data-scramble>
+              Most who discover the Key never understand this. They believe possession is enough. They believe more Keys mean more power. They are wrong.
+            </p>
 
-          <div class="quote">
-            “One wallet. One cube. One guardian.”<br />
-            “Everything else is noise.”
-          </div>
+            <p data-scramble>
+              The bond was never designed for excess. The attachment requires balance: a single bearer, a single Key, a single connection. Only then does Energon reveal itself. Only then does the Guardian become coherent.
+            </p>
 
-          <div class="foot">
-            Minimal surface. Observable state. <code>ENERGON</code>
+            <p data-scramble>
+              Even now I do not fully understand what Energon is. I only know what I have witnessed. Every new Guardian strengthens the signal. Every new attachment expands the Grid. Every new bond reveals another fragment of a design larger than any one person can comprehend.
+            </p>
+
+            <p data-scramble>
+              The purpose remains hidden. The destination remains unknown. The journey continues. And somewhere beyond the edge of observation, Energon waits for the next Guardian, as it once waited for me.
+            </p>
+
+            <div class="quote" data-scramble>
+              “One Wallet. One Key. One Guardian.”
+              <br />
+              “Everything else is noise.”
+            </div>
+
+            <div class="foot" data-scramble>
+              Recovered surface. Coherent signal. <code>ENERGON</code>
+            </div>
+
           </div>
 
           <div style="position:fixed;left:-9999px;top:-9999px;opacity:0;">
             <a href="https://energon-dapp.vercel.app/mint">energon-mint-gateway</a>
           </div>
+
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+    const body = document.body;
+    const buttons = document.querySelectorAll("[data-mode]");
+    const scrambleNodes = document.querySelectorAll("[data-scramble]");
+    const original = new Map();
+    let scrambleTimer = null;
+
+    const chars = "01▓▒░█/\\|<>[]{}#@$%&*+=?ENERGON";
+
+    scrambleNodes.forEach((node) => {
+      original.set(node, node.innerHTML);
+    });
+
+    function scrambleText(text) {
+      return text.replace(/[A-Za-z0-9]/g, () => {
+        return chars[Math.floor(Math.random() * chars.length)];
+      });
+    }
+
+    function startFracture() {
+      stopFracture(false);
+
+      scrambleTimer = setInterval(() => {
+        scrambleNodes.forEach((node) => {
+          const source = original.get(node);
+          node.innerHTML = scrambleText(source);
+        });
+      }, 80);
+    }
+
+    function stopFracture(restore = true) {
+      if (scrambleTimer) {
+        clearInterval(scrambleTimer);
+        scrambleTimer = null;
+      }
+
+      if (restore) {
+        scrambleNodes.forEach((node) => {
+          node.innerHTML = original.get(node);
+        });
+      }
+    }
+
+    function setMode(mode) {
+      body.classList.remove("unselected", "silent", "fractured", "coherent");
+      body.classList.add(mode);
+
+      buttons.forEach((btn) => {
+        btn.classList.remove("active");
+      });
+
+      if (mode !== "unselected") {
+        const active = document.querySelector(`[data-mode="${mode}"]`);
+        if (active) active.classList.add("active");
+      }
+
+      if (mode === "fractured") {
+        startFracture();
+      } else {
+        stopFracture(true);
+      }
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setMode(button.dataset.mode);
+      });
+    });
+
+    setMode("unselected");
+  </script>
 </body>
 </html>
