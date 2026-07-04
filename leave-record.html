@@ -183,12 +183,19 @@
 
           <p class="center">
             Connect the wallet that holds your EnergonCube.
-            If the wallet is coherent, enter the correct cube number to unlock the Chronicle.
+            If the wallet is coherent, verify your cube to unlock the Chronicle.
           </p>
 
           <div class="actions">
             <button id="connectBtn" type="button">Connect Wallet</button>
-            <a class="button" href="guardian.html">Return to Chronicle</a>
+            <a
+              class="button"
+              href="https://energon-dapp.vercel.app/observer"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Enter Observer
+            </a>
           </div>
         </div>
 
@@ -294,7 +301,14 @@
           <div class="actions">
             <a id="xButton" class="button" target="_blank" rel="noreferrer">Share on X</a>
             <a id="instagramButton" class="button" target="_blank" rel="noreferrer">Open Instagram</a>
-            <a class="button" href="https://energon-site.vercel.app">Return to Energon</a>
+            <a
+              class="button"
+              href="https://energon-dapp.vercel.app/observer"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Enter Observer
+            </a>
           </div>
         </div>
 
@@ -309,7 +323,8 @@
 
     const CUBE_ABI = [
       "function balanceOf(address owner) view returns (uint256)",
-      "function ownerOf(uint256 tokenId) view returns (address)"
+      "function ownerOf(uint256 tokenId) view returns (address)",
+      "function tokenURI(uint256 tokenId) view returns (string)"
     ];
 
     let connectedWallet = "";
@@ -348,9 +363,50 @@
       return String(a || "").toLowerCase() === String(b || "").toLowerCase();
     }
 
+    function ipfsToHttps(uri){
+      if(!uri) return "";
+
+      if(uri.startsWith("ipfs://")){
+        return "https://ipfs.io/ipfs/" + uri.replace("ipfs://", "");
+      }
+
+      return uri;
+    }
+
+    function findRarity(metadata){
+      const attrs = Array.isArray(metadata?.attributes)
+        ? metadata.attributes
+        : [];
+
+      const rarityAttr = attrs.find((attr) => {
+        const key = String(attr?.trait_type || attr?.type || attr?.key || "").toLowerCase();
+        return key === "rarity tier" || key === "rarity";
+      });
+
+      return rarityAttr?.value ? String(rarityAttr.value) : "";
+    }
+
     async function getCubeLabel(cubeNumber){
-      if(cubeNumber === "1") return "#" + cubeNumber + " — The Big Bang";
-      return "#" + cubeNumber;
+      if(cubeNumber === "1") return "#" + cubeNumber + " — Genesis: The Big Bang";
+
+      try{
+        const uri = await cubeContract.tokenURI(BigInt(cubeNumber));
+        const url = ipfsToHttps(uri);
+
+        const res = await fetch(url);
+        if(!res.ok) throw new Error("Metadata unavailable");
+
+        const metadata = await res.json();
+        const rarity = findRarity(metadata);
+
+        return rarity
+          ? "#" + cubeNumber + " — Rarity: " + rarity
+          : "#" + cubeNumber + " — Rarity Unknown";
+
+      }catch(err){
+        console.error("Rarity lookup failed:", err);
+        return "#" + cubeNumber + " — Rarity Unknown";
+      }
     }
 
     function resetAccess(){
