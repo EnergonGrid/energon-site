@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ENERGON — Guardian Chronicle</title>
-  <meta name="description" content="Recovered archive of the First Guardian encounter." />
-  <meta name="robots" content="noindex,nofollow" />
+  <meta name="description" content="Living record of Energon Genesis, Guardian entries, and protocol observations." />
+  <meta name="robots" content="index,follow" />
 
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <meta property="og:title" content="ENERGON — Guardian Chronicle" />
-  <meta property="og:description" content="Recovered archive of the First Guardian encounter." />
+  <meta property="og:description" content="A living record of Energon Genesis and the Guardians who entered the Grid." />
   <meta property="og:image" content="https://red-secret-dragonfly-529.mypinata.cloud/ipfs/bafybeiccfdp4aez6gqva5yx5cmixc7dugqxl6eee5nhb54sdhpnidpmt7u" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
@@ -42,7 +42,6 @@
       background-attachment:fixed;
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
-      transition:background 0.35s ease,color 0.35s ease;
     }
 
     .wrap{
@@ -59,8 +58,6 @@
       position:relative;
       overflow:hidden;
       backdrop-filter:blur(10px);
-      transform:translateZ(0);
-      transition:filter 0.35s ease,border-color 0.35s ease,box-shadow 0.35s ease,background 0.35s ease;
     }
 
     .inner{
@@ -156,29 +153,27 @@
     }
 
     #signalLine{
-  min-height:28px;
-  color:rgba(255,255,255,0.88);
-  font-size:14px;
-  font-weight:850;
-  letter-spacing:2.8px;
-  text-transform:uppercase;
-  text-shadow:0 0 14px rgba(80,180,255,0.25);
-}
+      min-height:28px;
+      color:rgba(255,255,255,0.88);
+      font-size:14px;
+      font-weight:850;
+      letter-spacing:2.8px;
+      text-transform:uppercase;
+      text-shadow:0 0 14px rgba(80,180,255,0.25);
+    }
 
-#signalLine::after{
-  content:"_";
-  margin-left:4px;
-  animation:blinkCursor 0.8s infinite;
-}
+    #signalLine::after{
+      content:"_";
+      margin-left:4px;
+      animation:blinkCursor 0.8s infinite;
+    }
 
-@keyframes blinkCursor{
-  0%,50%{opacity:1;}
-  51%,100%{opacity:0;}
-}
+    @keyframes blinkCursor{
+      0%,50%{opacity:1;}
+      51%,100%{opacity:0;}
+    }
 
-.hidden{
-  display:none;
-}
+    .hidden{display:none;}
 
     .pathSelector{
       display:flex;
@@ -259,6 +254,44 @@
       font-size:15px;
       line-height:1.75;
       max-width:760px;
+    }
+
+    .recordBox{
+      margin:22px auto;
+      padding:18px;
+      border-radius:16px;
+      border:1px solid rgba(87,184,255,0.20);
+      background:rgba(255,255,255,0.045);
+      box-shadow:0 0 28px rgba(87,184,255,0.06);
+    }
+
+    .recordTitle{
+      font-size:12px;
+      letter-spacing:1.8px;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.62);
+      font-weight:850;
+      margin-bottom:12px;
+    }
+
+    .recordLine{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      padding:7px 0;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+      color:rgba(255,255,255,0.84);
+      font-size:14px;
+    }
+
+    .recordLine:last-child{border-bottom:0;}
+
+    .recordLine span:first-child{
+      color:rgba(255,255,255,0.55);
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-size:11px;
+      font-weight:850;
     }
 
     .law{
@@ -354,17 +387,10 @@
       justify-content:center;
     }
 
-    body.unselected .story{
-      width:100%;
-    }
+    body.unselected .story{width:100%;}
+    body.unselected .pathSelector{margin:0;}
 
-    body.unselected .pathSelector{
-      margin:0;
-    }
-
-    body.silent{
-      background:#000;
-    }
+    body.silent{background:#000;}
 
     body.silent .sheet{
       min-height:360px;
@@ -384,13 +410,8 @@
       display:none;
     }
 
-    body.silent .story{
-      width:100%;
-    }
-
-    body.silent .pathSelector{
-      margin:0;
-    }
+    body.silent .story{width:100%;}
+    body.silent .pathSelector{margin:0;}
 
     body.fractured{
       background:
@@ -428,14 +449,13 @@
     }
 
     body.fractured .quote,
-    body.fractured .law{
+    body.fractured .law,
+    body.fractured .recordBox{
       border-color:rgba(255,50,50,0.28);
       background:rgba(50,0,0,0.20);
     }
 
-    body.fractured .returnBlock{
-      display:none;
-    }
+    body.fractured .returnBlock{display:none;}
 
     @keyframes fractureShake{
       0%{transform:translate(0,0)}
@@ -457,15 +477,15 @@
       .sigil{width:116px;height:116px;border-radius:22px}
       p{font-size:15px;line-height:1.68}
       .lawText{font-size:18px}
-
-      .pathSelector{
-        gap:10px;
-      }
-
+      .pathSelector{gap:10px;}
       .pathSelector button{
         min-width:0;
         flex:1 1 100%;
         padding:14px 16px;
+      }
+      .recordLine{
+        flex-direction:column;
+        gap:4px;
       }
     }
   </style>
@@ -493,7 +513,7 @@
         <div class="story">
 
           <p class="archiveLabel" data-scramble>
-            <em>Recovered Archive // Origin Unknown</em>
+            <em>Guardian Chronicle // Genesis Record</em>
           </p>
 
           <div class="signalSequence" id="signalSequence">
@@ -501,7 +521,7 @@
           </div>
 
           <div class="pathSelector hidden" id="pathSelector">
-            <div class="pathTitle">Choose Path</div>
+            <div class="pathTitle">Choose State</div>
             <button type="button" data-mode="silent" class="silentBtn">SILENT</button>
             <button type="button" data-mode="fractured" class="fracturedBtn">FRACTURED</button>
             <button type="button" data-mode="coherent" class="coherentBtn">COHERENT</button>
@@ -510,84 +530,143 @@
           <div class="archiveContent">
 
             <p data-scramble>
-              I remember the moment I found the Key. At least, I believed I found it. Years later I would realize the truth. The Key had found me.
+              Guardian Chronicle begins at Genesis.
             </p>
 
             <p data-scramble>
-              At first it appeared dormant, a silent object drifting through the noise of countless systems. Others saw it and moved on. Some collected them. Some ignored them. Most never understood what they were looking at. I did not understand either. Not at first.
+              Not before the protocol. Not after its memory has faded.
+              It begins where Energon entered the chain.
             </p>
 
             <p data-scramble>
-              The Key remained silent, waiting, observing, testing. Then the attachment occurred. I cannot explain how I knew. Only that the moment it happened, everything became clear.
+              On December 20, 2025, the Energon Protocol launched on Flare Mainnet.
+              The contracts were deployed. The network accepted them.
+              From that point forward, Energon was no longer only an idea.
+              It was a system.
             </p>
 
-            <div class="quote" data-scramble>
-              The Key was never the source. The Key was the vessel. A prison. A container built to hold something far older.
+            <div class="recordBox" data-scramble>
+              <div class="recordTitle">Genesis Record</div>
+              <div class="recordLine">
+                <span>Network</span>
+                <strong>Flare Mainnet</strong>
+              </div>
+              <div class="recordLine">
+                <span>Launch Date</span>
+                <strong>12.20.2025</strong>
+              </div>
+              <div class="recordLine">
+                <span>Record Type</span>
+                <strong>Protocol Genesis</strong>
+              </div>
+              <div class="recordLine">
+                <span>Status</span>
+                <strong>Confirmed</strong>
+              </div>
             </div>
 
             <p data-scramble>
-              Something had existed long before the first Guardian, long before the first network, long before the first civilization looked into the sky and wondered what existed beyond it. The ancients gave it many names. I know it by only one.
+              The first records belong to those who built, deployed, and observed its beginning.
+              They do not stand above the protocol.
+              They stand at the edge of its launch and record what followed.
             </p>
 
-            <div class="quote" data-scramble>
-              <strong>Energon.</strong>
-            </div>
+            <p data-scramble>
+              The EnergonCube is the Key to the Grid.
+              It does not rule the protocol.
+              It grants entry into observation.
+            </p>
 
             <p data-scramble>
-              The Key does not create Energon. It contains it. And when the correct bond is formed, Energon awakens. Not through force. Not through ownership. Through alignment.
+              Possession alone is not coherence.
+              The law is narrower than collection.
+              The bond requires balance.
             </p>
 
             <div class="law" data-scramble>
-              <div class="lawTitle">The Three Laws</div>
+              <div class="lawTitle">Guardian Law</div>
               <div class="lawText">
                 One Wallet.<br />
-                One Key.<br />
+                One Cube.<br />
                 One Guardian.
               </div>
             </div>
+
+            <p data-scramble>
+              0 Cubes is Silent.
+              1 Cube is Coherent.
+              2 or more Cubes is Fractured.
+            </p>
 
             <p data-scramble>
               Everything else is noise.
             </p>
 
             <p data-scramble>
-              Most who discover the Key never understand this. They believe possession is enough. They believe more Keys mean more power. They are wrong.
+              As Energon advances, the Chronicle advances with it.
             </p>
 
             <p data-scramble>
-              The bond was never designed for excess. The attachment requires balance: a single bearer, a single Key, a single connection. Only then does Energon reveal itself. Only then does the Guardian become coherent.
+              Founder records become Guardian records.
+              Guardian records become history.
             </p>
 
             <p data-scramble>
-              Even now I do not fully understand what Energon is. I only know what I have witnessed. Every new Guardian strengthens the signal. Every new attachment expands the Grid. Every new bond reveals another fragment of a design larger than any one person can comprehend.
+              Every EnergonCube minted begins a new Chronicle entry.
+              Every Guardian may leave a record explaining why they entered the Grid.
             </p>
 
             <p data-scramble>
-              The purpose remains hidden. The destination remains unknown. The journey continues. And somewhere beyond the edge of observation, Energon waits for the next Guardian, as it once waited for me.
+              Some records will remain in the Archive.
+              Some may enter the public Chronicle.
+              Some may one day become part of the books.
             </p>
 
             <div class="quote" data-scramble>
-              “One Wallet. One Key. One Guardian.”
+              Leave a record.<br />
+              The protocol remembers by law.<br />
+              The Chronicle remembers by witness.
+            </div>
+
+            <p data-scramble>
+              What is observed shall be preserved.
+              What is preserved shall remain faithful to the protocol.
+            </p>
+
+            <p data-scramble>
+              Nothing is added for admiration.
+              Nothing is removed for convenience.
+            </p>
+
+            <p data-scramble>
+              Guardian Chronicle exists so future Guardians may know not only what was built,
+              but why it began.
+            </p>
+
+            <div class="quote" data-scramble>
+              “One Wallet. One Cube. One Guardian.”
               <br />
               “Everything else is noise.”
             </div>
 
             <div class="foot" data-scramble>
-              Recovered surface. Coherent signal. <code>ENERGON</code>
+              Genesis confirmed. Guardian record open. <code>ENERGON</code>
             </div>
 
             <div class="returnBlock">
+              <div class="returnCopy">
+                If you hold the Key, you may leave a record.<br />
+                Your cube is your entry. Your reason is your witness.
+              </div>
 
-  <div class="returnCopy">
-    My transmission ends here.<br />
-    Your journey begins here.
-  </div>
-
-  <a href="https://energon-site.vercel.app" class="returnButton">
-    TRANSMISSION COMPLETE
-  </a>
-
-</div>
+              <!--
+                The Chronicle never verifies wallets directly.
+                Verification happens on leave-record.html.
+              -->
+              <a href="leave-record.html" class="returnButton">
+                LEAVE A RECORD
+              </a>
+            </div>
 
           </div>
 
@@ -601,119 +680,119 @@
   </div>
 
   <script>
-  const body = document.body;
-  const buttons = document.querySelectorAll("[data-mode]");
-  const scrambleNodes = document.querySelectorAll("[data-scramble]");
-  const original = new Map();
-  let scrambleTimer = null;
+    const body = document.body;
+    const buttons = document.querySelectorAll("[data-mode]");
+    const scrambleNodes = document.querySelectorAll("[data-scramble]");
+    const original = new Map();
+    let scrambleTimer = null;
 
-  const chars = "01▓▒░█/\\|<>[]{}#@$%&*+=?ENERGON";
+    const chars = "01▓▒░█/\\|<>[]{}#@$%&*+=?ENERGON";
 
-  scrambleNodes.forEach((node) => {
-    original.set(node, node.innerHTML);
-  });
-
-  function scrambleText(text) {
-    return text.replace(/[A-Za-z0-9]/g, () => {
-      return chars[Math.floor(Math.random() * chars.length)];
+    scrambleNodes.forEach((node) => {
+      original.set(node, node.innerHTML);
     });
-  }
 
-  function startFracture() {
-    stopFracture(false);
-
-    scrambleTimer = setInterval(() => {
-      scrambleNodes.forEach((node) => {
-        const source = original.get(node);
-        node.innerHTML = scrambleText(source);
-      });
-    }, 80);
-  }
-
-  function stopFracture(restore = true) {
-    if (scrambleTimer) {
-      clearInterval(scrambleTimer);
-      scrambleTimer = null;
-    }
-
-    if (restore) {
-      scrambleNodes.forEach((node) => {
-        node.innerHTML = original.get(node);
+    function scrambleText(text) {
+      return text.replace(/[A-Za-z0-9]/g, () => {
+        return chars[Math.floor(Math.random() * chars.length)];
       });
     }
-  }
 
-  function setMode(mode) {
-    body.classList.remove("unselected", "silent", "fractured", "coherent");
-    body.classList.add(mode);
+    function startFracture() {
+      stopFracture(false);
 
-    buttons.forEach((btn) => {
-      btn.classList.remove("active");
+      scrambleTimer = setInterval(() => {
+        scrambleNodes.forEach((node) => {
+          const source = original.get(node);
+          node.innerHTML = scrambleText(source);
+        });
+      }, 80);
+    }
+
+    function stopFracture(restore = true) {
+      if (scrambleTimer) {
+        clearInterval(scrambleTimer);
+        scrambleTimer = null;
+      }
+
+      if (restore) {
+        scrambleNodes.forEach((node) => {
+          node.innerHTML = original.get(node);
+        });
+      }
+    }
+
+    function setMode(mode) {
+      body.classList.remove("unselected", "silent", "fractured", "coherent");
+      body.classList.add(mode);
+
+      buttons.forEach((btn) => {
+        btn.classList.remove("active");
+      });
+
+      if (mode !== "unselected") {
+        const active = document.querySelector(`[data-mode="${mode}"]`);
+        if (active) active.classList.add("active");
+      }
+
+      if (mode === "fractured") {
+        startFracture();
+      } else {
+        stopFracture(true);
+      }
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setMode(button.dataset.mode);
+      });
     });
 
-    if (mode !== "unselected") {
-      const active = document.querySelector(`[data-mode="${mode}"]`);
-      if (active) active.classList.add("active");
+    const sequence = [
+      "SIGNAL RECEIVED...",
+      "EVALUATING GUARDIAN STATE...",
+      "COHERENCE CHECK IN PROGRESS...",
+      "CHRONICLE ACCESS READY"
+    ];
+
+    let sequenceIndex = 0;
+    const signalLine = document.getElementById("signalLine");
+    const signalSequence = document.getElementById("signalSequence");
+    const pathSelector = document.getElementById("pathSelector");
+
+    function typeLine(text, callback) {
+      let i = 0;
+      signalLine.textContent = "";
+
+      const typing = setInterval(() => {
+        signalLine.textContent += text.charAt(i);
+        i++;
+
+        if (i >= text.length) {
+          clearInterval(typing);
+
+          setTimeout(() => {
+            callback();
+          }, 1500);
+        }
+      }, 120);
     }
 
-    if (mode === "fractured") {
-      startFracture();
-    } else {
-      stopFracture(true);
-    }
-  }
+    function runSequence() {
+      if (sequenceIndex >= sequence.length) {
+        signalSequence.classList.add("hidden");
+        pathSelector.classList.remove("hidden");
+        return;
+      }
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      setMode(button.dataset.mode);
-    });
-  });
-
-  const sequence = [
-  "SIGNAL RECEIVED...",
-  "EVALUATING GUARDIAN STATE...",
-  "COHERENCE CHECK IN PROGRESS...",
-  "PATH SELECTION REQUIRED"
-];
-
-let sequenceIndex = 0;
-const signalLine = document.getElementById("signalLine");
-const signalSequence = document.getElementById("signalSequence");
-const pathSelector = document.getElementById("pathSelector");
-
-function typeLine(text, callback) {
-  let i = 0;
-  signalLine.textContent = "";
-
-  const typing = setInterval(() => {
-    signalLine.textContent += text.charAt(i);
-    i++;
-
-    if (i >= text.length) {
-      clearInterval(typing);
-
-      setTimeout(() => {
-        callback();
-      }, 1800);
-    }
-  }, 140);
-}
-
-  function runSequence() {
-    if (sequenceIndex >= sequence.length) {
-      signalSequence.classList.add("hidden");
-      pathSelector.classList.remove("hidden");
-      return;
+      typeLine(sequence[sequenceIndex], () => {
+        sequenceIndex++;
+        runSequence();
+      });
     }
 
-    typeLine(sequence[sequenceIndex], () => {
-      sequenceIndex++;
-      runSequence();
-    });
-  }
-
-  setMode("unselected");
-  window.addEventListener("load", runSequence);
-</script>
+    setMode("unselected");
+    window.addEventListener("load", runSequence);
+  </script>
 </body>
 </html>

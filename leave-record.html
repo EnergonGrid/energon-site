@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ENERGON — Leave a Record</title>
+  <meta name="description" content="Coherent Guardians may leave a record for the Guardian Chronicle." />
+  <meta name="robots" content="index,follow" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+
+  <style>
+    :root{
+      --fg:rgba(255,255,255,0.92);
+      --muted:rgba(255,255,255,0.66);
+      --blue:#57b8ff;
+      --green:#86f0a8;
+      --red:#ff7070;
+      --stroke:rgba(255,255,255,0.10);
+      --panelA:rgba(12,18,36,0.78);
+      --panelB:rgba(5,8,18,0.88);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--fg);
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background:radial-gradient(circle at 30% 10%, rgba(27,42,90,0.95) 0%, rgba(5,6,11,1) 55%, #000 100%);
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .wrap{
+      max-width:880px;
+      margin:0 auto;
+      padding:54px 16px 80px;
+    }
+
+    .sheet{
+      border:1px solid var(--stroke);
+      border-radius:22px;
+      background:linear-gradient(180deg,var(--panelA),var(--panelB));
+      box-shadow:0 18px 56px rgba(0,0,0,0.42);
+      overflow:hidden;
+      backdrop-filter:blur(10px);
+    }
+
+    .inner{padding:28px}
+    .top{text-align:center;margin-bottom:24px}
+
+    .sigil{
+      width:120px;
+      height:120px;
+      object-fit:cover;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,0.14);
+      box-shadow:0 18px 42px rgba(0,0,0,0.34);
+      margin-bottom:14px;
+    }
+
+    h1{
+      margin:0;
+      font-size:38px;
+      letter-spacing:3px;
+      text-transform:uppercase;
+    }
+
+    h2{
+      margin:8px 0 0;
+      font-size:13px;
+      color:var(--muted);
+      letter-spacing:1.8px;
+      text-transform:uppercase;
+    }
+
+    p{
+      line-height:1.72;
+      color:rgba(255,255,255,0.82);
+      font-size:15.5px;
+    }
+
+    .box{
+      margin:18px 0;
+      padding:18px;
+      border-radius:16px;
+      border:1px solid rgba(87,184,255,0.18);
+      background:rgba(255,255,255,0.045);
+    }
+
+    .securityBox{
+      border-color:rgba(134,240,168,0.28);
+      background:rgba(10,40,24,0.18);
+    }
+
+    .accessBox{
+      border-color:rgba(134,240,168,0.34);
+      box-shadow:0 0 28px rgba(134,240,168,0.08);
+    }
+
+    .statusTitle{
+      font-size:12px;
+      letter-spacing:1.8px;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.58);
+      font-weight:850;
+      margin-bottom:12px;
+    }
+
+    .line{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:8px 0;
+      border-bottom:1px solid rgba(255,255,255,0.07);
+      font-size:14px;
+    }
+
+    .line:last-child{border-bottom:0}
+
+    .line span:first-child{
+      color:rgba(255,255,255,0.55);
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-size:11px;
+      font-weight:850;
+    }
+
+    .good{color:var(--green)}
+    .bad{color:var(--red)}
+    .blue{color:var(--blue)}
+
+    button,.button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px 24px;
+      border-radius:16px;
+      border:1px solid rgba(87,184,255,0.50);
+      background:
+        radial-gradient(circle at 18% 30%, rgba(87,184,255,0.16), transparent 42%),
+        linear-gradient(180deg, rgba(16,48,108,0.55), rgba(6,16,42,0.96));
+      color:white;
+      font-size:12px;
+      font-weight:850;
+      letter-spacing:1.6px;
+      text-transform:uppercase;
+      cursor:pointer;
+      text-decoration:none;
+      box-shadow:0 0 24px rgba(87,184,255,0.14);
+    }
+
+    button:hover,.button:hover{
+      transform:translateY(-1px);
+      box-shadow:0 0 30px rgba(87,184,255,0.28);
+    }
+
+    button:disabled{
+      opacity:0.45;
+      cursor:not-allowed;
+      transform:none;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:center;
+      margin:22px 0;
+    }
+
+    textarea,input{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(0,0,0,0.24);
+      color:white;
+      padding:14px;
+      font:inherit;
+      outline:none;
+    }
+
+    textarea{
+      min-height:160px;
+      resize:vertical;
+      line-height:1.6;
+    }
+
+    label{
+      display:block;
+      margin:16px 0 8px;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1.4px;
+      color:rgba(255,255,255,0.65);
+      font-weight:850;
+    }
+
+    .check{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      margin:14px 0;
+      color:rgba(255,255,255,0.78);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .check input{
+      width:auto;
+      margin-top:3px;
+    }
+
+    .hidden{display:none}
+    .center{text-align:center}
+
+    .recorded{
+      text-align:center;
+      padding:18px 0;
+    }
+
+    .recordedTitle{
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:2.4px;
+      text-transform:uppercase;
+      color:var(--green);
+      text-shadow:0 0 22px rgba(134,240,168,0.25);
+      margin-bottom:12px;
+    }
+
+    .small{
+      color:rgba(255,255,255,0.58);
+      font-size:12px;
+      line-height:1.6;
+    }
+
+    @media(max-width:640px){
+      .wrap{padding:34px 12px 56px}
+      .inner{padding:22px 16px}
+      h1{font-size:30px}
+      .line{flex-direction:column;gap:4px}
+      .actions{flex-direction:column}
+      button,.button{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="sheet">
+      <div class="inner">
+
+        <div class="top">
+          <img
+            class="sigil"
+            src="https://red-secret-dragonfly-529.mypinata.cloud/ipfs/bafybeiccfdp4aez6gqva5yx5cmixc7dugqxl6eee5nhb54sdhpnidpmt7u"
+            alt="Energon Sigil"
+          />
+          <h1>ENERGON</h1>
+          <h2>Leave a Guardian Record</h2>
+        </div>
+
+        <div id="intro">
+          <p class="center">
+            Only coherent Guardians may leave a record.
+          </p>
+
+          <div class="box securityBox">
+            <div class="statusTitle">Guardian Safety</div>
+            <p class="small center">
+              This page is read-only. It will never ask you to sign a transaction,
+              approve assets, enter a seed phrase, reveal a private key, transfer a cube,
+              or send FLR.
+              <br><br>
+              It only reads your public Guardian state.
+            </p>
+          </div>
+
+          <div class="box">
+            <div class="statusTitle">Guardian Law</div>
+            <div class="line"><span>0 Cubes</span><strong>Silent</strong></div>
+            <div class="line"><span>1 Cube</span><strong class="good">Coherent</strong></div>
+            <div class="line"><span>2+ Cubes</span><strong class="bad">Fractured</strong></div>
+          </div>
+
+          <p class="center">
+            Connect the wallet that holds your EnergonCube.
+            If the wallet is coherent, the Chronicle will open.
+          </p>
+
+          <div class="actions">
+            <button id="connectBtn" type="button">Connect Wallet</button>
+            <a class="button" href="guardian-chronicle.html">Return to Chronicle</a>
+          </div>
+        </div>
+
+        <div id="statusBox" class="box hidden">
+          <div class="statusTitle">Guardian Status</div>
+          <div class="line"><span>Wallet</span><strong id="walletLine">—</strong></div>
+          <div class="line"><span>Cube Balance</span><strong id="balanceLine">—</strong></div>
+          <div class="line"><span>State</span><strong id="stateLine">—</strong></div>
+          <div class="line"><span>EnergonCube</span><strong id="cubeLine">—</strong></div>
+          <div class="line"><span>Access</span><strong id="accessLine">—</strong></div>
+        </div>
+
+        <div id="blockedBox" class="box hidden">
+          <p class="center bad">
+            This wallet is not coherent.
+          </p>
+          <p class="center">
+            A Guardian Record may only be left by a wallet holding exactly one EnergonCube.
+          </p>
+        </div>
+
+        <div id="accessBox" class="box accessBox hidden center">
+          <div class="statusTitle">Archive Access Granted</div>
+          <p class="good"><strong>Guardian Verified</strong></p>
+          <p>The Chronicle recognizes this Guardian.</p>
+          <p>Leave a record.</p>
+        </div>
+
+        <form id="recordForm" class="hidden">
+          <label for="recordText">Guardian Record</label>
+          <textarea
+            id="recordText"
+            maxlength="1000"
+            required
+            placeholder="Why did you become a Guardian? What did the Cube mean to you when you entered the Grid?"
+          ></textarea>
+
+          <div class="small">
+            Maximum 1000 characters. Do not include seed phrases, private keys, addresses of others,
+            or personal information you do not want preserved.
+          </div>
+
+          <label for="guardianName">Guardian Name or Alias Optional</label>
+          <input
+            id="guardianName"
+            maxlength="80"
+            placeholder="Guardian alias optional"
+          />
+
+          <div class="check">
+            <input id="publicPermission" type="checkbox" />
+            <span>I allow this record to be reviewed for possible inclusion in the public Guardian Chronicle.</span>
+          </div>
+
+          <div class="check">
+            <input id="bookPermission" type="checkbox" />
+            <span>I allow excerpts from this record to be considered for future Guardian Chronicle books.</span>
+          </div>
+
+          <div class="actions">
+            <button id="submitBtn" type="submit">Submit Record</button>
+          </div>
+        </form>
+
+        <div id="verifyBox" class="box hidden center">
+          <p id="verifyLine" class="blue">VERIFYING GUARDIAN...</p>
+        </div>
+
+        <div id="recordedWrap" class="recorded hidden">
+          <div class="recordedTitle">Guardian Recorded</div>
+
+          <p>
+            Guardian acquired <strong id="finalCube">EnergonCube #—</strong>.
+          </p>
+
+          <p>
+            Guardian Record received.
+            <br />
+            The Chronicle remembers by witness.
+          </p>
+
+          <p>
+            This observation has entered the Archive.
+            Future Guardians may one day read what began here.
+          </p>
+
+          <div class="actions">
+            <a id="xButton" class="button" target="_blank" rel="noreferrer">Share on X</a>
+            <a id="instagramButton" class="button" target="_blank" rel="noreferrer">Open Instagram</a>
+            <a class="button" href="https://energon-site.vercel.app">Return to Energon</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const FLARE_CHAIN_ID_HEX = "0xe";
+    const ENERGON_CUBE_ADDRESS = "0x30e1076bDf2B123B54486C2721125388af2d2061";
+    const CHRONICLE_API_URL = "https://energon-dapp.vercel.app/api/guardian-chronicle";
+
+    const CUBE_ABI = [
+      "function balanceOf(address owner) view returns (uint256)",
+      "function tokenOfOwnerByIndex(address owner, uint256 index) view returns (uint256)"
+    ];
+
+    let connectedWallet = "";
+    let cubeBalance = 0n;
+    let cubeId = "";
+    let isCoherent = false;
+
+    const connectBtn = document.getElementById("connectBtn");
+    const statusBox = document.getElementById("statusBox");
+    const blockedBox = document.getElementById("blockedBox");
+    const accessBox = document.getElementById("accessBox");
+    const recordForm = document.getElementById("recordForm");
+    const verifyBox = document.getElementById("verifyBox");
+    const verifyLine = document.getElementById("verifyLine");
+    const recordedWrap = document.getElementById("recordedWrap");
+
+    const walletLine = document.getElementById("walletLine");
+    const balanceLine = document.getElementById("balanceLine");
+    const stateLine = document.getElementById("stateLine");
+    const cubeLine = document.getElementById("cubeLine");
+    const accessLine = document.getElementById("accessLine");
+    const finalCube = document.getElementById("finalCube");
+
+    function shortAddr(addr){
+      return addr ? addr.slice(0,6) + "..." + addr.slice(-4) : "—";
+    }
+
+    async function switchToFlare(){
+      try{
+        await window.ethereum.request({
+          method:"wallet_switchEthereumChain",
+          params:[{ chainId: FLARE_CHAIN_ID_HEX }]
+        });
+      }catch(err){
+        if(err.code === 4902){
+          await window.ethereum.request({
+            method:"wallet_addEthereumChain",
+            params:[{
+              chainId: FLARE_CHAIN_ID_HEX,
+              chainName:"Flare Mainnet",
+              nativeCurrency:{ name:"Flare", symbol:"FLR", decimals:18 },
+              rpcUrls:["https://flare-api.flare.network/ext/C/rpc"],
+              blockExplorerUrls:["https://flarescan.com"]
+            }]
+          });
+        }else{
+          throw err;
+        }
+      }
+    }
+
+    async function connectWallet(){
+      if(!window.ethereum){
+        alert("No wallet detected. Open this page in Bifrost, MetaMask, or another Web3 wallet browser.");
+        return;
+      }
+
+      connectBtn.disabled = true;
+      connectBtn.textContent = "Checking...";
+
+      isCoherent = false;
+      accessBox.classList.add("hidden");
+      recordForm.classList.add("hidden");
+      blockedBox.classList.add("hidden");
+      recordedWrap.classList.add("hidden");
+
+      try{
+        await switchToFlare();
+
+        const accounts = await window.ethereum.request({
+          method:"eth_requestAccounts"
+        });
+
+        connectedWallet = accounts[0];
+
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const cube = new ethers.Contract(ENERGON_CUBE_ADDRESS, CUBE_ABI, provider);
+
+        cubeBalance = await cube.balanceOf(connectedWallet);
+
+        walletLine.textContent = shortAddr(connectedWallet);
+        balanceLine.textContent = cubeBalance.toString();
+        statusBox.classList.remove("hidden");
+
+        if(cubeBalance === 1n){
+          isCoherent = true;
+
+          stateLine.textContent = "COHERENT";
+          stateLine.className = "good";
+          accessLine.textContent = "GRANTED";
+          accessLine.className = "good";
+
+          try{
+            const id = await cube.tokenOfOwnerByIndex(connectedWallet, 0);
+            cubeId = id.toString();
+            cubeLine.textContent = "#" + cubeId;
+          }catch(err){
+            cubeId = "";
+            cubeLine.textContent = "Detected, token ID unavailable";
+          }
+
+          blockedBox.classList.add("hidden");
+          accessBox.classList.remove("hidden");
+
+          setTimeout(() => {
+            recordForm.classList.remove("hidden");
+          }, 900);
+
+        }else{
+          isCoherent = false;
+
+          stateLine.textContent = cubeBalance === 0n ? "SILENT" : "FRACTURED";
+          stateLine.className = "bad";
+          cubeLine.textContent = "—";
+          accessLine.textContent = "DENIED";
+          accessLine.className = "bad";
+
+          accessBox.classList.add("hidden");
+          recordForm.classList.add("hidden");
+          blockedBox.classList.remove("hidden");
+        }
+
+      }catch(err){
+        console.error(err);
+        alert("Wallet verification failed.");
+      }finally{
+        connectBtn.disabled = false;
+        connectBtn.textContent = "Reconnect Wallet";
+      }
+    }
+
+    async function waitLine(text, delay = 900){
+      verifyLine.textContent = text;
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+
+    recordForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if(!isCoherent || cubeBalance !== 1n){
+        alert("Guardian Record blocked. Wallet must be coherent.");
+        recordForm.classList.add("hidden");
+        blockedBox.classList.remove("hidden");
+        return;
+      }
+
+      const recordText = document.getElementById("recordText").value.trim();
+      const guardianName = document.getElementById("guardianName").value.trim();
+      const publicPermission = document.getElementById("publicPermission").checked;
+      const bookPermission = document.getElementById("bookPermission").checked;
+
+      if(!recordText){
+        alert("Write your Guardian Record first.");
+        return;
+      }
+
+      recordForm.classList.add("hidden");
+      accessBox.classList.add("hidden");
+      verifyBox.classList.remove("hidden");
+
+      await waitLine("VERIFYING GUARDIAN...");
+      await waitLine("VERIFYING CUBE...");
+      await waitLine("VERIFYING COHERENCE...");
+      await waitLine("RECORDING OBSERVATION...");
+
+      try{
+        const response = await fetch(CHRONICLE_API_URL, {
+          method:"POST",
+          headers:{
+            "content-type":"application/json"
+          },
+          body:JSON.stringify({
+            wallet:connectedWallet,
+            guardianName,
+            recordText,
+            publicPermission,
+            bookPermission
+          })
+        });
+
+        const result = await response.json();
+
+        if(!response.ok || !result.ok){
+          throw new Error(result.error || "Guardian record could not be saved.");
+        }
+
+        cubeId = result.cubeId || cubeId;
+
+        verifyBox.classList.add("hidden");
+        recordedWrap.classList.remove("hidden");
+
+        finalCube.textContent = cubeId
+          ? "EnergonCube #" + cubeId
+          : "an EnergonCube";
+
+        const shareText = encodeURIComponent(
+          cubeId
+            ? `Guardian acquired EnergonCube #${cubeId}.\n\nGuardian Record received.\nThe Chronicle remembers by witness.\n\nOne wallet. One cube. One Guardian.\n\n#Energon #Flare #EON`
+            : `Guardian Record received.\nThe Chronicle remembers by witness.\n\nOne wallet. One cube. One Guardian.\n\n#Energon #Flare #EON`
+        );
+
+        document.getElementById("xButton").href =
+          "https://twitter.com/intent/tweet?text=" + shareText;
+
+        document.getElementById("instagramButton").href =
+          "https://www.instagram.com/energongrid/";
+
+      }catch(err){
+        console.error(err);
+        verifyBox.classList.add("hidden");
+        accessBox.classList.remove("hidden");
+        recordForm.classList.remove("hidden");
+        alert(err.message || "Guardian record could not be saved.");
+      }
+    });
+
+    connectBtn.addEventListener("click", connectWallet);
+  </script>
+</body>
+</html>
