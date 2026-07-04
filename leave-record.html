@@ -297,7 +297,7 @@
 
           <div class="actions">
             <button id="connectBtn" type="button">Connect Wallet</button>
-            <a class="button" href="guardian-chronicle.html">Return to Chronicle</a>
+            <a class="button" href="guardian.html">Return to Chronicle</a>
           </div>
         </div>
 
@@ -327,6 +327,19 @@
         </div>
 
         <form id="recordForm" class="hidden">
+          <label for="cubeNumber">EnergonCube Number</label>
+          <input
+            id="cubeNumber"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            required
+            placeholder="Enter the cube number held by this wallet"
+          />
+
+          <div class="small">
+            The backend will verify that this wallet holds exactly one cube and that the entered cube number belongs to this wallet.
+          </div>
+
           <label for="recordText">Guardian Record</label>
           <textarea
             id="recordText"
@@ -401,13 +414,11 @@
     const CHRONICLE_API_URL = "https://energon-dapp.vercel.app/api/guardian-chronicle";
 
     const CUBE_ABI = [
-      "function balanceOf(address owner) view returns (uint256)",
-      "function tokenOfOwnerByIndex(address owner, uint256 index) view returns (uint256)"
+      "function balanceOf(address owner) view returns (uint256)"
     ];
 
     let connectedWallet = "";
     let cubeBalance = 0n;
-    let cubeId = "";
     let isCoherent = false;
 
     const connectBtn = document.getElementById("connectBtn");
@@ -492,17 +503,9 @@
 
           stateLine.textContent = "COHERENT";
           stateLine.className = "good";
+          cubeLine.textContent = "Enter Cube Number Below";
           accessLine.textContent = "GRANTED";
           accessLine.className = "good";
-
-          try{
-            const id = await cube.tokenOfOwnerByIndex(connectedWallet, 0);
-            cubeId = id.toString();
-            cubeLine.textContent = "#" + cubeId;
-          }catch(err){
-            cubeId = "";
-            cubeLine.textContent = "Detected, token ID unavailable";
-          }
 
           blockedBox.classList.add("hidden");
           accessBox.classList.remove("hidden");
@@ -549,10 +552,23 @@
         return;
       }
 
+      const cubeNumber = document.getElementById("cubeNumber").value.trim();
       const recordText = document.getElementById("recordText").value.trim();
       const guardianName = document.getElementById("guardianName").value.trim();
       const publicPermission = document.getElementById("publicPermission").checked;
       const bookPermission = document.getElementById("bookPermission").checked;
+
+      if(!/^[0-9]+$/.test(cubeNumber)){
+        alert("Enter your EnergonCube number.");
+        return;
+      }
+
+      const cubeNum = Number(cubeNumber);
+
+      if(!Number.isSafeInteger(cubeNum) || cubeNum < 1 || cubeNum > 1000000){
+        alert("Enter a valid EnergonCube number between 1 and 1000000.");
+        return;
+      }
 
       if(!recordText){
         alert("Write your Guardian Record first.");
@@ -564,7 +580,7 @@
       verifyBox.classList.remove("hidden");
 
       await waitLine("VERIFYING GUARDIAN...");
-      await waitLine("VERIFYING CUBE...");
+      await waitLine("VERIFYING CUBE OWNERSHIP...");
       await waitLine("VERIFYING COHERENCE...");
       await waitLine("RECORDING OBSERVATION...");
 
@@ -576,6 +592,7 @@
           },
           body:JSON.stringify({
             wallet:connectedWallet,
+            cubeId:cubeNumber,
             guardianName,
             recordText,
             publicPermission,
@@ -589,19 +606,13 @@
           throw new Error(result.error || "Guardian record could not be saved.");
         }
 
-        cubeId = result.cubeId || cubeId;
-
         verifyBox.classList.add("hidden");
         recordedWrap.classList.remove("hidden");
 
-        finalCube.textContent = cubeId
-          ? "EnergonCube #" + cubeId
-          : "an EnergonCube";
+        finalCube.textContent = "EnergonCube #" + result.cubeId;
 
         const shareText = encodeURIComponent(
-          cubeId
-            ? `Guardian acquired EnergonCube #${cubeId}.\n\nGuardian Record received.\nThe Chronicle remembers by witness.\n\nOne wallet. One cube. One Guardian.\n\n#Energon #Flare #EON`
-            : `Guardian Record received.\nThe Chronicle remembers by witness.\n\nOne wallet. One cube. One Guardian.\n\n#Energon #Flare #EON`
+          `Guardian acquired EnergonCube #${result.cubeId}.\n\nGuardian Record received.\nThe Chronicle remembers by witness.\n\nOne wallet. One cube. One Guardian.\n\n#Energon #Flare #EON`
         );
 
         document.getElementById("xButton").href =
