@@ -370,7 +370,38 @@
         return "https://ipfs.io/ipfs/" + uri.replace("ipfs://", "");
       }
 
+      if(uri.startsWith("/")){
+        return "https://energon-dapp.vercel.app" + uri;
+      }
+
+      if(uri.startsWith("bafy") || uri.startsWith("Qm")){
+        return "https://ipfs.io/ipfs/" + uri;
+      }
+
       return uri;
+    }
+
+    async function fetchJsonWithGatewayFallback(url){
+      const gateways = [
+        url,
+        url.includes("https://ipfs.io/ipfs/")
+          ? url.replace("https://ipfs.io/ipfs/", "https://cloudflare-ipfs.com/ipfs/")
+          : null,
+      ].filter(Boolean);
+
+      let lastErr = null;
+
+      for(const u of gateways){
+        try{
+          const res = await fetch(u, { cache:"force-cache" });
+          if(!res.ok) throw new Error("Metadata fetch failed");
+          return await res.json();
+        }catch(err){
+          lastErr = err;
+        }
+      }
+
+      throw lastErr || new Error("Metadata fetch error");
     }
 
     function findRarity(metadata){
@@ -378,34 +409,39 @@
         ? metadata.attributes
         : [];
 
-      const rarityAttr = attrs.find((attr) => {
-        const key = String(attr?.trait_type || attr?.type || attr?.key || "").toLowerCase();
-        return key === "rarity tier" || key === "rarity";
-      });
+      const map = {};
 
-      return rarityAttr?.value ? String(rarityAttr.value) : "";
+      for(const attr of attrs){
+        const key = attr?.trait_type ?? attr?.traitType ?? attr?.key;
+        const value = attr?.value;
+
+        if(key) map[String(key)] = value;
+      }
+
+      return (
+        map["Rarity Tier"] ||
+        map["Rarity"] ||
+        map["rarityTier"] ||
+        "Common"
+      );
     }
 
     async function getCubeLabel(cubeNumber){
-      if(cubeNumber === "1") return "#" + cubeNumber + " — Genesis: The Big Bang";
+      if(cubeNumber === "1") {
+        return "#" + cubeNumber + " — Genesis: The Big Bang";
+      }
 
       try{
         const uri = await cubeContract.tokenURI(BigInt(cubeNumber));
         const url = ipfsToHttps(uri);
 
-        const res = await fetch(url);
-        if(!res.ok) throw new Error("Metadata unavailable");
-
-        const metadata = await res.json();
+        const metadata = await fetchJsonWithGatewayFallback(url);
         const rarity = findRarity(metadata);
 
-        return rarity
-          ? "#" + cubeNumber + " — Rarity: " + rarity
-          : "#" + cubeNumber + " — Rarity Unknown";
-
+        return "#" + cubeNumber + " — Rarity: " + rarity;
       }catch(err){
         console.error("Rarity lookup failed:", err);
-        return "#" + cubeNumber + " — Rarity Unknown";
+        return "#" + cubeNumber + " — Rarity: Common";
       }
     }
 
