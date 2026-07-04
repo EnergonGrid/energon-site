@@ -348,6 +348,11 @@
       return String(a || "").toLowerCase() === String(b || "").toLowerCase();
     }
 
+    async function getCubeLabel(cubeNumber){
+      if(cubeNumber === "1") return "#" + cubeNumber + " — The Big Bang";
+      return "#" + cubeNumber;
+    }
+
     function resetAccess(){
       verifiedCubeId = "";
       cubeVerified = false;
@@ -505,11 +510,11 @@
         cubeVerified = true;
         verifiedCubeId = cubeNumber;
 
-        cubeLine.textContent = "#" + verifiedCubeId;
+        cubeLine.textContent = await getCubeLabel(verifiedCubeId);
         accessLine.textContent = "GRANTED";
         accessLine.className = "good";
 
-        cubeVerifyMessage.textContent = "Cube ownership verified.";
+        cubeVerifyMessage.textContent = "Cube ownership verified. Archive unlocked.";
         cubeVerifyMessage.className = "center small good";
 
         accessBox.classList.remove("hidden");
@@ -581,6 +586,7 @@
       await waitLine("VERIFYING GUARDIAN...");
       await waitLine("VERIFYING CUBE OWNERSHIP...");
       await waitLine("VERIFYING COHERENCE...");
+      await waitLine("ARCHIVE UNLOCKED");
       await waitLine("RECORDING OBSERVATION...");
 
       try{
@@ -603,13 +609,15 @@
           throw new Error(result.error || "Guardian record could not be saved.");
         }
 
+        const cubeLabel = await getCubeLabel(String(result.cubeId));
+
         verifyBox.classList.add("hidden");
         recordedWrap.classList.remove("hidden");
 
-        finalCube.textContent = "EnergonCube #" + result.cubeId;
+        finalCube.textContent = "EnergonCube " + cubeLabel;
 
         const shareText = encodeURIComponent(
-          `Guardian acquired EnergonCube #${result.cubeId}.\n\nGuardian Record received.\nThe Chronicle remembers by witness.\n\nOne wallet. One cube. One Guardian.\n\n#Energon #Flare #EON`
+          `Guardian acquired EnergonCube ${cubeLabel}.\n\nGuardian Record received.\nThe Chronicle remembers by witness.\n\nOne wallet. One cube. One Guardian.\n\n#Energon #Flare #EON`
         );
 
         document.getElementById("xButton").href =
