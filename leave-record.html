@@ -174,7 +174,7 @@
             </p>
           </div>
 
-          <div class="box">
+          <div id="guardianLawBox" class="box">
             <div class="statusTitle">Guardian Law</div>
             <div class="line"><span>0 Cubes</span><strong>Silent</strong></div>
             <div class="line"><span>1 Cube</span><strong class="good">Coherent</strong></div>
@@ -322,6 +322,7 @@
     const connectBtn = document.getElementById("connectBtn");
     const verifyCubeBtn = document.getElementById("verifyCubeBtn");
 
+    const guardianLawBox = document.getElementById("guardianLawBox");
     const statusBox = document.getElementById("statusBox");
     const blockedBox = document.getElementById("blockedBox");
     const cubeVerifyBox = document.getElementById("cubeVerifyBox");
@@ -397,6 +398,7 @@
       cubeVerified = false;
       verifiedCubeId = "";
 
+      guardianLawBox.classList.add("hidden");
       accessBox.classList.add("hidden");
       recordForm.classList.add("hidden");
       blockedBox.classList.add("hidden");
@@ -557,6 +559,7 @@
         alert("Verify your EnergonCube number first.");
         recordForm.classList.add("hidden");
         accessBox.classList.add("hidden");
+        cubeVerifyBox.classList.remove("hidden");
         return;
       }
 
