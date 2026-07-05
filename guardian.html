@@ -27,6 +27,9 @@
       --stroke:rgba(255,255,255,0.08);
       --stroke2:rgba(255,255,255,0.06);
       --glow:rgba(80,180,255,0.18);
+      --blue:#57b8ff;
+      --green:#86f0a8;
+      --red:#ff7070;
       --radius:18px;
     }
 
@@ -182,6 +185,27 @@
       flex-wrap:wrap;
       gap:14px;
       margin:24px 0 34px;
+      text-align:center;
+    }
+
+    .gateTitle{
+      width:100%;
+      font-size:36px;
+      font-weight:900;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      margin:4px 0 0;
+      color:rgba(255,255,255,0.96);
+    }
+
+    .gateSubtitle{
+      width:100%;
+      color:rgba(255,255,255,0.68);
+      font-size:13px;
+      letter-spacing:1.9px;
+      text-transform:uppercase;
+      font-weight:850;
+      margin:0 0 8px;
     }
 
     .pathTitle{
@@ -191,8 +215,18 @@
       font-size:12px;
       letter-spacing:2px;
       text-transform:uppercase;
-      margin-bottom:4px;
+      margin:8px 0 2px;
       font-weight:850;
+    }
+
+    .pathDoors{
+      width:100%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:8px;
     }
 
     .pathSelector button{
@@ -217,30 +251,63 @@
       border-color:rgba(255,255,255,0.32);
     }
 
-    body.silent .silentBtn{
-      border-color:rgba(87,184,255,0.78);
+    .silentBtn{
+      border-color:rgba(87,184,255,0.32) !important;
       background:
-        radial-gradient(circle at 18% 30%, rgba(87,184,255,0.16), transparent 42%),
-        linear-gradient(180deg, rgba(16,48,108,0.42), rgba(6,16,42,0.92));
-      box-shadow:0 0 28px rgba(87,184,255,0.30),0 0 58px rgba(87,184,255,0.12);
+        radial-gradient(circle at 18% 30%, rgba(87,184,255,0.10), transparent 42%),
+        linear-gradient(180deg, rgba(16,48,108,0.30), rgba(6,16,42,0.92)) !important;
+      box-shadow:0 0 18px rgba(87,184,255,0.10) !important;
+    }
+
+    .fracturedBtn{
+      border-color:rgba(255,112,112,0.34) !important;
+      background:
+        radial-gradient(circle at 18% 30%, rgba(255,90,90,0.12), transparent 42%),
+        linear-gradient(180deg, rgba(82,16,32,0.38), rgba(28,6,12,0.94)) !important;
+      box-shadow:0 0 18px rgba(255,90,90,0.12) !important;
+    }
+
+    .coherentBtn{
+      border-color:rgba(134,240,168,0.46) !important;
+      background:
+        radial-gradient(circle at 18% 30%, rgba(134,240,168,0.14), transparent 42%),
+        linear-gradient(180deg, rgba(18,58,44,0.42), rgba(8,24,16,0.94)) !important;
+      box-shadow:0 0 24px rgba(134,240,168,0.18) !important;
+    }
+
+    .gateCopy{
+      width:100%;
+      max-width:620px;
+      margin:12px auto 0;
+      color:rgba(255,255,255,0.70);
+      font-size:14px;
+      line-height:1.65;
+    }
+
+    .gateLaw{
+      width:100%;
+      margin:14px auto 0;
+      color:rgba(255,255,255,0.92);
+      font-size:15px;
+      font-weight:900;
+      letter-spacing:0.7px;
+    }
+
+    body.silent .silentBtn{
+      border-color:rgba(87,184,255,0.78) !important;
+      box-shadow:0 0 28px rgba(87,184,255,0.30),0 0 58px rgba(87,184,255,0.12) !important;
       transform:translateY(-2px);
     }
 
     body.fractured .fracturedBtn{
-      border-color:rgba(255,112,112,0.82);
-      background:
-        radial-gradient(circle at 18% 30%, rgba(255,90,90,0.18), transparent 42%),
-        linear-gradient(180deg, rgba(82,16,32,0.54), rgba(28,6,12,0.94));
-      box-shadow:0 0 28px rgba(255,90,90,0.34),0 0 58px rgba(255,0,0,0.14);
+      border-color:rgba(255,112,112,0.82) !important;
+      box-shadow:0 0 28px rgba(255,90,90,0.34),0 0 58px rgba(255,0,0,0.14) !important;
       transform:translateY(-2px);
     }
 
     body.coherent .coherentBtn{
-      border-color:rgba(134,240,168,0.82);
-      background:
-        radial-gradient(circle at 18% 30%, rgba(134,240,168,0.16), transparent 42%),
-        linear-gradient(180deg, rgba(18,58,44,0.50), rgba(8,24,16,0.94));
-      box-shadow:0 0 28px rgba(134,240,168,0.34),0 0 58px rgba(134,240,168,0.14);
+      border-color:rgba(134,240,168,0.82) !important;
+      box-shadow:0 0 28px rgba(134,240,168,0.34),0 0 58px rgba(134,240,168,0.14) !important;
       transform:translateY(-2px);
     }
 
@@ -373,7 +440,6 @@
       border-radius:8px;
     }
 
-    body.unselected .top,
     body.unselected .softSep,
     body.unselected .archiveLabel,
     body.unselected .archiveContent{
@@ -381,7 +447,7 @@
     }
 
     body.unselected .sheet{
-      min-height:360px;
+      min-height:520px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -393,7 +459,7 @@
     body.silent{background:#000;}
 
     body.silent .sheet{
-      min-height:360px;
+      min-height:520px;
       background:#000;
       border-color:rgba(87,184,255,0.10);
       box-shadow:0 0 34px rgba(87,184,255,0.05);
@@ -475,6 +541,7 @@
       .inner{padding:22px 18px}
       h1{font-size:34px;letter-spacing:2px}
       .sigil{width:116px;height:116px;border-radius:22px}
+      .gateTitle{font-size:30px;letter-spacing:2px}
       p{font-size:15px;line-height:1.68}
       .lawText{font-size:18px}
       .pathSelector{gap:10px;}
@@ -521,10 +588,25 @@
           </div>
 
           <div class="pathSelector hidden" id="pathSelector">
+            <div class="gateTitle">Guardian Chronicle</div>
+            <div class="gateSubtitle">Choose the state you wish to observe.</div>
+
             <div class="pathTitle">Choose State</div>
-            <button type="button" data-mode="silent" class="silentBtn">SILENT</button>
-            <button type="button" data-mode="fractured" class="fracturedBtn">FRACTURED</button>
-            <button type="button" data-mode="coherent" class="coherentBtn">COHERENT</button>
+
+            <div class="pathDoors">
+              <button type="button" data-mode="silent" class="silentBtn">SILENT</button>
+              <button type="button" data-mode="fractured" class="fracturedBtn">FRACTURED</button>
+              <button type="button" data-mode="coherent" class="coherentBtn">COHERENT</button>
+            </div>
+
+            <div class="gateCopy">
+              The Chronicle opens according to the state you choose to observe.
+              Silent reveals absence. Fractured reveals distortion. Coherent reveals the Archive.
+            </div>
+
+            <div class="gateLaw">
+              One wallet. One cube. One Guardian.
+            </div>
           </div>
 
           <div class="archiveContent">
@@ -659,10 +741,6 @@
                 Your cube is your entry. Your reason is your witness.
               </div>
 
-              <!--
-                The Chronicle never verifies wallets directly.
-                Verification happens on leave-record.html.
-              -->
               <a href="leave-record.html" class="returnButton">
                 LEAVE A RECORD
               </a>
@@ -733,6 +811,10 @@
       if (mode !== "unselected") {
         const active = document.querySelector(`[data-mode="${mode}"]`);
         if (active) active.classList.add("active");
+
+        if (mode === "coherent") {
+          pathSelector.classList.add("hidden");
+        }
       }
 
       if (mode === "fractured") {
