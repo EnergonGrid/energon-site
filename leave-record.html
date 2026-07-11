@@ -3,21 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>ENERGON — Leave a Record</title>
+
   <meta
     name="description"
     content="Coherent Guardians may leave a record for the Guardian Chronicle."
   />
+
   <meta name="robots" content="index,follow" />
 
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
   <link
     rel="icon"
     type="image/png"
     sizes="96x96"
     href="/favicon-96x96.png"
   />
+
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
@@ -42,6 +47,7 @@
       margin:0;
       min-height:100vh;
       color:var(--fg);
+
       font-family:
         ui-sans-serif,
         system-ui,
@@ -50,6 +56,7 @@
         Roboto,
         Helvetica,
         Arial;
+
       background:
         radial-gradient(
           circle at 30% 10%,
@@ -57,6 +64,7 @@
           rgba(5,6,11,1) 55%,
           #000 100%
         );
+
       -webkit-font-smoothing:antialiased;
     }
 
@@ -69,12 +77,14 @@
     .sheet{
       border:1px solid var(--stroke);
       border-radius:22px;
+
       background:
         linear-gradient(
           180deg,
           var(--panelA),
           var(--panelB)
         );
+
       box-shadow:0 18px 56px rgba(0,0,0,0.42);
       overflow:hidden;
       backdrop-filter:blur(10px);
@@ -188,6 +198,7 @@
       padding:14px 24px;
       border-radius:16px;
       border:1px solid rgba(87,184,255,0.50);
+
       background:
         radial-gradient(
           circle at 18% 30%,
@@ -199,6 +210,7 @@
           rgba(16,48,108,0.55),
           rgba(6,16,42,0.96)
         );
+
       color:white;
       font-size:12px;
       font-weight:850;
@@ -231,7 +243,9 @@
 
     textarea,
     input{
+      display:block;
       width:100%;
+      max-width:100%;
       border-radius:14px;
       border:1px solid rgba(255,255,255,0.12);
       background:rgba(0,0,0,0.24);
@@ -245,6 +259,13 @@
       min-height:160px;
       resize:vertical;
       line-height:1.6;
+      overflow-wrap:anywhere;
+    }
+
+    textarea::placeholder,
+    input::placeholder{
+      color:rgba(255,255,255,0.48);
+      opacity:1;
     }
 
     label{
@@ -255,6 +276,29 @@
       letter-spacing:1.4px;
       color:rgba(255,255,255,0.65);
       font-weight:850;
+    }
+
+    .recordPrompt{
+      display:block;
+      width:100%;
+      max-width:100%;
+      margin:0 0 16px;
+      padding:0;
+      color:rgba(255,255,255,0.68);
+      font-size:13px;
+      line-height:1.7;
+      white-space:normal;
+      overflow-wrap:anywhere;
+      word-break:normal;
+    }
+
+    .recordPrompt strong{
+      display:block;
+      margin-bottom:7px;
+      color:rgba(255,255,255,0.90);
+      font-size:14px;
+      line-height:1.5;
+      font-weight:750;
     }
 
     .check{
@@ -301,15 +345,18 @@
       padding:20px;
       border-radius:18px;
       border:1px solid rgba(134,240,168,0.30);
+
       background:
         linear-gradient(
           180deg,
           rgba(10,40,24,0.22),
           rgba(0,0,0,0.18)
         );
+
       box-shadow:
         0 0 30px rgba(134,240,168,0.08),
         inset 0 0 24px rgba(255,255,255,0.02);
+
       text-align:left;
     }
 
@@ -356,9 +403,15 @@
     }
 
     .small{
+      display:block;
+      width:100%;
+      max-width:100%;
       color:rgba(255,255,255,0.58);
       font-size:12px;
       line-height:1.6;
+      white-space:normal;
+      overflow-wrap:anywhere;
+      word-break:normal;
     }
 
     @media(max-width:640px){
@@ -392,6 +445,15 @@
       .button{
         width:100%;
       }
+
+      .recordPrompt{
+        font-size:12.5px;
+        line-height:1.65;
+      }
+
+      textarea{
+        min-height:190px;
+      }
     }
   </style>
 </head>
@@ -418,19 +480,24 @@
           </p>
 
           <div class="box securityBox">
-            <div class="statusTitle">Guardian Safety</div>
+            <div class="statusTitle">
+              Guardian Safety
+            </div>
 
             <p class="small center">
-              This page is read-only. It will never ask you to sign
-              a transaction, approve assets, enter a seed phrase,
+              This page will never ask you to sign a blockchain 
+              transaction, approve assets, enter a seed phrase,
               reveal a private key, transfer a cube, or send FLR.
               <br><br>
-              It only reads your public Guardian state.
+              It only reads your public Guardian state and submits
+              the record you choose to preserve.
             </p>
           </div>
 
           <div id="guardianLawBox" class="box">
-            <div class="statusTitle">Guardian Law</div>
+            <div class="statusTitle">
+              Guardian Law
+            </div>
 
             <div class="line">
               <span>0 Cubes</span>
@@ -439,12 +506,16 @@
 
             <div class="line">
               <span>1 Cube</span>
-              <strong class="good">Coherent</strong>
+              <strong class="good">
+                Coherent
+              </strong>
             </div>
 
             <div class="line">
               <span>2+ Cubes</span>
-              <strong class="bad">Fractured</strong>
+              <strong class="bad">
+                Fractured
+              </strong>
             </div>
           </div>
 
@@ -471,7 +542,9 @@
         </div>
 
         <div id="statusBox" class="box hidden">
-          <div class="statusTitle">Guardian Status</div>
+          <div class="statusTitle">
+            Guardian Status
+          </div>
 
           <div class="line">
             <span>Wallet</span>
@@ -572,17 +645,29 @@
             Guardian Record
           </label>
 
+          <div class="recordPrompt">
+            <strong>
+              Record this moment in your own words.
+            </strong>
+
+            Leave a thought, observation, quote, lesson,
+            acknowledgment, or brief account of your journey.
+            This record becomes part of the Guardian Chronicle.
+          </div>
+
           <textarea
             id="recordText"
             maxlength="1000"
             required
-            placeholder="Why did you become a Guardian? What did the Cube mean to you when you entered the Grid?"
+            placeholder="Record your observation, experience, quote, or message for future Guardians."
           ></textarea>
 
           <div class="small">
-            Maximum 1000 characters. Do not include seed phrases,
-            private keys, addresses of others, or personal
-            information you do not want preserved.
+            Maximum 1000 characters. This record is intended to
+            preserve your moment in the Guardian Chronicle.
+            Do not include seed phrases, private keys, addresses
+            of others, or personal information you do not wish
+            to preserve.
           </div>
 
           <label for="guardianName">
@@ -644,6 +729,7 @@
 
             <div class="receiptLine">
               <span>Chronicle Entry</span>
+
               <strong
                 id="receiptEntry"
                 class="receiptEntry"
@@ -654,20 +740,17 @@
 
             <div class="receiptLine">
               <span>Guardian</span>
-              <strong id="receiptGuardian">
-                —
-              </strong>
+              <strong id="receiptGuardian">—</strong>
             </div>
 
             <div class="receiptLine">
               <span>Cube</span>
-              <strong id="receiptCube">
-                #—
-              </strong>
+              <strong id="receiptCube">#—</strong>
             </div>
 
             <div class="receiptLine">
               <span>Wallet</span>
+
               <strong
                 id="receiptWallet"
                 class="good"
@@ -678,13 +761,12 @@
 
             <div class="receiptLine">
               <span>Recorded</span>
-              <strong id="receiptRecorded">
-                —
-              </strong>
+              <strong id="receiptRecorded">—</strong>
             </div>
 
             <div class="receiptLine">
               <span>Status</span>
+
               <strong
                 id="receiptStatus"
                 class="good"
@@ -841,7 +923,8 @@
     }
 
     function formatEntryNumber(id){
-      const cleanId = String(id ?? "").trim();
+      const cleanId =
+        String(id ?? "").trim();
 
       if(!/^\d+$/.test(cleanId)){
         return "#000000";
@@ -877,7 +960,8 @@
         return "UTC timestamp unavailable";
       }
 
-      const date = new Date(value);
+      const date =
+        new Date(value);
 
       if(Number.isNaN(date.getTime())){
         return "UTC timestamp unavailable";
@@ -887,16 +971,24 @@
         date.getUTCFullYear();
 
       const month =
-        String(date.getUTCMonth() + 1).padStart(2, "0");
+        String(
+          date.getUTCMonth() + 1
+        ).padStart(2, "0");
 
       const day =
-        String(date.getUTCDate()).padStart(2, "0");
+        String(
+          date.getUTCDate()
+        ).padStart(2, "0");
 
       const hours =
-        String(date.getUTCHours()).padStart(2, "0");
+        String(
+          date.getUTCHours()
+        ).padStart(2, "0");
 
       const minutes =
-        String(date.getUTCMinutes()).padStart(2, "0");
+        String(
+          date.getUTCMinutes()
+        ).padStart(2, "0");
 
       return (
         year +
@@ -946,11 +1038,14 @@
 
     async function fetchJsonWithGatewayFallback(url){
       if(!url){
-        throw new Error("Metadata URL missing.");
+        throw new Error(
+          "Metadata URL missing."
+        );
       }
 
       const gateways = [
         url,
+
         url.includes("https://ipfs.io/ipfs/")
           ? url.replace(
               "https://ipfs.io/ipfs/",
@@ -963,12 +1058,13 @@
 
       for(const gatewayUrl of gateways){
         try{
-          const res = await fetch(
-            gatewayUrl,
-            {
-              cache:"force-cache"
-            }
-          );
+          const res =
+            await fetch(
+              gatewayUrl,
+              {
+                cache:"force-cache"
+              }
+            );
 
           if(!res.ok){
             throw new Error(
@@ -1037,7 +1133,9 @@
           ipfsToHttps(uri);
 
         const metadata =
-          await fetchJsonWithGatewayFallback(url);
+          await fetchJsonWithGatewayFallback(
+            url
+          );
 
         const rarity =
           findRarity(metadata);
@@ -1063,12 +1161,23 @@
     }
 
     function resetReceipt(){
-      receiptEntry.textContent = "#000000";
-      receiptGuardian.textContent = "—";
-      receiptCube.textContent = "#—";
-      receiptWallet.textContent = "Verified";
-      receiptRecorded.textContent = "—";
-      receiptStatus.textContent = "Submitted";
+      receiptEntry.textContent =
+        "#000000";
+
+      receiptGuardian.textContent =
+        "—";
+
+      receiptCube.textContent =
+        "#—";
+
+      receiptWallet.textContent =
+        "Verified";
+
+      receiptRecorded.textContent =
+        "—";
+
+      receiptStatus.textContent =
+        "Submitted";
     }
 
     function resetAccess(){
@@ -1101,6 +1210,7 @@
       try{
         await window.ethereum.request({
           method:"wallet_switchEthereumChain",
+
           params:[
             {
               chainId:FLARE_CHAIN_ID_HEX
@@ -1111,18 +1221,22 @@
         if(err.code === 4902){
           await window.ethereum.request({
             method:"wallet_addEthereumChain",
+
             params:[
               {
                 chainId:FLARE_CHAIN_ID_HEX,
                 chainName:"Flare Mainnet",
+
                 nativeCurrency:{
                   name:"Flare",
                   symbol:"FLR",
                   decimals:18
                 },
+
                 rpcUrls:[
                   "https://flare-api.flare.network/ext/C/rpc"
                 ],
+
                 blockExplorerUrls:[
                   "https://flarescan.com"
                 ]
@@ -1252,6 +1366,7 @@
         );
       }finally{
         connectBtn.disabled = false;
+
         connectBtn.textContent =
           "Reconnect Wallet";
       }
@@ -1300,6 +1415,7 @@
       }
 
       verifyCubeBtn.disabled = true;
+
       verifyCubeBtn.textContent =
         "Verifying...";
 
@@ -1395,6 +1511,7 @@
         recordForm.classList.add("hidden");
       }finally{
         verifyCubeBtn.disabled = false;
+
         verifyCubeBtn.textContent =
           "Verify Cube";
       }
@@ -1404,7 +1521,8 @@
       text,
       delay = 900
     ){
-      verifyLine.textContent = text;
+      verifyLine.textContent =
+        text;
 
       await new Promise((resolve) => {
         setTimeout(resolve, delay);
@@ -1413,6 +1531,7 @@
 
     recordForm.addEventListener(
       "submit",
+
       async (event) => {
         event.preventDefault();
 
@@ -1506,10 +1625,12 @@
               CHRONICLE_API_URL,
               {
                 method:"POST",
+
                 headers:{
                   "content-type":
                     "application/json"
                 },
+
                 body:JSON.stringify({
                   wallet:connectedWallet,
                   cubeId:verifiedCubeId,
