@@ -1,52 +1,54 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <title>ENERGON — Leave a Record</title>
 
-  <meta
-    name="description"
-    content="Coherent Guardians may leave a record for the Guardian Chronicle."
-  />
+  <meta name="description" content="Coherent Guardians may leave a record for the Guardian Chronicle." />
 
   <meta name="robots" content="index,follow" />
+
+  <link rel="canonical" href="https://guardian.energon.app/leave-record.html" />
 
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-  <link
-    rel="icon"
-    type="image/png"
-    sizes="96x96"
-    href="/favicon-96x96.png"
-  />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
 
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <meta property="og:title" content="ENERGON — Leave a Record" />
+  <meta property="og:description" content="Coherent Guardians may leave a record for the Guardian Chronicle." />
+  <meta property="og:url" content="https://guardian.energon.app/leave-record.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://red-secret-dragonfly-529.mypinata.cloud/ipfs/bafybeiccfdp4aez6gqva5yx5cmixc7dugqxl6eee5nhb54sdhpnidpmt7u" />
+  <meta name="twitter:card" content="summary" />
 
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
 
   <style>
-    :root{
-      --fg:rgba(255,255,255,0.92);
-      --muted:rgba(255,255,255,0.66);
-      --blue:#57b8ff;
-      --green:#86f0a8;
-      --red:#ff7070;
-      --stroke:rgba(255,255,255,0.10);
-      --panelA:rgba(12,18,36,0.78);
-      --panelB:rgba(5,8,18,0.88);
+    :root {
+      --fg: rgba(255, 255, 255, 0.92);
+      --muted: rgba(255, 255, 255, 0.66);
+      --blue: #57b8ff;
+      --green: #86f0a8;
+      --red: #ff7070;
+      --stroke: rgba(255, 255, 255, 0.10);
+      --panelA: rgba(12, 18, 36, 0.78);
+      --panelB: rgba(5, 8, 18, 0.88);
     }
 
-    *{
-      box-sizing:border-box;
+    * {
+      box-sizing: border-box;
     }
 
-    body{
-      margin:0;
-      min-height:100vh;
-      color:var(--fg);
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--fg);
 
       font-family:
         ui-sans-serif,
@@ -58,401 +60,391 @@
         Arial;
 
       background:
-        radial-gradient(
-          circle at 30% 10%,
-          rgba(27,42,90,0.95) 0%,
-          rgba(5,6,11,1) 55%,
-          #000 100%
-        );
+        radial-gradient(circle at 30% 10%,
+          rgba(27, 42, 90, 0.95) 0%,
+          rgba(5, 6, 11, 1) 55%,
+          #000 100%);
 
-      -webkit-font-smoothing:antialiased;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .wrap{
-      max-width:880px;
-      margin:0 auto;
-      padding:54px 16px 80px;
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 54px 16px 80px;
     }
 
-    .sheet{
-      border:1px solid var(--stroke);
-      border-radius:22px;
+    .sheet {
+      border: 1px solid var(--stroke);
+      border-radius: 22px;
 
       background:
-        linear-gradient(
-          180deg,
+        linear-gradient(180deg,
           var(--panelA),
-          var(--panelB)
-        );
+          var(--panelB));
 
-      box-shadow:0 18px 56px rgba(0,0,0,0.42);
-      overflow:hidden;
-      backdrop-filter:blur(10px);
+      box-shadow: 0 18px 56px rgba(0, 0, 0, 0.42);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
     }
 
-    .inner{
-      padding:28px;
+    .inner {
+      padding: 28px;
     }
 
-    .top{
-      text-align:center;
-      margin-bottom:24px;
+    .top {
+      text-align: center;
+      margin-bottom: 24px;
     }
 
-    .sigil{
-      width:120px;
-      height:120px;
-      object-fit:cover;
-      border-radius:24px;
-      border:1px solid rgba(255,255,255,0.14);
-      box-shadow:0 18px 42px rgba(0,0,0,0.34);
-      margin-bottom:14px;
+    .sigil {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
+      margin-bottom: 14px;
     }
 
-    h1{
-      margin:0;
-      font-size:38px;
-      letter-spacing:3px;
-      text-transform:uppercase;
+    h1 {
+      margin: 0;
+      font-size: 38px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
     }
 
-    h2{
-      margin:8px 0 0;
-      font-size:13px;
-      color:var(--muted);
-      letter-spacing:1.8px;
-      text-transform:uppercase;
+    h2 {
+      margin: 8px 0 0;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
     }
 
-    p{
-      line-height:1.72;
-      color:rgba(255,255,255,0.82);
-      font-size:15.5px;
+    p {
+      line-height: 1.72;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 15.5px;
     }
 
-    .box{
-      margin:18px 0;
-      padding:18px;
-      border-radius:16px;
-      border:1px solid rgba(87,184,255,0.18);
-      background:rgba(255,255,255,0.045);
+    .box {
+      margin: 18px 0;
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(87, 184, 255, 0.18);
+      background: rgba(255, 255, 255, 0.045);
     }
 
-    .securityBox{
-      border-color:rgba(134,240,168,0.28);
-      background:rgba(10,40,24,0.18);
+    .securityBox {
+      border-color: rgba(134, 240, 168, 0.28);
+      background: rgba(10, 40, 24, 0.18);
     }
 
-    .accessBox{
-      border-color:rgba(134,240,168,0.34);
-      box-shadow:0 0 28px rgba(134,240,168,0.08);
+    .accessBox {
+      border-color: rgba(134, 240, 168, 0.34);
+      box-shadow: 0 0 28px rgba(134, 240, 168, 0.08);
     }
 
-    .statusTitle{
-      font-size:12px;
-      letter-spacing:1.8px;
-      text-transform:uppercase;
-      color:rgba(255,255,255,0.58);
-      font-weight:850;
-      margin-bottom:12px;
+    .statusTitle {
+      font-size: 12px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.58);
+      font-weight: 850;
+      margin-bottom: 12px;
     }
 
-    .line{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      padding:8px 0;
-      border-bottom:1px solid rgba(255,255,255,0.07);
-      font-size:14px;
+    .line {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      font-size: 14px;
     }
 
-    .line:last-child{
-      border-bottom:0;
+    .line:last-child {
+      border-bottom: 0;
     }
 
-    .line span:first-child{
-      color:rgba(255,255,255,0.55);
-      text-transform:uppercase;
-      letter-spacing:1px;
-      font-size:11px;
-      font-weight:850;
+    .line span:first-child {
+      color: rgba(255, 255, 255, 0.55);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 11px;
+      font-weight: 850;
     }
 
-    .good{
-      color:var(--green);
+    .good {
+      color: var(--green);
     }
 
-    .bad{
-      color:var(--red);
+    .bad {
+      color: var(--red);
     }
 
-    .blue{
-      color:var(--blue);
+    .blue {
+      color: var(--blue);
     }
 
     button,
-    .button{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:14px 24px;
-      border-radius:16px;
-      border:1px solid rgba(87,184,255,0.50);
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(87, 184, 255, 0.50);
 
       background:
-        radial-gradient(
-          circle at 18% 30%,
-          rgba(87,184,255,0.16),
-          transparent 42%
-        ),
-        linear-gradient(
-          180deg,
-          rgba(16,48,108,0.55),
-          rgba(6,16,42,0.96)
-        );
+        radial-gradient(circle at 18% 30%,
+          rgba(87, 184, 255, 0.16),
+          transparent 42%),
+        linear-gradient(180deg,
+          rgba(16, 48, 108, 0.55),
+          rgba(6, 16, 42, 0.96));
 
-      color:white;
-      font-size:12px;
-      font-weight:850;
-      letter-spacing:1.6px;
-      text-transform:uppercase;
-      cursor:pointer;
-      text-decoration:none;
-      box-shadow:0 0 24px rgba(87,184,255,0.14);
+      color: white;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 0 24px rgba(87, 184, 255, 0.14);
     }
 
     button:hover,
-    .button:hover{
-      transform:translateY(-1px);
-      box-shadow:0 0 30px rgba(87,184,255,0.28);
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 30px rgba(87, 184, 255, 0.28);
     }
 
-    button:disabled{
-      opacity:0.45;
-      cursor:not-allowed;
-      transform:none;
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
     }
 
-    .actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      justify-content:center;
-      margin:22px 0;
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin: 22px 0;
     }
 
     textarea,
-    input{
-      display:block;
-      width:100%;
-      max-width:100%;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,0.12);
-      background:rgba(0,0,0,0.24);
-      color:white;
-      padding:14px;
-      font:inherit;
-      outline:none;
+    input {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.24);
+      color: white;
+      padding: 14px;
+      font: inherit;
+      outline: none;
     }
 
-    textarea{
-      min-height:160px;
-      resize:vertical;
-      line-height:1.6;
-      overflow-wrap:anywhere;
+    textarea {
+      min-height: 160px;
+      resize: vertical;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
     }
 
     textarea::placeholder,
-    input::placeholder{
-      color:rgba(255,255,255,0.48);
-      opacity:1;
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.48);
+      opacity: 1;
     }
 
-    label{
-      display:block;
-      margin:16px 0 8px;
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:1.4px;
-      color:rgba(255,255,255,0.65);
-      font-weight:850;
+    label {
+      display: block;
+      margin: 16px 0 8px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: rgba(255, 255, 255, 0.65);
+      font-weight: 850;
     }
 
-    .recordPrompt{
-      display:block;
-      width:100%;
-      max-width:100%;
-      margin:0 0 16px;
-      padding:0;
-      color:rgba(255,255,255,0.68);
-      font-size:13px;
-      line-height:1.7;
-      white-space:normal;
-      overflow-wrap:anywhere;
-      word-break:normal;
+    .recordPrompt {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 0 16px;
+      padding: 0;
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 13px;
+      line-height: 1.7;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: normal;
     }
 
-    .recordPrompt strong{
-      display:block;
-      margin-bottom:7px;
-      color:rgba(255,255,255,0.90);
-      font-size:14px;
-      line-height:1.5;
-      font-weight:750;
+    .recordPrompt strong {
+      display: block;
+      margin-bottom: 7px;
+      color: rgba(255, 255, 255, 0.90);
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 750;
     }
 
-    .check{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      margin:14px 0;
-      color:rgba(255,255,255,0.78);
-      font-size:14px;
-      line-height:1.5;
+    .check {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin: 14px 0;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 14px;
+      line-height: 1.5;
     }
 
-    .check input{
-      width:auto;
-      margin-top:3px;
+    .check input {
+      width: auto;
+      margin-top: 3px;
     }
 
-    .hidden{
-      display:none;
+    .hidden {
+      display: none;
     }
 
-    .center{
-      text-align:center;
+    .center {
+      text-align: center;
     }
 
-    .recorded{
-      text-align:center;
-      padding:18px 0;
+    .recorded {
+      text-align: center;
+      padding: 18px 0;
     }
 
-    .recordedTitle{
-      font-size:28px;
-      font-weight:900;
-      letter-spacing:2.4px;
-      text-transform:uppercase;
-      color:var(--green);
-      text-shadow:0 0 22px rgba(134,240,168,0.25);
-      margin-bottom:12px;
+    .recordedTitle {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: var(--green);
+      text-shadow: 0 0 22px rgba(134, 240, 168, 0.25);
+      margin-bottom: 12px;
     }
 
-    .receiptBox{
-      max-width:680px;
-      margin:24px auto;
-      padding:20px;
-      border-radius:18px;
-      border:1px solid rgba(134,240,168,0.30);
+    .receiptBox {
+      max-width: 680px;
+      margin: 24px auto;
+      padding: 20px;
+      border-radius: 18px;
+      border: 1px solid rgba(134, 240, 168, 0.30);
 
       background:
-        linear-gradient(
-          180deg,
-          rgba(10,40,24,0.22),
-          rgba(0,0,0,0.18)
-        );
+        linear-gradient(180deg,
+          rgba(10, 40, 24, 0.22),
+          rgba(0, 0, 0, 0.18));
 
       box-shadow:
-        0 0 30px rgba(134,240,168,0.08),
-        inset 0 0 24px rgba(255,255,255,0.02);
+        0 0 30px rgba(134, 240, 168, 0.08),
+        inset 0 0 24px rgba(255, 255, 255, 0.02);
 
-      text-align:left;
+      text-align: left;
     }
 
-    .receiptTitle{
-      margin-bottom:14px;
-      color:rgba(255,255,255,0.62);
-      font-size:12px;
-      font-weight:850;
-      letter-spacing:1.8px;
-      text-transform:uppercase;
+    .receiptTitle {
+      margin-bottom: 14px;
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
     }
 
-    .receiptLine{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:18px;
-      padding:10px 0;
-      border-bottom:1px solid rgba(255,255,255,0.07);
-      font-size:14px;
-      line-height:1.5;
+    .receiptLine {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      font-size: 14px;
+      line-height: 1.5;
     }
 
-    .receiptLine:last-child{
-      border-bottom:0;
+    .receiptLine:last-child {
+      border-bottom: 0;
     }
 
-    .receiptLine span:first-child{
-      flex:0 0 auto;
-      color:rgba(255,255,255,0.52);
-      font-size:11px;
-      font-weight:850;
-      letter-spacing:1px;
-      text-transform:uppercase;
+    .receiptLine span:first-child {
+      flex: 0 0 auto;
+      color: rgba(255, 255, 255, 0.52);
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
-    .receiptLine strong{
-      text-align:right;
-      overflow-wrap:anywhere;
+    .receiptLine strong {
+      text-align: right;
+      overflow-wrap: anywhere;
     }
 
-    .receiptEntry{
-      color:var(--green);
+    .receiptEntry {
+      color: var(--green);
     }
 
-    .small{
-      display:block;
-      width:100%;
-      max-width:100%;
-      color:rgba(255,255,255,0.58);
-      font-size:12px;
-      line-height:1.6;
-      white-space:normal;
-      overflow-wrap:anywhere;
-      word-break:normal;
+    .small {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: normal;
     }
 
-    @media(max-width:640px){
-      .wrap{
-        padding:34px 12px 56px;
+    @media(max-width:640px) {
+      .wrap {
+        padding: 34px 12px 56px;
       }
 
-      .inner{
-        padding:22px 16px;
+      .inner {
+        padding: 22px 16px;
       }
 
-      h1{
-        font-size:30px;
+      h1 {
+        font-size: 30px;
       }
 
       .line,
-      .receiptLine{
-        flex-direction:column;
-        gap:4px;
+      .receiptLine {
+        flex-direction: column;
+        gap: 4px;
       }
 
-      .receiptLine strong{
-        text-align:left;
+      .receiptLine strong {
+        text-align: left;
       }
 
-      .actions{
-        flex-direction:column;
+      .actions {
+        flex-direction: column;
       }
 
       button,
-      .button{
-        width:100%;
+      .button {
+        width: 100%;
       }
 
-      .recordPrompt{
-        font-size:12.5px;
-        line-height:1.65;
+      .recordPrompt {
+        font-size: 12.5px;
+        line-height: 1.65;
       }
 
-      textarea{
-        min-height:190px;
+      textarea {
+        min-height: 190px;
       }
     }
   </style>
@@ -464,11 +456,9 @@
       <div class="inner">
 
         <div class="top">
-          <img
-            class="sigil"
+          <img class="sigil"
             src="https://red-secret-dragonfly-529.mypinata.cloud/ipfs/bafybeiccfdp4aez6gqva5yx5cmixc7dugqxl6eee5nhb54sdhpnidpmt7u"
-            alt="Energon Sigil"
-          />
+            alt="Energon Sigil" />
 
           <h1>ENERGON</h1>
           <h2>Leave a Guardian Record</h2>
@@ -485,7 +475,7 @@
             </div>
 
             <p class="small center">
-              This page will never ask you to sign a blockchain 
+              This page will never ask you to sign a blockchain
               transaction, approve assets, enter a seed phrase,
               reveal a private key, transfer a cube, or send FLR.
               <br><br>
@@ -530,12 +520,7 @@
               Connect Wallet
             </button>
 
-            <a
-              class="button"
-              href="https://energon-dapp.vercel.app/observer"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a class="button" href="https://observer.energon.app" target="_blank" rel="noreferrer">
               Enter Observer
             </a>
           </div>
@@ -592,12 +577,7 @@
             EnergonCube Number
           </label>
 
-          <input
-            id="cubeNumber"
-            inputmode="numeric"
-            pattern="[0-9]*"
-            placeholder="Enter your cube number"
-          />
+          <input id="cubeNumber" inputmode="numeric" pattern="[0-9]*" placeholder="Enter your cube number" />
 
           <div class="small">
             Enter the EnergonCube number held by this wallet.
@@ -611,18 +591,12 @@
             </button>
           </div>
 
-          <p
-            id="cubeVerifyMessage"
-            class="center small"
-          >
+          <p id="cubeVerifyMessage" class="center small">
             Access pending.
           </p>
         </div>
 
-        <div
-          id="accessBox"
-          class="box accessBox hidden center"
-        >
+        <div id="accessBox" class="box accessBox hidden center">
           <div class="statusTitle">
             Archive Access Granted
           </div>
@@ -655,12 +629,8 @@
             This record becomes part of the Guardian Chronicle.
           </div>
 
-          <textarea
-            id="recordText"
-            maxlength="1000"
-            required
-            placeholder="Record your observation, experience, quote, or message for future Guardians."
-          ></textarea>
+          <textarea id="recordText" maxlength="1000" required
+            placeholder="Record your observation, experience, quote, or message for future Guardians."></textarea>
 
           <div class="small">
             Maximum 1000 characters. This record is intended to
@@ -674,17 +644,10 @@
             Guardian Name or Alias Optional
           </label>
 
-          <input
-            id="guardianName"
-            maxlength="80"
-            placeholder="Guardian alias optional"
-          />
+          <input id="guardianName" maxlength="80" placeholder="Guardian alias optional" />
 
           <div class="check">
-            <input
-              id="publicPermission"
-              type="checkbox"
-            />
+            <input id="publicPermission" type="checkbox" />
 
             <span>
               I allow this record to be reviewed for possible
@@ -693,10 +656,7 @@
           </div>
 
           <div class="check">
-            <input
-              id="bookPermission"
-              type="checkbox"
-            />
+            <input id="bookPermission" type="checkbox" />
 
             <span>
               I allow excerpts from this record to be considered
@@ -730,10 +690,7 @@
             <div class="receiptLine">
               <span>Chronicle Entry</span>
 
-              <strong
-                id="receiptEntry"
-                class="receiptEntry"
-              >
+              <strong id="receiptEntry" class="receiptEntry">
                 #000000
               </strong>
             </div>
@@ -751,10 +708,7 @@
             <div class="receiptLine">
               <span>Wallet</span>
 
-              <strong
-                id="receiptWallet"
-                class="good"
-              >
+              <strong id="receiptWallet" class="good">
                 Verified
               </strong>
             </div>
@@ -767,10 +721,7 @@
             <div class="receiptLine">
               <span>Status</span>
 
-              <strong
-                id="receiptStatus"
-                class="good"
-              >
+              <strong id="receiptStatus" class="good">
                 Submitted
               </strong>
             </div>
@@ -785,30 +736,15 @@
           </p>
 
           <div class="actions">
-            <a
-              id="xButton"
-              class="button"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a id="xButton" class="button" target="_blank" rel="noreferrer">
               Share on X
             </a>
 
-            <a
-              id="instagramButton"
-              class="button"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a id="instagramButton" class="button" target="_blank" rel="noreferrer">
               Open Instagram
             </a>
 
-            <a
-              class="button"
-              href="https://energon-dapp.vercel.app/observer"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a class="button" href="https://observer.energon.app" target="_blank" rel="noreferrer">
               Enter Observer
             </a>
           </div>
@@ -825,7 +761,7 @@
       "0x30e1076bDf2B123B54486C2721125388af2d2061";
 
     const CHRONICLE_API_URL =
-      "https://energon-dapp.vercel.app/api/guardian-chronicle";
+      "https://guardian.energon.app/api/guardian-chronicle";
 
     const CUBE_ABI = [
       "function balanceOf(address owner) view returns (uint256)",
@@ -909,37 +845,37 @@
     const receiptStatus =
       document.getElementById("receiptStatus");
 
-    function shortAddr(addr){
+    function shortAddr(addr) {
       return addr
-        ? addr.slice(0,6) + "..." + addr.slice(-4)
+        ? addr.slice(0, 6) + "..." + addr.slice(-4)
         : "—";
     }
 
-    function sameAddr(a,b){
+    function sameAddr(a, b) {
       return (
         String(a || "").toLowerCase() ===
         String(b || "").toLowerCase()
       );
     }
 
-    function formatEntryNumber(id){
+    function formatEntryNumber(id) {
       const cleanId =
         String(id ?? "").trim();
 
-      if(!/^\d+$/.test(cleanId)){
+      if (!/^\d+$/.test(cleanId)) {
         return "#000000";
       }
 
       return "#" + cleanId.padStart(6, "0");
     }
 
-    function formatStatus(status){
+    function formatStatus(status) {
       const cleanStatus =
         String(status || "submitted")
           .trim()
           .replace(/[_-]+/g, " ");
 
-      if(!cleanStatus){
+      if (!cleanStatus) {
         return "Submitted";
       }
 
@@ -955,15 +891,15 @@
         .join(" ");
     }
 
-    function formatUtcTimestamp(value){
-      if(!value){
+    function formatUtcTimestamp(value) {
+      if (!value) {
         return "UTC timestamp unavailable";
       }
 
       const date =
         new Date(value);
 
-      if(Number.isNaN(date.getTime())){
+      if (Number.isNaN(date.getTime())) {
         return "UTC timestamp unavailable";
       }
 
@@ -1004,29 +940,29 @@
       );
     }
 
-    function ipfsToHttps(uri){
-      if(!uri){
+    function ipfsToHttps(uri) {
+      if (!uri) {
         return "";
       }
 
-      if(uri.startsWith("ipfs://")){
+      if (uri.startsWith("ipfs://")) {
         return (
           "https://ipfs.io/ipfs/" +
           uri.replace("ipfs://", "")
         );
       }
 
-      if(uri.startsWith("/")){
+      if (uri.startsWith("/")) {
         return (
-          "https://energon-dapp.vercel.app" +
+          "https://mint.energon.app" +
           uri
         );
       }
 
-      if(
+      if (
         uri.startsWith("bafy") ||
         uri.startsWith("Qm")
-      ){
+      ) {
         return (
           "https://ipfs.io/ipfs/" +
           uri
@@ -1036,8 +972,8 @@
       return uri;
     }
 
-    async function fetchJsonWithGatewayFallback(url){
-      if(!url){
+    async function fetchJsonWithGatewayFallback(url) {
+      if (!url) {
         throw new Error(
           "Metadata URL missing."
         );
@@ -1048,32 +984,32 @@
 
         url.includes("https://ipfs.io/ipfs/")
           ? url.replace(
-              "https://ipfs.io/ipfs/",
-              "https://cloudflare-ipfs.com/ipfs/"
-            )
+            "https://ipfs.io/ipfs/",
+            "https://cloudflare-ipfs.com/ipfs/"
+          )
           : null
       ].filter(Boolean);
 
       let lastErr = null;
 
-      for(const gatewayUrl of gateways){
-        try{
+      for (const gatewayUrl of gateways) {
+        try {
           const res =
             await fetch(
               gatewayUrl,
               {
-                cache:"force-cache"
+                cache: "force-cache"
               }
             );
 
-          if(!res.ok){
+          if (!res.ok) {
             throw new Error(
               "Metadata fetch failed."
             );
           }
 
           return await res.json();
-        }catch(err){
+        } catch (err) {
           lastErr = err;
         }
       }
@@ -1084,7 +1020,7 @@
       );
     }
 
-    function findRarity(metadata){
+    function findRarity(metadata) {
       const attrs =
         Array.isArray(metadata?.attributes)
           ? metadata.attributes
@@ -1092,7 +1028,7 @@
 
       const map = {};
 
-      for(const attr of attrs){
+      for (const attr of attrs) {
         const key =
           attr?.trait_type ??
           attr?.traitType ??
@@ -1101,7 +1037,7 @@
         const value =
           attr?.value;
 
-        if(key){
+        if (key) {
           map[String(key)] = value;
         }
       }
@@ -1114,8 +1050,8 @@
       );
     }
 
-    async function getCubeLabel(cubeNumber){
-      if(cubeNumber === "1"){
+    async function getCubeLabel(cubeNumber) {
+      if (cubeNumber === "1") {
         return (
           "#" +
           cubeNumber +
@@ -1123,7 +1059,7 @@
         );
       }
 
-      try{
+      try {
         const uri =
           await cubeContract.tokenURI(
             BigInt(cubeNumber)
@@ -1146,7 +1082,7 @@
           " — Rarity: " +
           rarity
         );
-      }catch(err){
+      } catch (err) {
         console.error(
           "Rarity lookup failed:",
           err
@@ -1160,7 +1096,7 @@
       }
     }
 
-    function resetReceipt(){
+    function resetReceipt() {
       receiptEntry.textContent =
         "#000000";
 
@@ -1180,7 +1116,7 @@
         "Submitted";
     }
 
-    function resetAccess(){
+    function resetAccess() {
       verifiedCubeId = "";
       cubeVerified = false;
 
@@ -1206,51 +1142,51 @@
       resetReceipt();
     }
 
-    async function switchToFlare(){
-      try{
+    async function switchToFlare() {
+      try {
         await window.ethereum.request({
-          method:"wallet_switchEthereumChain",
+          method: "wallet_switchEthereumChain",
 
-          params:[
+          params: [
             {
-              chainId:FLARE_CHAIN_ID_HEX
+              chainId: FLARE_CHAIN_ID_HEX
             }
           ]
         });
-      }catch(err){
-        if(err.code === 4902){
+      } catch (err) {
+        if (err.code === 4902) {
           await window.ethereum.request({
-            method:"wallet_addEthereumChain",
+            method: "wallet_addEthereumChain",
 
-            params:[
+            params: [
               {
-                chainId:FLARE_CHAIN_ID_HEX,
-                chainName:"Flare Mainnet",
+                chainId: FLARE_CHAIN_ID_HEX,
+                chainName: "Flare Mainnet",
 
-                nativeCurrency:{
-                  name:"Flare",
-                  symbol:"FLR",
-                  decimals:18
+                nativeCurrency: {
+                  name: "Flare",
+                  symbol: "FLR",
+                  decimals: 18
                 },
 
-                rpcUrls:[
+                rpcUrls: [
                   "https://flare-api.flare.network/ext/C/rpc"
                 ],
 
-                blockExplorerUrls:[
+                blockExplorerUrls: [
                   "https://flarescan.com"
                 ]
               }
             ]
           });
-        }else{
+        } else {
           throw err;
         }
       }
     }
 
-    async function connectWallet(){
-      if(!window.ethereum){
+    async function connectWallet() {
+      if (!window.ethereum) {
         alert(
           "No wallet detected. Open this page in Bifrost, MetaMask, or another Web3 wallet browser."
         );
@@ -1274,18 +1210,18 @@
 
       resetReceipt();
 
-      try{
+      try {
         await switchToFlare();
 
         const accounts =
           await window.ethereum.request({
-            method:"eth_requestAccounts"
+            method: "eth_requestAccounts"
           });
 
-        if(
+        if (
           !Array.isArray(accounts) ||
           !accounts[0]
-        ){
+        ) {
           throw new Error(
             "No wallet account returned."
           );
@@ -1319,7 +1255,7 @@
 
         statusBox.classList.remove("hidden");
 
-        if(cubeBalance === 1n){
+        if (cubeBalance === 1n) {
           isCoherent = true;
 
           stateLine.textContent =
@@ -1332,7 +1268,7 @@
 
           blockedBox.classList.add("hidden");
           cubeVerifyBox.classList.remove("hidden");
-        }else{
+        } else {
           isCoherent = false;
 
           stateLine.textContent =
@@ -1357,14 +1293,14 @@
           cubeVerifyBox.classList.add("hidden");
           blockedBox.classList.remove("hidden");
         }
-      }catch(err){
+      } catch (err) {
         console.error(err);
 
         alert(
           err?.message ||
           "Wallet verification failed."
         );
-      }finally{
+      } finally {
         connectBtn.disabled = false;
 
         connectBtn.textContent =
@@ -1372,12 +1308,12 @@
       }
     }
 
-    async function verifyCubeNumber(){
-      if(
+    async function verifyCubeNumber() {
+      if (
         !isCoherent ||
         cubeBalance !== 1n ||
         !cubeContract
-      ){
+      ) {
         alert(
           "Connect a coherent Guardian wallet first."
         );
@@ -1391,7 +1327,7 @@
           .value
           .trim();
 
-      if(!/^[0-9]+$/.test(cubeNumber)){
+      if (!/^[0-9]+$/.test(cubeNumber)) {
         alert(
           "Enter your EnergonCube number."
         );
@@ -1402,11 +1338,11 @@
       const cubeNum =
         Number(cubeNumber);
 
-      if(
+      if (
         !Number.isSafeInteger(cubeNum) ||
         cubeNum < 1 ||
         cubeNum > 1000000
-      ){
+      ) {
         alert(
           "Enter a valid EnergonCube number between 1 and 1000000."
         );
@@ -1425,18 +1361,18 @@
       cubeVerifyMessage.className =
         "center small blue";
 
-      try{
+      try {
         const owner =
           await cubeContract.ownerOf(
             BigInt(cubeNumber)
           );
 
-        if(
+        if (
           !sameAddr(
             owner,
             connectedWallet
           )
-        ){
+        ) {
           cubeVerified = false;
           verifiedCubeId = "";
 
@@ -1486,7 +1422,7 @@
         setTimeout(() => {
           recordForm.classList.remove("hidden");
         }, 600);
-      }catch(err){
+      } catch (err) {
         console.error(err);
 
         cubeVerified = false;
@@ -1509,7 +1445,7 @@
 
         accessBox.classList.add("hidden");
         recordForm.classList.add("hidden");
-      }finally{
+      } finally {
         verifyCubeBtn.disabled = false;
 
         verifyCubeBtn.textContent =
@@ -1520,7 +1456,7 @@
     async function waitLine(
       text,
       delay = 900
-    ){
+    ) {
       verifyLine.textContent =
         text;
 
@@ -1535,10 +1471,10 @@
       async (event) => {
         event.preventDefault();
 
-        if(
+        if (
           !isCoherent ||
           cubeBalance !== 1n
-        ){
+        ) {
           alert(
             "Guardian Record blocked. Wallet must be coherent."
           );
@@ -1549,10 +1485,10 @@
           return;
         }
 
-        if(
+        if (
           !cubeVerified ||
           !verifiedCubeId
-        ){
+        ) {
           alert(
             "Verify your EnergonCube number first."
           );
@@ -1586,7 +1522,7 @@
             .getElementById("bookPermission")
             .checked;
 
-        if(!recordText){
+        if (!recordText) {
           alert(
             "Write your Guardian Record first."
           );
@@ -1619,21 +1555,21 @@
           "RECORDING OBSERVATION..."
         );
 
-        try{
+        try {
           const response =
             await fetch(
               CHRONICLE_API_URL,
               {
-                method:"POST",
+                method: "POST",
 
-                headers:{
+                headers: {
                   "content-type":
                     "application/json"
                 },
 
-                body:JSON.stringify({
-                  wallet:connectedWallet,
-                  cubeId:verifiedCubeId,
+                body: JSON.stringify({
+                  wallet: connectedWallet,
+                  cubeId: verifiedCubeId,
                   guardianName,
                   recordText,
                   publicPermission,
@@ -1645,10 +1581,10 @@
           const result =
             await response.json();
 
-          if(
+          if (
             !response.ok ||
             !result.ok
-          ){
+          ) {
             throw new Error(
               result.error ||
               "Guardian record could not be saved."
@@ -1658,16 +1594,16 @@
           const savedRecord =
             result.record;
 
-          if(!savedRecord){
+          if (!savedRecord) {
             throw new Error(
               "The saved Guardian Record was not returned."
             );
           }
 
-          if(
+          if (
             savedRecord.id === undefined ||
             !savedRecord.created_at
-          ){
+          ) {
             throw new Error(
               "The Guardian Record receipt is missing its entry number or timestamp."
             );
@@ -1744,14 +1680,14 @@
           document
             .getElementById("xButton")
             .href =
-              "https://twitter.com/intent/tweet?text=" +
-              shareText;
+            "https://twitter.com/intent/tweet?text=" +
+            shareText;
 
           document
             .getElementById("instagramButton")
             .href =
-              "https://www.instagram.com/energongrid/";
-        }catch(err){
+            "https://www.instagram.com/energongrid/";
+        } catch (err) {
           console.error(err);
 
           verifyBox.classList.add("hidden");
@@ -1778,4 +1714,5 @@
     );
   </script>
 </body>
+
 </html>

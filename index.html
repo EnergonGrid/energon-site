@@ -3,28 +3,42 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>ENERGON</title>
+
   <meta
     name="description"
     content="Energon is a live deterministic protocol on Flare. Public minting is open. Coherent Guardian state requires exactly one Energon Cube."
   />
+
   <meta name="robots" content="index,follow" />
 
+  <link rel="canonical" href="https://energon.app/" />
+
   <link rel="icon" href="/favicon.ico" sizes="any" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="96x96"
+    href="/favicon-96x96.png"
+  />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <meta property="og:title" content="ENERGON" />
+
   <meta
     property="og:description"
     content="A live deterministic protocol on Flare. Public minting is open. Coherent Guardian state requires exactly one Energon Cube."
   />
+
   <meta
     property="og:image"
     content="https://red-secret-dragonfly-529.mypinata.cloud/ipfs/bafybeiccfdp4aez6gqva5yx5cmixc7dugqxl6eee5nhb54sdhpnidpmt7u"
   />
+
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://energon.app/" />
   <meta name="twitter:card" content="summary" />
 
   <style>
@@ -56,16 +70,33 @@
         0 0 18px rgba(60,135,255,0.07);
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    html{scroll-behavior:smooth}
+    *{
+      box-sizing:border-box;
+    }
+
+    html,
+    body{
+      height:100%;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
 
     body{
       margin:0;
       min-height:100vh;
       overflow-x:hidden;
       color:var(--text);
-      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      font-family:
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
       background:#000;
       position:relative;
       -webkit-font-smoothing:antialiased;
@@ -79,12 +110,36 @@
       pointer-events:none;
       opacity:0.18;
       background-image:
-        radial-gradient(circle at 12% 18%, rgba(255,255,255,0.92) 0 1px, transparent 2px),
-        radial-gradient(circle at 28% 9%, rgba(255,255,255,0.68) 0 1px, transparent 2px),
-        radial-gradient(circle at 42% 14%, rgba(255,255,255,0.76) 0 1px, transparent 2px),
-        radial-gradient(circle at 65% 10%, rgba(255,255,255,0.70) 0 1px, transparent 2px),
-        radial-gradient(circle at 78% 22%, rgba(255,255,255,0.60) 0 1px, transparent 2px),
-        radial-gradient(circle at 88% 12%, rgba(255,255,255,0.74) 0 1px, transparent 2px);
+        radial-gradient(
+          circle at 12% 18%,
+          rgba(255,255,255,0.92) 0 1px,
+          transparent 2px
+        ),
+        radial-gradient(
+          circle at 28% 9%,
+          rgba(255,255,255,0.68) 0 1px,
+          transparent 2px
+        ),
+        radial-gradient(
+          circle at 42% 14%,
+          rgba(255,255,255,0.76) 0 1px,
+          transparent 2px
+        ),
+        radial-gradient(
+          circle at 65% 10%,
+          rgba(255,255,255,0.70) 0 1px,
+          transparent 2px
+        ),
+        radial-gradient(
+          circle at 78% 22%,
+          rgba(255,255,255,0.60) 0 1px,
+          transparent 2px
+        ),
+        radial-gradient(
+          circle at 88% 12%,
+          rgba(255,255,255,0.74) 0 1px,
+          transparent 2px
+        );
     }
 
     body::after{
@@ -94,15 +149,42 @@
       pointer-events:none;
       opacity:0.08;
       background-image:
-        radial-gradient(circle at 16% 42%, rgba(255,255,255,0.8) 0 1px, transparent 2px),
-        radial-gradient(circle at 31% 50%, rgba(255,255,255,0.6) 0 1px, transparent 2px),
-        radial-gradient(circle at 56% 36%, rgba(255,255,255,0.62) 0 1px, transparent 2px),
-        radial-gradient(circle at 70% 48%, rgba(255,255,255,0.54) 0 1px, transparent 2px),
-        radial-gradient(circle at 85% 58%, rgba(255,255,255,0.64) 0 1px, transparent 2px),
-        radial-gradient(circle at 22% 72%, rgba(255,255,255,0.55) 0 1px, transparent 2px);
+        radial-gradient(
+          circle at 16% 42%,
+          rgba(255,255,255,0.8) 0 1px,
+          transparent 2px
+        ),
+        radial-gradient(
+          circle at 31% 50%,
+          rgba(255,255,255,0.6) 0 1px,
+          transparent 2px
+        ),
+        radial-gradient(
+          circle at 56% 36%,
+          rgba(255,255,255,0.62) 0 1px,
+          transparent 2px
+        ),
+        radial-gradient(
+          circle at 70% 48%,
+          rgba(255,255,255,0.54) 0 1px,
+          transparent 2px
+        ),
+        radial-gradient(
+          circle at 85% 58%,
+          rgba(255,255,255,0.64) 0 1px,
+          transparent 2px
+        ),
+        radial-gradient(
+          circle at 22% 72%,
+          rgba(255,255,255,0.55) 0 1px,
+          transparent 2px
+        );
     }
 
-    .bgGlowA,.bgGlowB,.circuitLeft,.circuitRight{
+    .bgGlowA,
+    .bgGlowB,
+    .circuitLeft,
+    .circuitRight{
       position:fixed;
       pointer-events:none;
       z-index:0;
@@ -114,7 +196,12 @@
       width:360px;
       height:360px;
       border-radius:50%;
-      background:radial-gradient(circle, rgba(70,150,255,0.08), transparent 72%);
+      background:
+        radial-gradient(
+          circle,
+          rgba(70,150,255,0.08),
+          transparent 72%
+        );
       filter:blur(90px);
     }
 
@@ -124,7 +211,12 @@
       width:300px;
       height:300px;
       border-radius:50%;
-      background:radial-gradient(circle, rgba(80,120,255,0.05), transparent 72%);
+      background:
+        radial-gradient(
+          circle,
+          rgba(80,120,255,0.05),
+          transparent 72%
+        );
       filter:blur(90px);
     }
 
@@ -135,9 +227,23 @@
       width:180px;
       opacity:0.10;
       background:
-        linear-gradient(transparent 0%, rgba(80,160,255,0.24) 10%, transparent 11%),
-        linear-gradient(90deg, rgba(80,160,255,0.18), rgba(80,160,255,0.02)),
-        linear-gradient(transparent 0%, transparent 58%, rgba(80,160,255,0.22) 58%, rgba(80,160,255,0.22) 59%, transparent 59%);
+        linear-gradient(
+          transparent 0%,
+          rgba(80,160,255,0.24) 10%,
+          transparent 11%
+        ),
+        linear-gradient(
+          90deg,
+          rgba(80,160,255,0.18),
+          rgba(80,160,255,0.02)
+        ),
+        linear-gradient(
+          transparent 0%,
+          transparent 58%,
+          rgba(80,160,255,0.22) 58%,
+          rgba(80,160,255,0.22) 59%,
+          transparent 59%
+        );
     }
 
     .circuitRight{
@@ -147,9 +253,23 @@
       width:180px;
       opacity:0.10;
       background:
-        linear-gradient(transparent 0%, rgba(80,160,255,0.24) 16%, transparent 17%),
-        linear-gradient(270deg, rgba(80,160,255,0.18), rgba(80,160,255,0.02)),
-        linear-gradient(transparent 0%, transparent 42%, rgba(80,160,255,0.22) 42%, rgba(80,160,255,0.22) 43%, transparent 43%);
+        linear-gradient(
+          transparent 0%,
+          rgba(80,160,255,0.24) 16%,
+          transparent 17%
+        ),
+        linear-gradient(
+          270deg,
+          rgba(80,160,255,0.18),
+          rgba(80,160,255,0.02)
+        ),
+        linear-gradient(
+          transparent 0%,
+          transparent 42%,
+          rgba(80,160,255,0.22) 42%,
+          rgba(80,160,255,0.22) 43%,
+          transparent 43%
+        );
     }
 
     .wrap{
@@ -163,7 +283,12 @@
     .shell{
       position:relative;
       border-radius:22px;
-      background:linear-gradient(180deg, rgba(8,14,30,0.24), rgba(5,10,24,0.30));
+      background:
+        linear-gradient(
+          180deg,
+          rgba(8,14,30,0.24),
+          rgba(5,10,24,0.30)
+        );
       border:1px solid rgba(122,185,255,0.10);
       box-shadow:
         0 18px 40px rgba(0,0,0,0.24),
@@ -189,7 +314,12 @@
       max-width:900px;
       display:grid;
       grid-template-columns:repeat(5, minmax(0, 1fr));
-      background:linear-gradient(180deg, rgba(8,18,42,0.84), rgba(6,12,28,0.96));
+      background:
+        linear-gradient(
+          180deg,
+          rgba(8,18,42,0.84),
+          rgba(6,12,28,0.96)
+        );
       border:1px solid rgba(110,180,255,0.18);
       border-radius:20px;
       overflow:hidden;
@@ -205,7 +335,7 @@
       align-items:center;
       justify-content:center;
       gap:8px;
-      padding:12px 12px;
+      padding:12px;
       text-decoration:none;
       color:rgba(234,241,255,0.92);
       font-size:13px;
@@ -221,7 +351,9 @@
         transform 0.18s ease;
     }
 
-    .topNavLink:last-child{border-right:none}
+    .topNavLink:last-child{
+      border-right:none;
+    }
 
     .topNavIcon{
       width:42px;
@@ -249,11 +381,30 @@
       height:22px;
     }
 
-    .nav-wallet{ color:var(--blue2); box-shadow:0 0 18px var(--blueGlow); }
-    .nav-cube{ color:var(--blue); box-shadow:0 0 18px var(--blueGlow); }
-    .nav-paper{ color:var(--gold); box-shadow:0 0 18px var(--goldGlow); }
-    .nav-emp{ color:var(--violet); box-shadow:0 0 18px var(--violetGlow); }
-    .nav-guardian{ color:var(--cyan); box-shadow:0 0 18px var(--cyanGlow); }
+    .nav-wallet{
+      color:var(--blue2);
+      box-shadow:0 0 18px var(--blueGlow);
+    }
+
+    .nav-cube{
+      color:var(--blue);
+      box-shadow:0 0 18px var(--blueGlow);
+    }
+
+    .nav-paper{
+      color:var(--gold);
+      box-shadow:0 0 18px var(--goldGlow);
+    }
+
+    .nav-emp{
+      color:var(--violet);
+      box-shadow:0 0 18px var(--violetGlow);
+    }
+
+    .nav-guardian{
+      color:var(--cyan);
+      box-shadow:0 0 18px var(--cyanGlow);
+    }
 
     .topNavText{
       line-height:1.15;
@@ -308,7 +459,7 @@
     }
 
     .headerGlowLine{
-      margin:14px 0 14px;
+      margin:14px 0;
       height:1px;
       width:100%;
       border-radius:999px;
@@ -357,7 +508,12 @@
     .tile,
     .pathTile{
       position:relative;
-      background:linear-gradient(180deg, var(--panelA), var(--panelB));
+      background:
+        linear-gradient(
+          180deg,
+          var(--panelA),
+          var(--panelB)
+        );
       border:1px solid var(--stroke);
       border-radius:16px;
       padding:16px;
@@ -401,7 +557,9 @@
       height:30px;
     }
 
-    .ctaText{min-width:0}
+    .ctaText{
+      min-width:0;
+    }
 
     .ctaTitle{
       font-size:18px;
@@ -419,36 +577,86 @@
     .ctaCube{
       border-color:rgba(87,184,255,0.48);
       background:
-        radial-gradient(circle at 18% 30%, rgba(87,184,255,0.12), transparent 40%),
-        linear-gradient(180deg, rgba(16,48,108,0.40), rgba(6,16,42,0.82));
+        radial-gradient(
+          circle at 18% 30%,
+          rgba(87,184,255,0.12),
+          transparent 40%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(16,48,108,0.40),
+          rgba(6,16,42,0.82)
+        );
     }
-    .ctaCube .ctaIcon{color:var(--blue);box-shadow:0 0 24px var(--blueGlow)}
+
+    .ctaCube .ctaIcon{
+      color:var(--blue);
+      box-shadow:0 0 24px var(--blueGlow);
+    }
 
     .ctaWallet{
       border-color:rgba(134,240,168,0.48);
       background:
-        radial-gradient(circle at 18% 30%, rgba(134,240,168,0.12), transparent 40%),
-        linear-gradient(180deg, rgba(18,58,44,0.42), rgba(8,24,16,0.84));
+        radial-gradient(
+          circle at 18% 30%,
+          rgba(134,240,168,0.12),
+          transparent 40%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(18,58,44,0.42),
+          rgba(8,24,16,0.84)
+        );
     }
-    .ctaWallet .ctaIcon{color:var(--green);box-shadow:0 0 24px var(--greenGlow)}
+
+    .ctaWallet .ctaIcon{
+      color:var(--green);
+      box-shadow:0 0 24px var(--greenGlow);
+    }
 
     .ctaPaper{
       border-color:rgba(255,217,105,0.48);
       background:
-        radial-gradient(circle at 18% 30%, rgba(255,217,105,0.12), transparent 40%),
-        linear-gradient(180deg, rgba(62,48,16,0.42), rgba(28,22,8,0.84));
+        radial-gradient(
+          circle at 18% 30%,
+          rgba(255,217,105,0.12),
+          transparent 40%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(62,48,16,0.42),
+          rgba(28,22,8,0.84)
+        );
     }
-    .ctaPaper .ctaIcon{color:var(--gold);box-shadow:0 0 24px var(--goldGlow)}
+
+    .ctaPaper .ctaIcon{
+      color:var(--gold);
+      box-shadow:0 0 24px var(--goldGlow);
+    }
 
     .ctaEmp{
       border-color:rgba(199,125,255,0.48);
       background:
-        radial-gradient(circle at 18% 30%, rgba(199,125,255,0.12), transparent 40%),
-        linear-gradient(180deg, rgba(46,18,66,0.42), rgba(20,8,30,0.84));
+        radial-gradient(
+          circle at 18% 30%,
+          rgba(199,125,255,0.12),
+          transparent 40%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(46,18,66,0.42),
+          rgba(20,8,30,0.84)
+        );
     }
-    .ctaEmp .ctaIcon{color:var(--violet);box-shadow:0 0 24px var(--violetGlow)}
 
-    .spacer{height:14px}
+    .ctaEmp .ctaIcon{
+      color:var(--violet);
+      box-shadow:0 0 24px var(--violetGlow);
+    }
+
+    .spacer{
+      height:14px;
+    }
 
     .tileLabel{
       font-size:12px;
@@ -472,7 +680,6 @@
       line-height:1.72;
       color:rgba(214,226,255,0.84);
     }
-
 
     .newHere{
       background:
@@ -537,16 +744,14 @@
       color:#d8ffea;
       background:rgba(42,176,86,0.18);
       border:1px solid rgba(74,214,120,0.36);
-      box-shadow:
-        0 0 14px rgba(70,214,120,0.12);
+      box-shadow:0 0 14px rgba(70,214,120,0.12);
     }
 
     .badge.closed{
       color:#ffd8dd;
       background:rgba(220,54,76,0.18);
       border:1px solid rgba(255,90,110,0.34);
-      box-shadow:
-        0 0 14px rgba(255,70,98,0.10);
+      box-shadow:0 0 14px rgba(255,70,98,0.10);
     }
 
     .miniGrid{
@@ -601,8 +806,7 @@
       font-size:12px;
       font-weight:700;
       margin-bottom:10px;
-      box-shadow:
-        0 0 14px rgba(80,160,255,0.10);
+      box-shadow:0 0 14px rgba(80,160,255,0.10);
     }
 
     .stepTitle{
@@ -655,8 +859,7 @@
       font-size:11px;
       color:#7fcfff;
       border:1px solid rgba(76,160,255,0.38);
-      box-shadow:
-        0 0 12px rgba(60,130,255,0.12);
+      box-shadow:0 0 12px rgba(60,130,255,0.12);
       flex-shrink:0;
     }
 
@@ -725,16 +928,14 @@
     @keyframes goldTextPulse{
       50%{
         color:var(--goldText);
-        text-shadow:
-          0 0 8px rgba(255,220,130,0.35);
+        text-shadow:0 0 8px rgba(255,220,130,0.35);
       }
     }
 
     .topNavLink:hover,
     .ctaCard:hover,
     .footerLinks a:hover{
-      animation:
-        goldPulse 1.6s ease-in-out infinite;
+      animation:goldPulse 1.6s ease-in-out infinite;
       transform:
         translateY(-1px)
         scale(1.01);
@@ -744,24 +945,23 @@
     .topNavLink:hover .topNavIcon,
     .ctaCard:hover .ctaTitle,
     .ctaCard:hover .ctaIcon{
-      animation:
-        goldTextPulse 1.4s ease-in-out infinite;
+      animation:goldTextPulse 1.4s ease-in-out infinite;
     }
 
-    @media (max-width: 980px){
+    @media (max-width:980px){
       .topNav{
         grid-template-columns:repeat(2,minmax(0,1fr));
       }
     }
 
-    @media (max-width: 900px){
+    @media (max-width:900px){
       .grid3,
       .grid2{
         grid-template-columns:1fr;
       }
     }
 
-    @media (max-width: 760px){
+    @media (max-width:760px){
       .bgGlowA,
       .bgGlowB,
       .circuitLeft,
@@ -883,15 +1083,37 @@
     }
 
     @keyframes qoriOrbPulse{
-      0%{ transform:scale(1); opacity:0.72; }
-      50%{ transform:scale(1.18); opacity:1; }
-      100%{ transform:scale(1); opacity:0.72; }
+      0%{
+        transform:scale(1);
+        opacity:0.72;
+      }
+
+      50%{
+        transform:scale(1.18);
+        opacity:1;
+      }
+
+      100%{
+        transform:scale(1);
+        opacity:0.72;
+      }
     }
 
     @keyframes qoriOrbRing{
-      0%{ transform:scale(0.9); opacity:0.18; }
-      50%{ transform:scale(1.22); opacity:0.42; }
-      100%{ transform:scale(0.9); opacity:0.18; }
+      0%{
+        transform:scale(0.9);
+        opacity:0.18;
+      }
+
+      50%{
+        transform:scale(1.22);
+        opacity:0.42;
+      }
+
+      100%{
+        transform:scale(0.9);
+        opacity:0.18;
+      }
     }
 
     #qoriFrameOverlay{
@@ -931,6 +1153,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="bgGlowA"></div>
@@ -944,7 +1167,11 @@
 
         <div class="topNavWrap">
           <div class="topNav">
-            <a class="topNavLink" href="wallet-setup.html">
+
+            <a
+              class="topNavLink"
+              href="https://wallet.energon.app/wallet-setup.html"
+            >
               <span class="topNavIcon nav-wallet">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a2 2 0 0 1 2 2v1.5"></path>
@@ -952,10 +1179,18 @@
                   <circle cx="17" cy="14" r="1"></circle>
                 </svg>
               </span>
-              <span class="topNavText">Wallet Setup</span>
+
+              <span class="topNavText">
+                Wallet Setup
+              </span>
             </a>
 
-            <a class="topNavLink" href="https://energon-dapp.vercel.app" target="_blank" rel="noreferrer">
+            <a
+              class="topNavLink"
+              href="https://mint.energon.app/mint"
+              target="_blank"
+              rel="noreferrer"
+            >
               <span class="topNavIcon nav-cube">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 3l7 4v10l-7 4-7-4V7l7-4z"></path>
@@ -963,10 +1198,18 @@
                   <path d="M12 11v10"></path>
                 </svg>
               </span>
-              <span class="topNavText">Acquire Energon Cube</span>
+
+              <span class="topNavText">
+                Acquire Energon Cube
+              </span>
             </a>
 
-            <a class="topNavLink" href="docs/energon-whitepaper.pdf" target="_blank" rel="noreferrer">
+            <a
+              class="topNavLink"
+              href="https://docs.energon.app/docs/energon-whitepaper.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
               <span class="topNavIcon nav-paper">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M8 3h6l5 5v13H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
@@ -975,10 +1218,18 @@
                   <path d="M10 17h6"></path>
                 </svg>
               </span>
-              <span class="topNavText">Whitepaper</span>
+
+              <span class="topNavText">
+                Whitepaper
+              </span>
             </a>
 
-            <a class="topNavLink" href="docs/energon-emp.pdf" target="_blank" rel="noreferrer">
+            <a
+              class="topNavLink"
+              href="https://docs.energon.app/docs/energon-emp.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
               <span class="topNavIcon nav-emp">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 2l7 4v8l-7 8-7-8V6l7-4z"></path>
@@ -987,22 +1238,33 @@
                   <path d="M9 15h4"></path>
                 </svg>
               </span>
-              <span class="topNavText">EMP</span>
+
+              <span class="topNavText">
+                EMP
+              </span>
             </a>
 
-            <a class="topNavLink" href="guardian.html">
+            <a
+              class="topNavLink"
+              href="https://guardian.energon.app/guardian.html"
+            >
               <span class="topNavIcon nav-guardian">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <circle cx="12" cy="8" r="3.5"></circle>
                   <path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path>
                 </svg>
               </span>
-              <span class="topNavText">Guardian Chronicle</span>
+
+              <span class="topNavText">
+                Guardian Chronicle
+              </span>
             </a>
+
           </div>
         </div>
 
         <div class="headerBlock">
+
           <div class="sigilWrap">
             <img
               class="sigil"
@@ -1012,21 +1274,34 @@
           </div>
 
           <h1>ENERGON</h1>
-          <div class="eyebrow">Deterministic Protocol</div>
+
+          <div class="eyebrow">
+            Deterministic Protocol
+          </div>
+
           <div class="headerGlowLine"></div>
 
-          <div class="heroTitle">Defined by rules. Observed by Guardians.</div>
+          <div class="heroTitle">
+            Defined by rules. Observed by Guardians.
+          </div>
 
           <div class="heroCopy">
             Energon is a live on-chain system operating on Flare mainnet.
-            The protocol advances through public contract state, not hidden automation.
-            The interface only reflects what the contracts expose.
+            The protocol advances through public contract state, not hidden
+            automation. The interface only reflects what the contracts expose.
           </div>
+
         </div>
 
         <div class="tile newHere">
-          <div class="tileLabel">New Here?</div>
-          <div class="tileTitle">Start with the rule.</div>
+          <div class="tileLabel">
+            New Here?
+          </div>
+
+          <div class="tileTitle">
+            Start with the rule.
+          </div>
+
           <div class="tileBody">
             Any wallet may acquire Energon Cubes while supply remains available.
             Holding exactly one cube creates a coherent Guardian state.
@@ -1039,12 +1314,16 @@
         <div class="grid3">
 
           <div class="tile">
-            <div class="tileLabel">The Protocol</div>
+            <div class="tileLabel">
+              The Protocol
+            </div>
+
             <div class="tileTitle">
               The system follows conditions, not commands.
             </div>
+
             <div class="tileBody">
-              Energon does not rely on administrators, 
+              Energon does not rely on administrators,
               external operators, or hidden automation.
               Every meaningful transition occurs only when
               the required on-chain conditions are satisfied.
@@ -1052,10 +1331,14 @@
           </div>
 
           <div class="tile">
-            <div class="tileLabel">Verification</div>
+            <div class="tileLabel">
+              Verification
+            </div>
+
             <div class="tileTitle">
               Everything can be observed.
             </div>
+
             <div class="tileBody">
               The protocol state exists publicly on Flare.
               Transactions, supply, Guardian states, and
@@ -1066,10 +1349,14 @@
           </div>
 
           <div class="tile">
-            <div class="tileLabel">The Guardian Rule</div>
+            <div class="tileLabel">
+              The Guardian Rule
+            </div>
+
             <div class="tileTitle">
               One wallet. One cube.
             </div>
+
             <div class="tileBody">
               The system does not interpret intention.
               It reads state.
@@ -1085,6 +1372,7 @@
 
               <div class="diagramItem">
                 <span>0 Cubes</span>
+
                 <span class="badge closed">
                   Silent
                 </span>
@@ -1092,6 +1380,7 @@
 
               <div class="diagramItem">
                 <span>1 Cube</span>
+
                 <span class="badge open">
                   Coherent
                 </span>
@@ -1099,6 +1388,7 @@
 
               <div class="diagramItem">
                 <span>2+ Cubes</span>
+
                 <span class="badge closed">
                   Fractured
                 </span>
@@ -1107,7 +1397,7 @@
             </div>
           </div>
 
-         <div class="tile">
+          <div class="tile">
             <div class="tileLabel">
               Energon Cube
             </div>
@@ -1118,8 +1408,8 @@
 
             <div class="tileBody">
               An Energon Cube is not a collectible created for accumulation.
-              It is a state key that determines whether a wallet can enter a coherent
-              Guardian state inside the protocol.
+              It is a state key that determines whether a wallet can enter a
+              coherent Guardian state inside the protocol.
 
               <br><br>
 
@@ -1127,7 +1417,6 @@
               It only evaluates the condition of the wallet.
             </div>
           </div>
-
 
           <div class="tile">
             <div class="tileLabel">
@@ -1139,7 +1428,8 @@
             </div>
 
             <div class="tileBody">
-              EON is the native digital asset used within Energon's protocol mechanics.
+              EON is the native digital asset used within Energon's protocol
+              mechanics.
 
               <br><br>
 
@@ -1147,7 +1437,6 @@
               or a claim on external assets.
             </div>
           </div>
-
 
           <div class="tile">
             <div class="tileLabel">
@@ -1174,45 +1463,82 @@
         <div class="spacer"></div>
 
         <div class="tile">
-          <div class="tileLabel">Path to Guardian</div>
+
+          <div class="tileLabel">
+            Path to Guardian
+          </div>
 
           <div class="grid3">
+
             <div class="pathTile">
-              <div class="stepNum">1</div>
-              <div class="stepTitle">Prepare the Wallet</div>
+              <div class="stepNum">
+                1
+              </div>
+
+              <div class="stepTitle">
+                Prepare the Wallet
+              </div>
+
               <div class="stepCopy">
                 Set up a wallet capable of using Flare Mainnet.
               </div>
             </div>
 
             <div class="pathTile">
-              <div class="stepNum">2</div>
-              <div class="stepTitle">Hold Exactly One Cube</div>
+              <div class="stepNum">
+                2
+              </div>
+
+              <div class="stepTitle">
+                Hold Exactly One Cube
+              </div>
+
               <div class="stepCopy">
-                One cube creates coherence. More than one creates a fractured state.
+                One cube creates coherence. More than one creates a fractured
+                state.
               </div>
             </div>
 
             <div class="pathTile">
-              <div class="stepNum">3</div>
-              <div class="stepTitle">Observe the System</div>
+              <div class="stepNum">
+                3
+              </div>
+
+              <div class="stepTitle">
+                Observe the System
+              </div>
+
               <div class="stepCopy">
                 Return to the dApp and observe your wallet state directly.
               </div>
             </div>
+
           </div>
         </div>
 
         <div class="spacer"></div>
 
         <div class="pathStrip">
-          <span class="pathDot">◉</span>
-          <span><strong>Start here.</strong> Read, understand, then choose your path.</span>
+          <span class="pathDot">
+            ◉
+          </span>
+
+          <span>
+            <strong>Start here.</strong>
+            Read, understand, then choose your path.
+          </span>
         </div>
 
         <div class="grid2">
-          <a class="ctaCard ctaCube" href="https://energon-dapp.vercel.app" target="_blank" rel="noreferrer">
+
+          <a
+            class="ctaCard ctaCube"
+            href="https://mint.energon.app/mint"
+            target="_blank"
+            rel="noreferrer"
+          >
             <div class="ctaInner">
+
               <div class="ctaIcon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 3l7 4v10l-7 4-7-4V7l7-4z"></path>
@@ -1220,15 +1546,26 @@
                   <path d="M12 11v10"></path>
                 </svg>
               </div>
+
               <div class="ctaText">
-                <div class="ctaTitle">Acquire an Energon Cube</div>
-                <div class="ctaCopy">Enter through the public mint interface.</div>
+                <div class="ctaTitle">
+                  Acquire an Energon Cube
+                </div>
+
+                <div class="ctaCopy">
+                  Enter through the public mint interface.
+                </div>
               </div>
+
             </div>
           </a>
 
-          <a class="ctaCard ctaWallet" href="wallet-setup.html">
+          <a
+            class="ctaCard ctaWallet"
+            href="https://wallet.energon.app/wallet-setup.html"
+          >
             <div class="ctaInner">
+
               <div class="ctaIcon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a2 2 0 0 1 2 2v1.5"></path>
@@ -1236,30 +1573,56 @@
                   <circle cx="17" cy="14" r="1"></circle>
                 </svg>
               </div>
+
               <div class="ctaText">
-                <div class="ctaTitle">Wallet Setup</div>
-                <div class="ctaCopy">Start here if you are new to Flare or wallets.</div>
+                <div class="ctaTitle">
+                  Wallet Setup
+                </div>
+
+                <div class="ctaCopy">
+                  Start here if you are new to Flare or wallets.
+                </div>
               </div>
+
             </div>
           </a>
 
-          <a class="ctaCard ctaPaper" href="docs/energon-whitepaper.pdf" target="_blank" rel="noreferrer">
+          <a
+            class="ctaCard ctaPaper"
+            href="https://docs.energon.app/docs/energon-whitepaper.pdf"
+            target="_blank"
+            rel="noreferrer"
+          >
             <div class="ctaInner">
+
               <div class="ctaIcon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M6 5.5C7.2 4.5 8.7 4 10.5 4c2 0 3.8.7 5.5 2v14c-1.5-1-3.3-1.5-5.5-1.5-1.8 0-3.3.4-4.5 1.2z"></path>
                   <path d="M18 5.5C16.8 4.5 15.3 4 13.5 4c-2 0-3.8.7-5.5 2v14c1.5-1 3.3-1.5 5.5-1.5 1.8 0 3.3.4 4.5 1.2z"></path>
                 </svg>
               </div>
+
               <div class="ctaText">
-                <div class="ctaTitle">Whitepaper</div>
-                <div class="ctaCopy">Read the protocol framework.</div>
+                <div class="ctaTitle">
+                  Whitepaper
+                </div>
+
+                <div class="ctaCopy">
+                  Read the protocol framework.
+                </div>
               </div>
+
             </div>
           </a>
 
-          <a class="ctaCard ctaEmp" href="docs/energon-emp.pdf" target="_blank" rel="noreferrer">
+          <a
+            class="ctaCard ctaEmp"
+            href="https://docs.energon.app/docs/energon-emp.pdf"
+            target="_blank"
+            rel="noreferrer"
+          >
             <div class="ctaInner">
+
               <div class="ctaIcon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 2l7 4v8l-7 8-7-8V6l7-4z"></path>
@@ -1268,29 +1631,44 @@
                   <path d="M9 15h4"></path>
                 </svg>
               </div>
+
               <div class="ctaText">
-                <div class="ctaTitle">EMP</div>
-                <div class="ctaCopy">Advanced protocol reference.</div>
+                <div class="ctaTitle">
+                  EMP
+                </div>
+
+                <div class="ctaCopy">
+                  Advanced protocol reference.
+                </div>
               </div>
+
             </div>
           </a>
+
         </div>
 
         <div class="spacer"></div>
 
         <div class="bottomStrip">
-          <span class="bottomIcon">◉</span>
+          <span class="bottomIcon">
+            ◉
+          </span>
+
           <span>
             Read carefully. Understand the rule. Choose your path.
           </span>
         </div>
 
         <div class="footerLinks">
-          <a href="wallet-setup.html">Wallet Setup</a>
+
+          <a href="https://wallet.energon.app/wallet-setup.html">
+            Wallet Setup
+          </a>
+
           <span>·</span>
 
           <a
-            href="https://energon-dapp.vercel.app"
+            href="https://mint.energon.app/mint"
             target="_blank"
             rel="noreferrer"
           >
@@ -1300,7 +1678,7 @@
           <span>·</span>
 
           <a
-            href="docs/energon-whitepaper.pdf"
+            href="https://docs.energon.app/docs/energon-whitepaper.pdf"
             target="_blank"
             rel="noreferrer"
           >
@@ -1310,7 +1688,7 @@
           <span>·</span>
 
           <a
-            href="docs/energon-emp.pdf"
+            href="https://docs.energon.app/docs/energon-emp.pdf"
             target="_blank"
             rel="noreferrer"
           >
@@ -1319,13 +1697,15 @@
 
           <span>·</span>
 
-          <a href="guardian.html">
+          <a href="https://guardian.energon.app/guardian.html">
             Guardian Chronicle
           </a>
+
         </div>
 
         <div class="footerNote">
           One wallet. One cube. One Guardian.
+
           <span class="footerCode">
             ENERGON
           </span>
@@ -1335,7 +1715,6 @@
     </div>
   </div>
 
-
   <!-- Q.O.R.I Observer -->
   <button
     id="qoriOrb"
@@ -1343,7 +1722,6 @@
     aria-label="Open Q.O.R.I"
     title="Open Q.O.R.I"
   ></button>
-
 
   <div id="qoriFrameOverlay">
 
@@ -1364,9 +1742,7 @@
 
   </div>
 
-
   <script>
-
     const qoriOrb =
       document.getElementById("qoriOrb");
 
@@ -1383,7 +1759,7 @@
     qoriOrb.addEventListener("click", () => {
 
       qoriFrame.src =
-        "https://energon-dapp.vercel.app/qori?open=1&mode=landing&v="
+        "https://observer.energon.app/qori?open=1&mode=landing&v="
         + Date.now();
 
       qoriOverlay.style.display = "flex";
@@ -1398,7 +1774,6 @@
       qoriFrame.src = "";
 
     });
-
   </script>
 
 </body>
