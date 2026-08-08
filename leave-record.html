@@ -452,6 +452,22 @@
       min-height: 20px;
     }
 
+    .discordHandoffActions {
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .discordHandoffActions .button,
+    .discordHandoffActions button {
+      width:auto;
+      min-width:190px;
+      margin:0;
+    }
+
     @media(max-width:640px) {
       .wrap {
         padding: 34px 12px 56px;
@@ -485,6 +501,18 @@
 
       .gatewayText {
         min-height: 0;
+      }
+
+      .discordHandoffActions {
+        flex-direction:column;
+        align-items:center;
+      }
+
+      .discordHandoffActions .button,
+      .discordHandoffActions button {
+        width:auto;
+        min-width:240px;
+        max-width:calc(100% - 24px);
       }
 
       button,
@@ -1750,11 +1778,102 @@
           );
         }
 
-        discordVerifyMessage.textContent =
-          "Opening Discord. Guardian verification will finish there.";
+        discordVerifyMessage.innerHTML = "";
 
-        window.location.href =
+        const continueLink =
+          document.createElement("a");
+
+        continueLink.href =
           result.authorizeUrl;
+
+        continueLink.target =
+          "_blank";
+
+        continueLink.rel =
+          "noopener noreferrer";
+
+        continueLink.className =
+          "button";
+
+        continueLink.textContent =
+          "Continue to Discord";
+
+        const copyButton =
+          document.createElement("button");
+
+        copyButton.type =
+          "button";
+
+        copyButton.textContent =
+          "Copy Discord Link";
+
+        copyButton.style.marginLeft =
+          "10px";
+
+        copyButton.addEventListener(
+          "click",
+          async () => {
+            try {
+              await navigator.clipboard.writeText(
+                result.authorizeUrl
+              );
+
+              discordVerifyMessage.textContent =
+                "Discord link copied. Open Safari and paste the link to continue Guardian verification.";
+
+              discordVerifyMessage.className =
+                "center small gatewayStatus good";
+            } catch (copyError) {
+              console.error(copyError);
+
+              discordVerifyMessage.textContent =
+                "Could not copy automatically. Press and hold Continue to Discord and open the link in your browser.";
+
+              discordVerifyMessage.className =
+                "center small gatewayStatus blue";
+            }
+          }
+        );
+
+        const handoffText =
+          document.createElement("div");
+
+        handoffText.className =
+          "small";
+
+        handoffText.style.marginBottom =
+          "12px";
+
+        handoffText.textContent =
+          "Guardian verification is complete. Continue with Discord. If Discord does not load inside your wallet browser, copy the link and open it in Safari.";
+
+        discordVerifyMessage.appendChild(
+          handoffText
+        );
+
+        const handoffActions =
+          document.createElement("div");
+
+        handoffActions.className =
+          "discordHandoffActions";
+
+        handoffActions.appendChild(
+          continueLink
+        );
+
+        handoffActions.appendChild(
+          copyButton
+        );
+
+        discordVerifyMessage.appendChild(
+          handoffActions
+        );
+
+        discordVerifyMessage.className =
+          "center small gatewayStatus blue";
+
+        discordVerifyBtn.textContent =
+          "Guardian Confirmed";
       } catch (err) {
         console.error(err);
 
