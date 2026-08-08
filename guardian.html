@@ -568,6 +568,38 @@
         0 0 60px rgba(87,184,255,0.12);
     }
 
+    .guardianActions{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .guardianRoleButton{
+      border-color:rgba(134,240,168,0.52);
+      background:
+        radial-gradient(
+          circle at 18% 30%,
+          rgba(134,240,168,0.14),
+          transparent 42%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(18,58,44,0.42),
+          rgba(8,24,16,0.92)
+        );
+      box-shadow:
+        0 0 24px rgba(134,240,168,0.16);
+    }
+
+    .guardianRoleButton:hover{
+      border-color:rgba(134,240,168,0.82);
+      box-shadow:
+        0 0 30px rgba(134,240,168,0.30),
+        0 0 60px rgba(134,240,168,0.12);
+    }
+
     code{
       color:rgba(255,255,255,0.85);
       background:rgba(255,255,255,0.06);
@@ -762,11 +794,20 @@
         flex-direction:column;
         gap:4px;
       }
+
+      .guardianActions{
+        flex-direction:column;
+      }
+
+      .guardianActions .returnButton{
+        width:100%;
+        max-width:360px;
+      }
     }
   </style>
 </head>
 
-<body class="unselected">
+<body class="coherent">
   <div class="wrap">
     <div class="sheet">
       <div class="inner">
@@ -799,14 +840,14 @@
           </p>
 
           <div
-            class="signalSequence"
+            class="signalSequence hidden"
             id="signalSequence"
           >
             <div id="signalLine"></div>
           </div>
 
           <div
-            class="pathSelector hidden"
+            class="pathSelector"
             id="pathSelector"
           >
             <div class="gateTitle">
@@ -814,11 +855,11 @@
             </div>
 
             <div class="gateSubtitle">
-              Choose the state you wish to observe.
+              Chronicle State Observer
             </div>
 
             <div class="pathTitle">
-              Choose State
+              Observe State
             </div>
 
             <div class="pathDoors">
@@ -848,9 +889,9 @@
             </div>
 
             <div class="gateCopy">
-              The Chronicle opens according to the state you choose to observe.
-              Silent reveals absence. Fractured reveals distortion. Coherent
-              reveals the Archive.
+              The Chronicle opens in Coherent state.
+              Silent reveals absence. Fractured reveals distortion.
+              Coherent restores the Archive.
             </div>
 
             <div class="gateLaw">
@@ -1016,12 +1057,21 @@
                 Your cube is your entry. Your reason is your witness.
               </div>
 
-              <a
-                href="leave-record.html"
-                class="returnButton"
-              >
-                LEAVE A RECORD
-              </a>
+              <div class="guardianActions">
+                <a
+                  href="leave-record.html?action=record"
+                  class="returnButton"
+                >
+                  LEAVE A RECORD
+                </a>
+
+                <a
+                  href="leave-record.html?action=discord"
+                  class="returnButton guardianRoleButton"
+                >
+                  VERIFY GUARDIAN ROLE
+                </a>
+              </div>
             </div>
 
           </div>
@@ -1113,9 +1163,6 @@
           active.classList.add("active");
         }
 
-        if (mode === "coherent") {
-          pathSelector.classList.add("hidden");
-        }
       }
 
       if (mode === "fractured") {
@@ -1189,12 +1236,7 @@
       );
     }
 
-    setMode("unselected");
-
-    window.addEventListener(
-      "load",
-      runSequence
-    );
+    setMode("coherent");
   </script>
 </body>
 </html>

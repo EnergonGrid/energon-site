@@ -854,11 +854,8 @@
 
     // Discord Guardian verification runs through the
     // production Energon dApp API.
-    const DISCORD_LOGIN_URL =
-      "https://mint.energon.app/api/discord/login";
-
-    const DISCORD_VERIFY_API_URL =
-      "https://mint.energon.app/api/discord/verify-guardian";
+    const DISCORD_BEGIN_API_URL =
+      "https://mint.energon.app/api/discord/begin-guardian";
 
     const CUBE_ABI = [
       "function balanceOf(address owner) view returns (uint256)",
@@ -884,6 +881,15 @@
 
     const discordProof =
       discordParams.get("proof") || "";
+
+    const guardianAction =
+      discordParams.get("action") || "";
+
+    const requestedRecord =
+      guardianAction === "record";
+
+    const requestedDiscord =
+      guardianAction === "discord";
 
     const connectBtn =
       document.getElementById("connectBtn");
@@ -1565,6 +1571,31 @@
 
         accessBox.classList.remove("hidden");
         recordForm.classList.add("hidden");
+
+        if (requestedRecord) {
+          recordForm.classList.remove("hidden");
+
+          discordVerifyMessage.textContent =
+            "Guardian verified. Guardian Record opened.";
+
+          recordForm.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+        }
+
+        if (requestedDiscord) {
+          discordVerifyMessage.textContent =
+            "Guardian verified. Discord Guardian access is ready.";
+
+          discordVerifyMessage.className =
+            "center small gatewayStatus blue";
+
+          discordVerifyBtn.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+        }
       } catch (err) {
         console.error(err);
 
@@ -1633,11 +1664,12 @@
       }
 
       discordVerifyBtn.disabled = true;
+
       discordVerifyBtn.textContent =
-        "Verifying Guardian...";
+        "Preparing Discord...";
 
       discordVerifyMessage.textContent =
-        "Preparing secure Guardian verification...";
+        "Confirm wallet ownership before Discord opens.";
 
       discordVerifyMessage.className =
         "center small gatewayStatus blue";
@@ -1669,7 +1701,7 @@
           "Verify Energon Guardian";
 
         discordVerifyMessage.textContent =
-          "Sign the free verification message in your wallet. No transaction or gas is required.";
+          "Sign the free verification message. No transaction or gas is required.";
 
         const signature =
           await signer.signMessage(
@@ -1677,15 +1709,13 @@
           );
 
         discordVerifyMessage.textContent =
-          "Checking Discord, wallet ownership, and Guardian coherence...";
+          "Guardian confirmed. Preparing Discord authorization...";
 
         const response =
           await fetch(
-            DISCORD_VERIFY_API_URL,
+            DISCORD_BEGIN_API_URL,
             {
               method: "POST",
-
-              credentials: "include",
 
               headers: {
                 "Content-Type":
@@ -1693,10 +1723,15 @@
               },
 
               body: JSON.stringify({
-                wallet: connectedWallet,
+                wallet:
+                  connectedWallet,
+
+                cubeId:
+                  verifiedCubeId,
+
                 message,
-                signature,
-                proof: discordProof
+
+                signature
               })
             }
           );
@@ -1705,49 +1740,21 @@
           await response.json();
 
         if (
-          response.status === 401 &&
-          result?.error ===
-            "Discord authentication required."
-        ) {
-          discordVerifyMessage.textContent =
-            "Opening Discord authorization...";
-
-          sessionStorage.setItem(
-            "energon_discord_guardian_pending",
-            "1"
-          );
-
-          window.location.href =
-            DISCORD_LOGIN_URL;
-
-          return;
-        }
-
-        if (
           !response.ok ||
-          !result.verified ||
-          !result.coherent ||
-          !result.discordVerified ||
-          !result.roleAssigned
+          !result.ok ||
+          !result.authorizeUrl
         ) {
           throw new Error(
             result?.error ||
-            "Discord Guardian verification failed."
+            "Discord Guardian verification could not be started."
           );
         }
 
-        sessionStorage.removeItem(
-          "energon_discord_guardian_pending"
-        );
-
         discordVerifyMessage.textContent =
-          "Discord Guardian verified. Guardian role assigned.";
+          "Opening Discord. Guardian verification will finish there.";
 
-        discordVerifyMessage.className =
-          "center small gatewayStatus good";
-
-        discordVerifyBtn.textContent =
-          "Guardian Role Verified";
+        window.location.href =
+          result.authorizeUrl;
       } catch (err) {
         console.error(err);
 
@@ -1760,7 +1767,7 @@
 
         discordVerifyBtn.textContent =
           "Verify Discord Guardian Role";
-      } finally {
+
         discordVerifyBtn.disabled = false;
       }
     }
