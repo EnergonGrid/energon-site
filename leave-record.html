@@ -406,6 +406,52 @@
       word-break: normal;
     }
 
+    .gatewayGrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+      text-align: left;
+    }
+
+    .gatewayCard {
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(87, 184, 255, 0.22);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .gatewayCard.discord {
+      border-color: rgba(134, 240, 168, 0.24);
+    }
+
+    .gatewayTitle {
+      margin-bottom: 8px;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .gatewayText {
+      min-height: 66px;
+      margin: 0 0 14px;
+      color: rgba(255, 255, 255, 0.66);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .gatewayCard .button,
+    .gatewayCard button {
+      width: 100%;
+    }
+
+    .gatewayStatus {
+      margin-top: 14px;
+      min-height: 20px;
+    }
+
     @media(max-width:640px) {
       .wrap {
         padding: 34px 12px 56px;
@@ -431,6 +477,14 @@
 
       .actions {
         flex-direction: column;
+      }
+
+      .gatewayGrid {
+        grid-template-columns: 1fr;
+      }
+
+      .gatewayText {
+        min-height: 0;
       }
 
       button,
@@ -475,12 +529,14 @@
             </div>
 
             <p class="small center">
-              This page will never ask you to sign a blockchain
-              transaction, approve assets, enter a seed phrase,
-              reveal a private key, transfer a cube, or send FLR.
+              This page will never ask you to approve assets, enter a
+              seed phrase, reveal a private key, transfer a cube, or
+              send FLR.
               <br><br>
-              It only reads your public Guardian state and submits
-              the record you choose to preserve.
+              Chronicle access only reads your public Guardian state.
+              Discord verification may request a free wallet signature
+              to prove control of the connected wallet. A message
+              signature is not a blockchain transaction and costs no gas.
             </p>
           </div>
 
@@ -598,7 +654,7 @@
 
         <div id="accessBox" class="box accessBox hidden center">
           <div class="statusTitle">
-            Archive Access Granted
+            Guardian Gateway
           </div>
 
           <p class="good">
@@ -606,11 +662,44 @@
           </p>
 
           <p>
-            The Chronicle recognizes this Guardian.
+            This wallet is coherent and the EnergonCube ownership
+            check has passed. Choose what you want to do next.
           </p>
 
-          <p>
-            Leave a record.
+          <div class="gatewayGrid">
+            <div class="gatewayCard">
+              <div class="gatewayTitle">
+                Guardian Chronicle
+              </div>
+
+              <p class="gatewayText">
+                Preserve an observation, thought, quote, lesson, or
+                moment in the Guardian Chronicle.
+              </p>
+
+              <button id="leaveRecordBtn" type="button">
+                Leave a Guardian Record
+              </button>
+            </div>
+
+            <div class="gatewayCard discord">
+              <div class="gatewayTitle">
+                Discord Guardian Access
+              </div>
+
+              <p class="gatewayText">
+                Link your Discord account to this verified Guardian
+                wallet and request the Guardian role in EnergonGrid.
+              </p>
+
+              <button id="discordVerifyBtn" type="button">
+                Verify Discord Guardian Role
+              </button>
+            </div>
+          </div>
+
+          <p id="discordVerifyMessage" class="center small gatewayStatus">
+            Guardian verification complete.
           </p>
         </div>
 
@@ -763,6 +852,14 @@
     const CHRONICLE_API_URL =
       "https://guardian.energon.app/api/guardian-chronicle";
 
+    // Discord Guardian verification runs through the
+    // production Energon dApp API.
+    const DISCORD_LOGIN_URL =
+      "https://mint.energon.app/api/discord/login";
+
+    const DISCORD_VERIFY_API_URL =
+      "https://mint.energon.app/api/discord/verify-guardian";
+
     const CUBE_ABI = [
       "function balanceOf(address owner) view returns (uint256)",
       "function ownerOf(uint256 tokenId) view returns (address)",
@@ -776,11 +873,25 @@
     let cubeVerified = false;
     let cubeContract = null;
 
+    const discordOAuthConnected =
+      new URLSearchParams(
+        window.location.search
+      ).get("discord") === "connected";
+
     const connectBtn =
       document.getElementById("connectBtn");
 
     const verifyCubeBtn =
       document.getElementById("verifyCubeBtn");
+
+    const leaveRecordBtn =
+      document.getElementById("leaveRecordBtn");
+
+    const discordVerifyBtn =
+      document.getElementById("discordVerifyBtn");
+
+    const discordVerifyMessage =
+      document.getElementById("discordVerifyMessage");
 
     const guardianLawBox =
       document.getElementById("guardianLawBox");
@@ -1135,6 +1246,20 @@
       cubeVerifyMessage.className =
         "center small blue";
 
+      if (discordOAuthConnected) {
+        discordVerifyMessage.textContent =
+          "Discord connected. Verify your Guardian wallet and press Verify Discord Guardian Role to complete access.";
+
+        discordVerifyMessage.className =
+          "center small gatewayStatus blue";
+      } else {
+        discordVerifyMessage.textContent =
+          "Guardian verification complete.";
+
+        discordVerifyMessage.className =
+          "center small gatewayStatus";
+      }
+
       accessBox.classList.add("hidden");
       recordForm.classList.add("hidden");
       recordedWrap.classList.add("hidden");
@@ -1412,16 +1537,27 @@
           "good";
 
         cubeVerifyMessage.textContent =
-          "Cube ownership verified. Archive unlocked.";
+          "Cube ownership verified. Guardian gateway unlocked.";
 
         cubeVerifyMessage.className =
           "center small good";
 
-        accessBox.classList.remove("hidden");
+        if (discordOAuthConnected) {
+          discordVerifyMessage.textContent =
+            "Discord connected. Guardian wallet and cube verified. Press Verify Discord Guardian Role to complete access.";
 
-        setTimeout(() => {
-          recordForm.classList.remove("hidden");
-        }, 600);
+          discordVerifyMessage.className =
+            "center small gatewayStatus blue";
+        } else {
+          discordVerifyMessage.textContent =
+            "Guardian verification complete.";
+
+          discordVerifyMessage.className =
+            "center small gatewayStatus good";
+        }
+
+        accessBox.classList.remove("hidden");
+        recordForm.classList.add("hidden");
       } catch (err) {
         console.error(err);
 
@@ -1450,6 +1586,174 @@
 
         verifyCubeBtn.textContent =
           "Verify Cube";
+      }
+    }
+
+    function guardianIsVerified() {
+      return (
+        isCoherent &&
+        cubeBalance === 1n &&
+        cubeVerified &&
+        Boolean(verifiedCubeId) &&
+        Boolean(connectedWallet)
+      );
+    }
+
+    function openGuardianRecord() {
+      if (!guardianIsVerified()) {
+        alert(
+          "Verify a coherent Guardian wallet and EnergonCube first."
+        );
+
+        return;
+      }
+
+      recordForm.classList.remove("hidden");
+
+      recordForm.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+
+    async function startDiscordVerification() {
+      if (!guardianIsVerified()) {
+        alert(
+          "Verify a coherent Guardian wallet and EnergonCube first."
+        );
+
+        return;
+      }
+
+      discordVerifyBtn.disabled = true;
+      discordVerifyBtn.textContent =
+        "Verifying Guardian...";
+
+      discordVerifyMessage.textContent =
+        "Preparing secure Guardian verification...";
+
+      discordVerifyMessage.className =
+        "center small gatewayStatus blue";
+
+      try {
+        const provider =
+          new ethers.BrowserProvider(
+            window.ethereum
+          );
+
+        const signer =
+          await provider.getSigner();
+
+        const signerAddress =
+          await signer.getAddress();
+
+        if (
+          !sameAddr(
+            signerAddress,
+            connectedWallet
+          )
+        ) {
+          throw new Error(
+            "The active wallet changed. Reconnect and verify your EnergonCube again."
+          );
+        }
+
+        const message =
+          "Verify Energon Guardian";
+
+        discordVerifyMessage.textContent =
+          "Sign the free verification message in your wallet. No transaction or gas is required.";
+
+        const signature =
+          await signer.signMessage(
+            message
+          );
+
+        discordVerifyMessage.textContent =
+          "Checking Discord, wallet ownership, and Guardian coherence...";
+
+        const response =
+          await fetch(
+            DISCORD_VERIFY_API_URL,
+            {
+              method: "POST",
+
+              credentials: "include",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body: JSON.stringify({
+                wallet: connectedWallet,
+                message,
+                signature
+              })
+            }
+          );
+
+        const result =
+          await response.json();
+
+        if (
+          response.status === 401 &&
+          result?.error ===
+            "Discord authentication required."
+        ) {
+          discordVerifyMessage.textContent =
+            "Opening Discord authorization...";
+
+          sessionStorage.setItem(
+            "energon_discord_guardian_pending",
+            "1"
+          );
+
+          window.location.href =
+            DISCORD_LOGIN_URL;
+
+          return;
+        }
+
+        if (
+          !response.ok ||
+          !result.verified ||
+          !result.coherent ||
+          !result.discordVerified ||
+          !result.roleAssigned
+        ) {
+          throw new Error(
+            result?.error ||
+            "Discord Guardian verification failed."
+          );
+        }
+
+        sessionStorage.removeItem(
+          "energon_discord_guardian_pending"
+        );
+
+        discordVerifyMessage.textContent =
+          "Discord Guardian verified. Guardian role assigned.";
+
+        discordVerifyMessage.className =
+          "center small gatewayStatus good";
+
+        discordVerifyBtn.textContent =
+          "Guardian Role Verified";
+      } catch (err) {
+        console.error(err);
+
+        discordVerifyMessage.textContent =
+          err?.message ||
+          "Discord Guardian verification failed.";
+
+        discordVerifyMessage.className =
+          "center small gatewayStatus bad";
+
+        discordVerifyBtn.textContent =
+          "Verify Discord Guardian Role";
+      } finally {
+        discordVerifyBtn.disabled = false;
       }
     }
 
@@ -1711,6 +2015,16 @@
     verifyCubeBtn.addEventListener(
       "click",
       verifyCubeNumber
+    );
+
+    leaveRecordBtn.addEventListener(
+      "click",
+      openGuardianRecord
+    );
+
+    discordVerifyBtn.addEventListener(
+      "click",
+      startDiscordVerification
     );
   </script>
 </body>
