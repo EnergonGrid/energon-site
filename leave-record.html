@@ -642,13 +642,24 @@
         </div>
 
         <div id="blockedBox" class="box hidden">
-          <p class="center bad">
+          <p id="blockedTitle" class="center bad">
             This wallet is not coherent.
           </p>
 
+          <p id="blockedMessage" class="center">
+            Guardian access requires exactly one EnergonCube
+            in the connected wallet.
+          </p>
+
+          <p id="blockedAccessMessage" class="center">
+            Without a coherent Guardian state, this wallet cannot
+            leave a Guardian Record or receive the Discord Guardian role.
+          </p>
+
           <p class="center">
-            A Guardian Record may only be left by a wallet holding
-            exactly one EnergonCube.
+            <strong>
+              One wallet. One cube. One Guardian.
+            </strong>
           </p>
         </div>
 
@@ -942,6 +953,15 @@
 
     const blockedBox =
       document.getElementById("blockedBox");
+
+    const blockedTitle =
+      document.getElementById("blockedTitle");
+
+    const blockedMessage =
+      document.getElementById("blockedMessage");
+
+    const blockedAccessMessage =
+      document.getElementById("blockedAccessMessage");
 
     const cubeVerifyBox =
       document.getElementById("cubeVerifyBox");
@@ -1444,6 +1464,26 @@
 
           stateLine.className =
             "bad";
+
+          if (cubeBalance === 0n) {
+            blockedTitle.textContent =
+              "This wallet is silent.";
+
+            blockedMessage.textContent =
+              "Guardian access requires exactly one EnergonCube in the connected wallet.";
+
+            blockedAccessMessage.textContent =
+              "A wallet holding zero cubes cannot leave a Guardian Record or receive the Discord Guardian role.";
+          } else {
+            blockedTitle.textContent =
+              "This wallet is fractured.";
+
+            blockedMessage.textContent =
+              "Guardian access requires exactly one EnergonCube in the connected wallet.";
+
+            blockedAccessMessage.textContent =
+              "A wallet holding two or more cubes cannot leave a Guardian Record or receive the Discord Guardian role.";
+          }
 
           cubeLine.textContent =
             "—";
