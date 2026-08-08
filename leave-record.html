@@ -873,10 +873,17 @@
     let cubeVerified = false;
     let cubeContract = null;
 
-    const discordOAuthConnected =
+    const discordParams =
       new URLSearchParams(
         window.location.search
-      ).get("discord") === "connected";
+      );
+
+    const discordOAuthConnected =
+      discordParams.get("discord") ===
+      "connected";
+
+    const discordProof =
+      discordParams.get("proof") || "";
 
     const connectBtn =
       document.getElementById("connectBtn");
@@ -1688,7 +1695,8 @@
               body: JSON.stringify({
                 wallet: connectedWallet,
                 message,
-                signature
+                signature,
+                proof: discordProof
               })
             }
           );
