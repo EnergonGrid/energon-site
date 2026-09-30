@@ -562,9 +562,9 @@
               send FLR.
               <br><br>
               Chronicle access only reads your public Guardian state.
-              Discord verification may request a free wallet signature
-              to prove control of the connected wallet. A message
-              signature is not a blockchain transaction and costs no gas.
+              Guardian Record submission and Discord verification may request
+              a free wallet signature to prove control of the connected wallet.
+              A message signature is not a blockchain transaction and costs no gas.
             </p>
           </div>
 
@@ -1027,6 +1027,27 @@
       return (
         String(a || "").toLowerCase() ===
         String(b || "").toLowerCase()
+      );
+    }
+
+    function buildRecordVerificationMessage({
+      wallet,
+      cubeId,
+      guardianName,
+      recordText,
+      publicPermission,
+      bookPermission
+    }) {
+      return (
+        "Energon Guardian Chronicle Record\n" +
+        JSON.stringify({
+          wallet,
+          cubeId,
+          guardianName,
+          recordText,
+          publicPermission,
+          bookPermission
+        })
       );
     }
 
@@ -2034,6 +2055,53 @@
         );
 
         try {
+          const provider =
+            new ethers.BrowserProvider(
+              window.ethereum
+            );
+
+          const signer =
+            await provider.getSigner();
+
+          const signerAddress =
+            await signer.getAddress();
+
+          if (
+            !sameAddr(
+              signerAddress,
+              connectedWallet
+            )
+          ) {
+            throw new Error(
+              "The active wallet changed. Reconnect and verify your EnergonCube again."
+            );
+          }
+
+          const verificationMessage =
+            buildRecordVerificationMessage({
+              wallet:
+                connectedWallet.toLowerCase(),
+
+              cubeId:
+                verifiedCubeId,
+
+              guardianName,
+              recordText,
+              publicPermission,
+              bookPermission
+            });
+
+          verifyLine.textContent =
+            "CONFIRM WALLET OWNERSHIP...";
+
+          const signature =
+            await signer.signMessage(
+              verificationMessage
+            );
+
+          verifyLine.textContent =
+            "VERIFYING SIGNATURE...";
+
           const response =
             await fetch(
               CHRONICLE_API_URL,
@@ -2046,12 +2114,18 @@
                 },
 
                 body: JSON.stringify({
-                  wallet: connectedWallet,
-                  cubeId: verifiedCubeId,
+                  wallet:
+                    connectedWallet,
+
+                  cubeId:
+                    verifiedCubeId,
+
                   guardianName,
                   recordText,
                   publicPermission,
-                  bookPermission
+                  bookPermission,
+                  verificationMessage,
+                  signature
                 })
               }
             );
