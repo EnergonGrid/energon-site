@@ -25,11 +25,11 @@ Core properties:
 - Fully observable state transitions
 - Identity enforced by protocol state
 - No hidden automation
-- No off-chain control
-- No administrator intervention
+- No off-chain execution required for protocol progression
+- State transitions governed by deployed contract conditions
 
 User interfaces observe and interact with protocol state.
-They do not alter protocol behavior outside of the immutable smart contracts.
+They do not override deployed contract behavior.
 
 ---
 
@@ -39,7 +39,7 @@ Protocol behavior is defined exclusively by:
 
 - The ENERGON Whitepaper
 - The Energon Management Protocol (EMP)
-- Immutable deployed smart contracts
+- Deployed smart contracts
 
 If documentation and deployed code ever differ, the deployed contracts are the source of truth.
 

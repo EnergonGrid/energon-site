@@ -270,127 +270,84 @@ code{
       <a class="btn" target="_blank" rel="noreferrer" href="https://flare-explorer.flare.network/token/0x30e1076bDf2B123B54486C2721125388af2d2061">CUBE Explorer</a>
 
       <h1>WALLET SETUP</h1>
-      <h2>Flare Network · Choose Your Wallet</h2>
+      <h2>Flare Mainnet · Start Here</h2>
 
       <p>
-        Select the wallet you use below. Each option explains how to connect to
-        <strong>Flare Mainnet</strong>, add <strong>EON</strong>, and mint/purchase your
-        <strong>Energon Cube</strong> using the wallet’s <strong>dApp Browser</strong>.
+        This guide walks you from wallet installation through your first verified
+        Energon Cube. <strong>Bifrost is the recommended mobile wallet</strong>,
+        followed by MetaMask. Ledger is available for users who prefer hardware-wallet signing.
       </p>
 
+      <div class="note note-danger">
+        <strong>Before You Begin:</strong>
+        Install wallets only from their official website or official app-store listing.
+        Write your recovery phrase down and keep it offline. Never send it to anyone,
+        never enter it into Energon, and never type it into any website.
+      </div>
+
       <div class="note">
-        <strong>Funding:</strong> You’ll need a small amount of <strong>FLR</strong> to pay network fees (and mint cost if minting).
-        You can purchase <strong>FLR</strong> on most major crypto exchanges, then <strong>withdraw/send FLR</strong> to your wallet’s
-        <strong>Flare Mainnet</strong> address.
+        <strong>Funding:</strong> You need <strong>FLR on Flare Mainnet</strong> for network fees
+        and the mint transaction. When withdrawing FLR from an exchange, confirm that the withdrawal
+        network is <strong>Flare</strong>. For a first transfer, consider sending a small test amount
+        before transferring the rest.
       </div>
 
       <div class="wallet-chooser">
+        <a href="#bifrost" class="wallet-card">
+          <div class="badge">RECOMMENDED</div>
+          <div class="wallet-icon">❄️</div>
+          <div class="wallet-title">Bifrost</div>
+          <div class="wallet-sub">Mobile · Flare Support</div>
+        </a>
+
         <a href="#metamask" class="wallet-card">
           <div class="wallet-icon">🦊</div>
           <div class="wallet-title">MetaMask</div>
           <div class="wallet-sub">Browser & Mobile</div>
         </a>
 
-        <a href="#bifrost" class="wallet-card">
-          <div class="wallet-icon">❄️</div>
-          <div class="wallet-title">Bifrost</div>
-          <div class="wallet-sub">Flare Native</div>
-        </a>
-
         <a href="#ledger" class="wallet-card">
-          <div class="badge">RECOMMENDED</div>
           <div class="wallet-icon">🔐</div>
           <div class="wallet-title">Ledger</div>
           <div class="wallet-sub">Hardware Wallet</div>
         </a>
       </div>
 
-      <h3>Network Details (Copy / Paste)</h3>
+      <h3>Official Energon / Flare Details</h3>
       <div class="kv">
         <div>Network</div><div>Flare Mainnet</div>
         <div>Chain ID</div><div><code>14</code></div>
+        <div>Currency Symbol</div><div><code>FLR</code></div>
         <div>RPC URL</div><div><code>https://flare-api.flare.network/ext/C/rpc</code></div>
         <div>Explorer</div><div><code>https://flare-explorer.flare.network</code></div>
         <div>Mint URL</div><div><code class="code-green">https://mint.energon.app/mint</code></div>
         <div>EON Token</div><div><code class="code-yellow">0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code></div>
+        <div>EON Symbol</div><div><code>EON</code></div>
+        <div>EON Decimals</div><div><code>18</code></div>
         <div>Energon Cube</div><div><code>0x30e1076bDf2B123B54486C2721125388af2d2061</code></div>
       </div>
 
       <div class="note note-danger">
-        <strong>Security:</strong> Always verify the URL in your wallet dApp Browser is exactly
-        <code class="code-green">mint.energon.app/mint</code>. Never enter a seed phrase on any website.
+        <strong>Security:</strong> Always verify the mint URL is exactly
+        <code class="code-green">https://mint.energon.app/mint</code>.
+        Energon will never ask for your recovery phrase or private key.
       </div>
 
       <div class="note">
-        Only wallets holding <strong>exactly one Energon Cube</strong> are eligible.
+        <strong>Guardian Rule:</strong>
+        Zero cubes = <strong>SILENT</strong>.
+        Exactly one cube = <strong>COHERENT</strong>.
+        Two or more cubes = <strong>FRACTURED</strong>.
+        If this wallet already owns one Energon Cube, do not mint another into the same wallet.
       </div>
 
       <div class="sep" aria-hidden="true"></div>
 
-      <h3 id="metamask">Option A — MetaMask</h3>
+      <h3 id="bifrost">Option A — Bifrost Wallet · Recommended</h3>
       <ol class="steps">
         <li>
-          Install MetaMask and create or import your wallet.
-          <br>
-          <a class="btn" target="_blank" rel="noreferrer"
-            href="https://apps.apple.com/us/app/metamask-blockchain-wallet/id1438144202">
-            iOS App Store
-          </a>
-          <a class="btn" target="_blank" rel="noreferrer"
-            href="https://play.google.com/store/apps/details?id=io.metamask">
-            Android / Google Play
-          </a>
-        </li>
-        <li>Add the Flare Mainnet network using the network details above.</li>
-        <li>Switch MetaMask to <strong>Flare Mainnet</strong>.</li>
-
-        <li>
-          <strong>Fund your wallet with FLR</strong> (for gas + mint):
-          Tap <strong>Receive</strong> in MetaMask to copy your address, then send/withdraw <strong>FLR (Flare Mainnet)</strong> to that address.
-        </li>
-
-        <li>
-          <strong>Add EON in MetaMask (mobile):</strong>
-          Go to <strong>Tokens</strong> → tap <strong>+</strong> (Import tokens) → select <strong>Custom token</strong> →
-          paste the EON contract address:
-          <br><code class="code-yellow">0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
-          EON should auto-populate → tap <strong>Import</strong>. (EON will now appear in your wallet.)
-        </li>
-
-        <li>
-          <strong>Tap and copy</strong> the Energon dApp address:
-          <br><code class="code-green">https://mint.energon.app/mint</code>
-        </li>
-        <li>Open the <strong>dApp Browser</strong> inside the MetaMask app.</li>
-        <li>Paste the Energon dApp address into the address bar of the dApp Browser and load the page.</li>
-        <li>Tap <strong>Connect Wallet</strong> on the Energon dApp.</li>
-        <li>Approve the wallet connection request in MetaMask.</li>
-        <li>
-          Confirm the network is <strong>Flare Mainnet</strong>
-          (MetaMask will prompt you to switch if required).
-        </li>
-        <li>Follow the on-screen steps to mint or purchase <strong>one Energon Cube</strong>.</li>
-        <li>Review the transaction details carefully and approve the transaction in MetaMask.</li>
-        <li>
-          After confirmation, if the Energon Cube does not appear immediately, verify ownership on the Flare Explorer:
-          <br>
-          <a class="btn" target="_blank" rel="noreferrer"
-            href="https://flare-explorer.flare.network/token/0x30e1076bDf2B123B54486C2721125388af2d2061">
-            Verify CUBE on Explorer
-          </a>
-        </li>
-      </ol>
-
-      <div class="note">
-        If the mint site opens in Safari/Chrome instead of MetaMask, copy the URL and open it inside the MetaMask dApp Browser.
-      </div>
-
-      <div class="sep" aria-hidden="true"></div>
-
-      <h3 id="bifrost">Option B — Bifrost Wallet</h3>
-      <ol class="steps">
-        <li>
-          Install Bifrost Wallet and create or import your wallet.
+          Install Bifrost Wallet from the official app-store listing and create a new wallet,
+          or import a wallet you already control.
           <br>
           <a class="btn" target="_blank" rel="noreferrer"
             href="https://apps.apple.com/us/app/bifrost-wallet/id1577198351">
@@ -401,85 +358,341 @@ code{
             Android / Google Play
           </a>
         </li>
-        <li>Ensure the active network is set to <strong>Flare Mainnet</strong> (or <strong>Flare</strong>).</li>
 
         <li>
-          <strong>Fund your wallet with FLR</strong> (for gas + mint):
-          Tap <strong>Receive</strong> to copy your Flare address, then send/withdraw <strong>FLR (Flare Mainnet)</strong> to that address.
+          If creating a new wallet, write the recovery phrase down and store it securely offline.
+          Complete Bifrost's backup/verification process before funding the wallet.
         </li>
 
         <li>
-          <strong>Add EON in Bifrost (manual import):</strong><br>
-          Tap the <strong>blue up arrow</strong> → tap <strong>Receive</strong> → search <strong>Energon</strong> →
-          tap <strong>Custom token</strong> → make sure <strong>Flare Mainnet</strong> is selected (Flare at the top) →
-          paste the EON contract address:
+          Open Bifrost and make sure you are using the account you intend to use for Energon.
+        </li>
+
+        <li>
+          Select <strong>Flare</strong> / <strong>Flare Mainnet</strong>.
+        </li>
+
+        <li>
+          Tap <strong>Receive</strong> and copy your Flare address. Confirm the address carefully
+          before sending funds to it.
+        </li>
+
+        <li>
+          <strong>Fund with FLR:</strong> Send or withdraw <strong>FLR using the Flare network</strong>
+          to that address. If this is your first transfer, consider sending a small test amount first.
+        </li>
+
+        <li>
+          Wait for the FLR balance to appear before continuing.
+        </li>
+
+        <li>
+          <strong>Add EON if it is not already visible:</strong>
+          open <strong>Receive</strong>, search for <strong>Energon</strong> or <strong>EON</strong>,
+          then choose <strong>Add Custom Token</strong> if needed. Select <strong>Flare</strong> and paste:
           <br><code class="code-yellow">0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
-          You should see <strong>EON</strong> populate → confirm/add. (EON will now show in your token list.)
+          Verify the token shows <strong>EON</strong> before adding it.
         </li>
 
         <li>
-          <strong>Tap and copy</strong> the Energon dApp address:
+          Open Bifrost's built-in <strong>Web3 browser</strong>.
+        </li>
+
+        <li>
+          Enter the official Energon mint URL:
           <br><code class="code-green">https://mint.energon.app/mint</code>
         </li>
-        <li>Open the <strong>dApp Browser</strong> inside the Bifrost app.</li>
-        <li>Paste the Energon dApp address into the address bar of the dApp Browser and load the page.</li>
-        <li>Tap <strong>Connect Wallet</strong> on the Energon dApp.</li>
+
         <li>
-          Approve the wallet connection inside Bifrost
-          (this may appear as an in-app approval or WalletConnect confirmation).
+          Verify the URL before connecting. Tap <strong>Connect Wallet</strong> on the Energon dApp
+          and approve the connection request inside Bifrost.
         </li>
-        <li>Confirm the network is <strong>Flare Mainnet</strong>.</li>
-        <li>Follow the on-screen steps to mint or purchase <strong>one Energon Cube</strong>.</li>
-        <li>Approve the transaction in Bifrost.</li>
+
         <li>
-          If the Energon Cube does not appear immediately, verify ownership on the Flare Explorer:
+          Make sure the connected account is the same address you funded and that the selected
+          network is <strong>Flare</strong>.
+        </li>
+
+        <li>
+          Before minting, confirm this wallet does <strong>not</strong> already hold an Energon Cube.
+          If it already holds one, stop here.
+        </li>
+
+        <li>
+          Follow the Energon dApp instructions to mint <strong>one Energon Cube</strong>.
+        </li>
+
+        <li>
+          Review the transaction details in Bifrost, confirm you are signing on Flare,
+          and approve the transaction.
+        </li>
+
+        <li>
+          Wait for the transaction to confirm. Do not submit a second mint simply because
+          the wallet display is slow to update.
+        </li>
+
+        <li>
+          If the wallet display has not updated, use Flare Explorer to inspect the confirmed
+          mint transaction and on-chain Cube activity:
           <br>
           <a class="btn" target="_blank" rel="noreferrer"
             href="https://flare-explorer.flare.network/token/0x30e1076bDf2B123B54486C2721125388af2d2061">
-            Verify CUBE on Explorer
+            Open CUBE on Explorer
           </a>
+        </li>
+
+        <li>
+          Confirm that EON is visible in your wallet. If the token is not displayed automatically,
+          use the EON contract address above to add it manually.
+        </li>
+
+        <li>
+          Return to Energon and reconnect the same wallet. The intended Guardian state is
+          <strong>COHERENT — exactly one Energon Cube</strong>.
         </li>
       </ol>
 
       <div class="sep" aria-hidden="true"></div>
 
-      <h3 id="ledger">Option C — Ledger (Hardware Wallet)</h3>
+      <h3 id="metamask">Option B — MetaMask</h3>
+      <ol class="steps">
+        <li>
+          Install MetaMask from the official MetaMask source or official app-store listing,
+          then create or import your wallet.
+          <br>
+          <a class="btn" target="_blank" rel="noreferrer"
+            href="https://metamask.io/download/">
+            Desktop / Browser Extension
+          </a>
+          <a class="btn" target="_blank" rel="noreferrer"
+            href="https://apps.apple.com/us/app/metamask-blockchain-wallet/id1438144202">
+            iOS App Store
+          </a>
+          <a class="btn" target="_blank" rel="noreferrer"
+            href="https://play.google.com/store/apps/details?id=io.metamask">
+            Android / Google Play
+          </a>
+        </li>
+
+        <li>
+          If creating a new wallet, write the recovery phrase down and store it securely offline.
+          Complete MetaMask's backup/verification steps before funding the wallet.
+        </li>
+
+        <li>
+          Open the network selector. If <strong>Flare</strong> is available, add/select it.
+          Otherwise choose <strong>Add a custom network</strong> and enter:
+          <br><br>
+          Network name: <strong>Flare Mainnet</strong><br>
+          RPC URL: <code>https://flare-api.flare.network/ext/C/rpc</code><br>
+          Chain ID: <code>14</code><br>
+          Currency symbol: <code>FLR</code><br>
+          Block explorer: <code>https://flare-explorer.flare.network</code>
+        </li>
+
+        <li>
+          Switch MetaMask to <strong>Flare Mainnet</strong>.
+        </li>
+
+        <li>
+          Select the MetaMask account you intend to use for Energon and copy its receive address.
+        </li>
+
+        <li>
+          <strong>Fund with FLR:</strong> Send or withdraw <strong>FLR using the Flare network</strong>
+          to that address. If this is your first transfer, consider sending a small test amount first.
+        </li>
+
+        <li>
+          Wait for the FLR balance to appear before continuing.
+        </li>
+
+        <li>
+          <strong>Add EON:</strong> use MetaMask's token import / custom token option and paste:
+          <br><code class="code-yellow">0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
+          Verify <strong>EON</strong> and <strong>18 decimals</strong> if MetaMask displays those fields,
+          then import the token.
+        </li>
+
+        <li>
+          On MetaMask Mobile, open the built-in browser. On desktop, open the Energon mint site
+          in the browser where the MetaMask extension is installed.
+        </li>
+
+        <li>
+          Navigate to:
+          <br><code class="code-green">https://mint.energon.app/mint</code>
+        </li>
+
+        <li>
+          Verify the URL, then tap/click <strong>Connect Wallet</strong> and approve the connection.
+        </li>
+
+        <li>
+          Confirm that MetaMask is connected with the correct account and
+          <strong>Flare Mainnet</strong>.
+        </li>
+
+        <li>
+          Before minting, confirm this wallet does <strong>not</strong> already hold an Energon Cube.
+          If it already holds one, stop here.
+        </li>
+
+        <li>
+          Follow the Energon dApp instructions to mint <strong>one Energon Cube</strong>.
+        </li>
+
+        <li>
+          Review the transaction details carefully, confirm the network is Flare, and approve it.
+        </li>
+
+        <li>
+          Wait for confirmation. Do not submit another mint merely because the NFT display has
+          not refreshed yet.
+        </li>
+
+        <li>
+          If the wallet display has not updated, use Flare Explorer to inspect the confirmed
+          mint transaction and on-chain Cube activity:
+          <br>
+          <a class="btn" target="_blank" rel="noreferrer"
+            href="https://flare-explorer.flare.network/token/0x30e1076bDf2B123B54486C2721125388af2d2061">
+            Open CUBE on Explorer
+          </a>
+        </li>
+
+        <li>
+          Confirm EON is visible in MetaMask. If necessary, import EON again using the official
+          contract address above.
+        </li>
+
+        <li>
+          Return to Energon and reconnect the same wallet. The intended Guardian state is
+          <strong>COHERENT — exactly one Energon Cube</strong>.
+        </li>
+      </ol>
+
+      <div class="note">
+        MetaMask network settings are device-specific. If you use the same account on another device,
+        you may need to add Flare Mainnet there separately.
+      </div>
+
+      <div class="sep" aria-hidden="true"></div>
+
+      <h3 id="ledger">Option C — Ledger Hardware Wallet</h3>
+
       <p>
-        Ledger provides maximum security by keeping private keys offline.
-        Use Ledger together with MetaMask for Flare compatibility.
+        Ledger keeps transaction signing on the hardware device. For this setup,
+        use Ledger together with MetaMask to interact with Flare and Energon.
       </p>
 
       <p>
         <a class="btn" target="_blank" rel="noreferrer"
           href="https://shop.ledger.com/pages/referral-program?referral_code=1YJBE3FEYB4W9">
-          Get a Ledger Hardware Wallet — Referral Link
+          Optional Ledger Purchase — Referral Link
         </a>
       </p>
 
       <ol class="steps">
-        <li>Initialize Ledger and store your recovery phrase securely offline.</li>
-        <li>Install the <strong>Ethereum app</strong> on Ledger.</li>
-        <li>Connect Ledger to MetaMask as a hardware wallet.</li>
-        <li>Add Flare Network in MetaMask (using the network details above).</li>
-
         <li>
-          <strong>Fund with FLR:</strong> Send/withdraw <strong>FLR (Flare Mainnet)</strong> to your Ledger address (view/copy it in MetaMask → <strong>Receive</strong>).
+          Initialize your Ledger using Ledger's official setup process.
+          Write the Ledger recovery phrase down and store it securely offline.
+          Use only Ledger's official companion app for device setup and app installation.
+          <br>
+          <a class="btn" target="_blank" rel="noreferrer"
+            href="https://www.ledger.com/ledger-live-download">
+            Official Ledger App Download
+          </a>
         </li>
 
         <li>
-          <strong>Add EON in MetaMask:</strong> Go to <strong>Tokens</strong> → <strong>+</strong> (Import) → <strong>Custom token</strong> →
-          paste:
+          In Ledger's official companion app, open the device app manager and install the
+          <strong>Ethereum app</strong> on the Ledger device.
+        </li>
+
+        <li>
+          Install/open MetaMask and connect your Ledger as a hardware wallet.
+        </li>
+
+        <li>
+          Select the Ledger account/address you intend to use and verify the address carefully.
+          This is the Ledger-controlled address you will use with Energon.
+        </li>
+
+        <li>
+          Add or select <strong>Flare Mainnet</strong> in MetaMask using the network details above.
+        </li>
+
+        <li>
+          Make sure MetaMask is showing the correct Ledger account while Flare Mainnet is selected.
+        </li>
+
+        <li>
+          <strong>Fund with FLR:</strong> send or withdraw <strong>FLR using the Flare network</strong>
+          to that Ledger-controlled address. Consider a small test transfer first.
+        </li>
+
+        <li>
+          Wait for the FLR balance to appear before continuing.
+        </li>
+
+        <li>
+          Add EON to MetaMask using:
           <br><code class="code-yellow">0x9458Cbb2e7DafFE6b3cf4d6F2AC75f2d2e0F7d79</code><br>
-          then <strong>Import</strong>.
+          Verify <strong>EON</strong> and <strong>18 decimals</strong> if those fields are displayed.
         </li>
 
         <li>
-          Open the Mint Site in MetaMask (dApp Browser) and always verify transaction details on the Ledger device screen before approving.
+          Open:
+          <br><code class="code-green">https://mint.energon.app/mint</code>
+          <br>
+          in the browser where your Ledger-connected MetaMask is available.
+        </li>
+
+        <li>
+          Verify the URL, connect MetaMask, and make sure the selected account is the
+          Ledger-controlled address you funded.
+        </li>
+
+        <li>
+          Before minting, confirm that this Ledger address does <strong>not</strong> already hold
+          an Energon Cube. If it already holds one, stop here.
+        </li>
+
+        <li>
+          Follow the Energon dApp instructions to mint <strong>one Energon Cube</strong>.
+        </li>
+
+        <li>
+          When MetaMask requests the transaction, review the details there and then verify the
+          transaction on the Ledger device screen before physically approving it.
+        </li>
+
+        <li>
+          Wait for confirmation. Do not repeat the mint simply because the wallet interface
+          has not refreshed yet.
+        </li>
+
+        <li>
+          If the wallet display has not updated, use Flare Explorer to inspect the confirmed
+          mint transaction and on-chain Cube activity:
+          <br>
+          <a class="btn" target="_blank" rel="noreferrer"
+            href="https://flare-explorer.flare.network/token/0x30e1076bDf2B123B54486C2721125388af2d2061">
+            Open CUBE on Explorer
+          </a>
+        </li>
+
+        <li>
+          Confirm EON is visible in MetaMask and return to Energon with the same Ledger account.
+          The intended Guardian state is <strong>COHERENT — exactly one Energon Cube</strong>.
         </li>
       </ol>
 
-      <div class="note">
-        Never share your Ledger recovery phrase. Energon will never request it.
+      <div class="note note-danger">
+        Never enter your Ledger recovery phrase into MetaMask, Energon, a browser, or any website.
+        Energon will never request it.
       </div>
 
       <div class="footer">
