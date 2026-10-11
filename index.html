@@ -789,6 +789,103 @@
       color:var(--textMuted);
     }
 
+    .ecosystemHeader{
+      margin-bottom:14px;
+    }
+
+    .ecosystemIntro{
+      max-width:760px;
+      margin:0 0 16px;
+      color:rgba(214,226,255,0.82);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .ecosystemCard{
+      min-height:220px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .ecosystemTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .ecosystemName{
+      font-size:19px;
+      font-weight:800;
+      line-height:1.25;
+      color:#f2f7ff;
+    }
+
+    .ecosystemRole{
+      font-size:14px;
+      line-height:1.58;
+      color:rgba(214,226,255,0.78);
+    }
+
+    .ecosystemAddress{
+      display:block;
+      width:100%;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(0,0,0,0.24);
+      border:1px solid rgba(110,180,255,0.14);
+      color:rgba(220,236,255,0.88);
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        monospace;
+      font-size:11.5px;
+      line-height:1.5;
+      overflow-wrap:anywhere;
+      word-break:break-all;
+    }
+
+    .ecosystemLink{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      align-self:flex-start;
+      min-height:38px;
+      padding:8px 12px;
+      border-radius:11px;
+      border:1px solid rgba(87,184,255,0.28);
+      background:rgba(87,184,255,0.06);
+      color:var(--blue2);
+      text-decoration:none;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:0.7px;
+      text-transform:uppercase;
+      transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+    .ecosystemLink:hover{
+      transform:translateY(-1px);
+      border-color:rgba(87,184,255,0.52);
+      box-shadow:0 0 18px rgba(87,184,255,0.14);
+    }
+
+    .badge.node{
+      color:#fff0be;
+      background:rgba(255,194,76,0.14);
+      border:1px solid rgba(255,205,96,0.32);
+      box-shadow:0 0 14px rgba(255,194,76,0.10);
+    }
+
     .stepNum{
       width:28px;
       height:28px;
@@ -1452,6 +1549,246 @@
             </div>
           </div>
 
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="tile">
+          <div class="ecosystemHeader">
+            <div class="tileLabel">
+              Live Ecosystem
+            </div>
+
+            <div class="tileTitle">
+              The expanded Energon stack is live on Flare Mainnet.
+            </div>
+
+            <div class="ecosystemIntro">
+              These protocol components are deployed and verified on Flare Mainnet.
+              The public site presents their roles and addresses for observation.
+              Transaction controls will be introduced separately after staged Mainnet testing.
+            </div>
+          </div>
+
+          <div class="grid3">
+
+            <div class="pathTile ecosystemCard">
+              <div>
+                <div class="ecosystemTop">
+                  <div class="ecosystemName">
+                    EVault
+                  </div>
+
+                  <span class="badge open">
+                    Live · Flare Mainnet
+                  </span>
+                </div>
+
+                <div class="ecosystemRole">
+                  Protocol reserve, contribution, Guardian registration,
+                  claim, maturity, and payout-control layer.
+                </div>
+              </div>
+
+              <code class="ecosystemAddress">
+                0x4f4C84321f83f77e95359e16f472b130Ed15EF04
+              </code>
+
+              <a
+                class="ecosystemLink"
+                href="https://flarescan.com/address/0x4f4C84321f83f77e95359e16f472b130Ed15EF04"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View on Flarescan
+              </a>
+            </div>
+
+            <div class="pathTile ecosystemCard">
+              <div>
+                <div class="ecosystemTop">
+                  <div class="ecosystemName">
+                    Energon Network
+                  </div>
+
+                  <span class="badge open">
+                    Live · Flare Mainnet
+                  </span>
+                </div>
+
+                <div class="ecosystemRole">
+                  Permanent Node creation and identity layer for projects
+                  entering the Energon Network.
+                </div>
+              </div>
+
+              <code class="ecosystemAddress">
+                0x6c0bB202a4AF3126E21BbaD6c4D79A8DD41Cc5aC
+              </code>
+
+              <a
+                class="ecosystemLink"
+                href="https://flarescan.com/address/0x6c0bB202a4AF3126E21BbaD6c4D79A8DD41Cc5aC"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View on Flarescan
+              </a>
+            </div>
+
+            <div class="pathTile ecosystemCard">
+              <div>
+                <div class="ecosystemTop">
+                  <div class="ecosystemName">
+                    Node Registry
+                  </div>
+
+                  <span class="badge open">
+                    Live · Flare Mainnet
+                  </span>
+                </div>
+
+                <div class="ecosystemRole">
+                  Coordinates Node listings, requests, versioning,
+                  and reputation without taking custody of payment tokens or NFTs.
+                </div>
+              </div>
+
+              <code class="ecosystemAddress">
+                0x834F79cdDc43CF231bFe7b1abC622ceF7Cbe14a5
+              </code>
+
+              <a
+                class="ecosystemLink"
+                href="https://flarescan.com/address/0x834F79cdDc43CF231bFe7b1abC622ceF7Cbe14a5"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View on Flarescan
+              </a>
+            </div>
+
+            <div class="pathTile ecosystemCard">
+              <div>
+                <div class="ecosystemTop">
+                  <div class="ecosystemName">
+                    NFT Delivery
+                  </div>
+
+                  <span class="badge open">
+                    Live · Flare Mainnet
+                  </span>
+                </div>
+
+                <div class="ecosystemRole">
+                  Deterministic ERC-721 custody and delivery layer for
+                  Registry-linked NFT requests.
+                </div>
+              </div>
+
+              <code class="ecosystemAddress">
+                0xe946d9892E54A7F09e373894e8A478aa793bEcB0
+              </code>
+
+              <a
+                class="ecosystemLink"
+                href="https://flarescan.com/address/0xe946d9892E54A7F09e373894e8A478aa793bEcB0"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View on Flarescan
+              </a>
+            </div>
+
+            <div class="pathTile ecosystemCard">
+              <div>
+                <div class="ecosystemTop">
+                  <div class="ecosystemName">
+                    Service Resolution
+                  </div>
+
+                  <span class="badge open">
+                    Live · Flare Mainnet
+                  </span>
+                </div>
+
+                <div class="ecosystemRole">
+                  Deterministic service backing, custody, release,
+                  and cancellation resolution for SERVICE listings.
+                </div>
+              </div>
+
+              <code class="ecosystemAddress">
+                0xE24b8f0D1a85b567b565322074A0f157EaE6053A
+              </code>
+
+              <a
+                class="ecosystemLink"
+                href="https://flarescan.com/address/0xE24b8f0D1a85b567b565322074A0f157EaE6053A"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View on Flarescan
+              </a>
+            </div>
+
+            <div class="pathTile ecosystemCard">
+              <div>
+                <div class="ecosystemTop">
+                  <div class="ecosystemName">
+                    Established Mark
+                  </div>
+
+                  <span class="badge open">
+                    Live · Flare Mainnet
+                  </span>
+                </div>
+
+                <div class="ecosystemRole">
+                  Permanent on-chain recognition for an active Energon Node
+                  after exactly 365 days of Node age.
+                </div>
+              </div>
+
+              <code class="ecosystemAddress">
+                0x28525B92678Bd3AFA5825b45421842bfA46DFdBa
+              </code>
+
+              <a
+                class="ecosystemLink"
+                href="https://flarescan.com/address/0x28525B92678Bd3AFA5825b45421842bfA46DFdBa"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View on Flarescan
+              </a>
+            </div>
+
+            <div class="pathTile ecosystemCard">
+              <div>
+                <div class="ecosystemTop">
+                  <div class="ecosystemName">
+                    Project Adapter · EFlow
+                  </div>
+
+                  <span class="badge node">
+                    Created Per Node
+                  </span>
+                </div>
+
+                <div class="ecosystemRole">
+                  A Project Adapter is created through
+                  EnergonNetwork.createNode() when a project enters the Network.
+                  Completed project payments are recorded as permanent EFlow receipts.
+                </div>
+              </div>
+
+              <code class="ecosystemAddress">
+                No standalone Mainnet adapter address
+              </code>
+            </div>
+
+          </div>
         </div>
 
         <div class="spacer"></div>
